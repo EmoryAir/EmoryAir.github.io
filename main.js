@@ -1,32 +1,17 @@
-	 	//using open street map for the mapping 
-	 	var osmUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-	 	    osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-	 	    osm = L.tileLayer(osmUrl, {
-	 	        maxZoom: 18,
-	 	        attribution: osmAttrib
-	 	    });
+	 	/*
+ the script mus be loaded after the map div is defined.
+ otherwise this will not work (we would need a listener to
+ wait for the DOM to be fully loaded).
+ Just put the script tag below the map div.
+ The source code below is the example from the leaflet start page.
+ */
 
-	 	// initialize the map on the "map" div with a given center and zoom
-	 	var map = L.map('map').setView([33.795, -84.327], 12).addLayer(osm);
+var map = L.map('map').setView([51.505, -0.09], 13);
 
-	 	// Script for adding marker on map click
-	 	function onMapClick(e) {
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
 
-	 	    var marker = L.marker(e.latlng, {
-	 	        draggable: true,
-	 	        title: "Resource location",
-	 	        alt: "Resource Location",
-	 	        riseOnHover: true
-	 	    }).addTo(map)
-	 	        .bindPopup(e.latlng.toString()).openPopup();
-
-	 	    // Update marker on changing it's position
-	 	    marker.on("dragend", function (ev) {
-
-	 	        var chagedPos = ev.target.getLatLng();
-	 	        this.bindPopup(chagedPos.toString()).openPopup();
-
-	 	    });
-	 	}
-
-	 	map.on('click', onMapClick);
+L.marker([51.5, -0.09]).addTo(map)
+		.bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+		.openPopup();
