@@ -1,51 +1,43 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-	<title>Leaflet example</title>
-	 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
-	 <style type="text/css">
-	 #map, #map1 { height: 1200px; }
-	 </style>
-</head>
-<body>
-<div id="map"></div>
+  <head>
+		<meta charset="utf-8" />
+    <title>Leaflet example</title>
 
- <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
-<script type="text/javascript">
-	// create a map in the "map" div, set the view to a given place and zoom
-	var map = L.map('map').setView([51.505, -0.09], 13);
-	// add an OpenStreetMap tile layer
-	L.tileLayer('http://{s}.tile.cloudmade.com/d61308dc1f7a4a48b64c24f9286e3a27/997/256/{z}/{x}/{y}.png', {
-	    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-	    maxZoom: 18
-	}).addTo(map);
-	var circle = L.circle([51.508, -0.11], 500, {
-	    color: 'red',
-	    fillColor: '#f03',
-	    fillOpacity: 0.5
-	}).addTo(map);
-	var polygon = L.polygon([
-	    [51.509, -0.08],
-	    [51.503, -0.06],
-	    [51.51, -0.047]
-	]).addTo(map);
-	var marker = L.marker([51.5, -0.09]).addTo(map);
-	circle.bindPopup("I am a circle.");
-	polygon.bindPopup("I am a polygon.");
-	marker.bindPopup('A pretty CSS3 popup. <br> Easily customizable.');
-	// add a marker in the given location, attach some popup content to it and open the popup
-	marker.openPopup();
-	var popup = L.popup()
-	    .setLatLng([51.5, -0.09])
-	    .setContent("I am a standalone popup.")
-	    .openOn(map);
-	function onMapClick(e) {
-	    popup
-	        .setLatLng(e.latlng)
-	        .setContent("You clicked the map at " + e.latlng.toString())
-	        .openOn(map);
-	}
-	map.on('click', onMapClick);
-</script>
-</body>
+		<!-- include leaflet css and javascript -->
+		<link rel="stylesheet" crossorigin=""
+				href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"
+						crossorigin=""></script>
+
+		<!-- include our own css -->
+		<link rel="stylesheet" href="leaflet-example.css" />
+
+		<!-- we include the javascript at the bottom, see below -->
+	</head>
+
+	<body>
+		<h1><a href="http://leafletjs.com/">Leaflet</a> example in one file</h1>
+		<p>
+			This is the html template for a <a href="http://leafletjs.com/">leaflet</a>
+			map. CSS and Javascript
+			are in different files. For a self-contained one-file-version see
+			<a href="one-file.html">one-file.html</a>. For a leaflet map without
+			Javascript programming try
+			<a href="https://lapizistik.github.io/leaflet-easymap/">Leasymap</a>.
+		</p>
+		<p>
+			Find the <a href="https://github.com/Lapizistik/leaflet-examples">source
+				code on Github</a>.
+		</p>
+		<p>
+			The one important thing is that the #map div needs a <em>height</em>
+			to be visible.
+		</p>
+		<div id="map"></div>
+
+		<!-- include our own javascript -->
+		<script src="leaflet-example.js"></script>
+
+	</body>
 </html>
