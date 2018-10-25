@@ -6,7 +6,7 @@
  The source code below is the example from the leaflet start page.
  */
 
-var map = L.map('map').setView([42.505, -71.09], 13);
+var map = L.map('map').setView([33.505, -84.09], 13);
 
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
