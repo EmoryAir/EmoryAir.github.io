@@ -1,31 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>EmoryAQ Map</title>
-  
-  <!-- External Leaflet Style Sheet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.7/dist/leaflet.css" />
-  
-  
-  
+	<title>Leaflet example</title>
+	 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+	 <style type="text/css">
+	 #map, #map1 { height: 1200px; }
+	 </style>
 </head>
 <body>
-    <!-- Our web map and content will go here -->
-    <!-- map -->
-    <!-- Add the Leaflet JavaScript library -->
-    <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script>
-    <div id="map" style="width: 705px; height: 375px"></div>
-    <script>
-      // Create variable to hold map element, give initial settings to map
-      var map = L.map('map',{ center: [34.362432, -84.086086], zoom: 14});
-      
-      // Add OpenStreetMap tile layer to map element
-      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
-    
-      
-    </script>
-  
-  
+<div id="map"></div>
+
+ <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
+<script type="text/javascript">
+	// create a map in the "map" div, set the view to a given place and zoom
+	var map = L.map('map').setView([51.505, -0.09], 13);
+	// add an OpenStreetMap tile layer
+	L.tileLayer('http://{s}.tile.cloudmade.com/d61308dc1f7a4a48b64c24f9286e3a27/997/256/{z}/{x}/{y}.png', {
+	    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+	    maxZoom: 18
+	}).addTo(map);
+	var circle = L.circle([51.508, -0.11], 500, {
+	    color: 'red',
+	    fillColor: '#f03',
+	    fillOpacity: 0.5
+	}).addTo(map);
+	var polygon = L.polygon([
+	    [51.509, -0.08],
+	    [51.503, -0.06],
+	    [51.51, -0.047]
+	]).addTo(map);
+	var marker = L.marker([51.5, -0.09]).addTo(map);
+	circle.bindPopup("I am a circle.");
+	polygon.bindPopup("I am a polygon.");
+	marker.bindPopup('A pretty CSS3 popup. <br> Easily customizable.');
+	// add a marker in the given location, attach some popup content to it and open the popup
+	marker.openPopup();
+	var popup = L.popup()
+	    .setLatLng([51.5, -0.09])
+	    .setContent("I am a standalone popup.")
+	    .openOn(map);
+	function onMapClick(e) {
+	    popup
+	        .setLatLng(e.latlng)
+	        .setContent("You clicked the map at " + e.latlng.toString())
+	        .openOn(map);
+	}
+	map.on('click', onMapClick);
+</script>
 </body>
 </html>
