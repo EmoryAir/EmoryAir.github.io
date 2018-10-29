@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root {
 	--black: #110B11;
     --grey: #BFBFBF;
@@ -11,11 +12,28 @@
  * font-family: 'Josefin Sans', sans-serif;
  * font-family: 'Open Sans', sans-serif;
  * */
+=======
+:root {
+	--black: #110B11;
+    --grey: #BFBFBF;
+    --white: #FFFFFF;
+    --red: #A53F2B;
+    --blue: #6D98BA;
+}
+
+/*
+fonts
+font-family: 'Josefin Sans', sans-serif;
+font-family: 'Open Sans', sans-serif;
+
+*/
+>>>>>>> origin/master
 
 #map {
 	height: 500px;
 }
 
+<<<<<<< HEAD
 nav ul {
 	color: var(--black);
 	background-color: var(--white);
@@ -30,6 +48,22 @@ nav ul {
     width: 100%;
 	top: 0px;
 	left: 0;
+=======
+nav ul {
+	color: var(--black);
+	background-color: var(--white);
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 25px;
+	display: block;
+	position: fixed;
+    list-style-type: none;
+	overflow: hidden;
+	padding: 10px 20px;
+	margin: 0;
+    width: 100%;
+	top: 0px;
+	left: 0;
+>>>>>>> origin/master
 }
 
 nav li {
@@ -54,6 +88,7 @@ nav a:visited {
     color: var(--black);
 }
 
+<<<<<<< HEAD
 nav a:hover {
     color: var(--grey);
 }
@@ -62,6 +97,16 @@ body {
 	position: relative;
 	display: block;
 	padding: 5% 15%;
+=======
+nav a:hover {
+    color: var(--grey);
+}
+
+body {
+	position: relative;
+	display: block;
+	padding: 5% 15%;
+>>>>>>> origin/master
 }
 
 h1 {
@@ -73,6 +118,7 @@ p {
 	font-family: 'Open Sans', sans-serif;
 }
 
+<<<<<<< HEAD
 footer {
     position: relative;
     height: 20px;
@@ -80,3 +126,12 @@ footer {
     text-align: center;
     padding: 30px 10px;
     }}
+=======
+footer {
+    position: relative;
+    height: 20px;
+    color: var(--black);
+    text-align: center;
+    padding: 30px 10px;
+    }
+>>>>>>> origin/master
