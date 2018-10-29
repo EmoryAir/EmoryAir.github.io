@@ -1,3 +1,83 @@
-#map {
-		height: 300px;
+:root {
+	--black: #110B11;
+    --grey: #BFBFBF;
+    --white: #FFFFFF;
+    --red: #A53F2B;
+    --blue: #6D98BA;
 }
+
+/*
+fonts
+font-family: 'Josefin Sans', sans-serif;
+font-family: 'Open Sans', sans-serif;
+
+*/
+
+#map {
+	height: 500px;
+}
+
+nav ul {
+	color: var(--black);
+	background-color: var(--white);
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 25px;
+	display: block;
+	position: fixed;
+    list-style-type: none;
+	overflow: hidden;
+	padding: 10px 20px;
+	margin: 0;
+    width: 100%;
+	top: 0px;
+	left: 0;
+}
+
+nav li {
+	border-radius: 5px;
+	float: right;
+	padding: 15px 0px;
+	display: inline-block;
+	text-align: center;
+	width: 9%;
+	oveerflow: hidden;
+}
+
+nav a {
+	text-decoration: none;
+}
+
+nav a:link {
+	color: var(--black);
+}
+
+nav a:visited {
+    color: var(--black);
+}
+
+nav a:hover {
+    color: var(--grey);
+}
+
+body {
+	position: relative;
+	display: block;
+	padding: 5% 15%;
+}
+
+h1 {
+
+}
+
+p {
+	color: var(--black);
+	font-family: 'Open Sans', sans-serif;
+}
+
+footer {
+    position: relative;
+    height: 20px;
+    color: var(--black);
+    text-align: center;
+    padding: 30px 10px;
+    }
