@@ -4,7 +4,7 @@
     --white: #FFFFFF;
     --red: #A53F2B;
     --blue: #2e7eb8;
-
+}
 /*
  * fonts
  * font-family: 'Josefin Sans', sans-serif;
@@ -104,4 +104,4 @@ footer {
     color: var(--black);
     text-align: center;
     padding: 40px 30px;
-    }
+}
