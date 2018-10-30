@@ -4,13 +4,12 @@
     --white: #FFFFFF;
     --red: #A53F2B;
     --blue: #2e7eb8;
-}
 
 /*
-fonts
-font-family: 'Josefin Sans', sans-serif;
-font-family: 'Open Sans', sans-serif;
-
+ * fonts
+ * font-family: 'Josefin Sans', sans-serif;
+ * font-family: 'Open Sans', sans-serif;
+ *
 */
 
 #map {
@@ -68,7 +67,7 @@ nav li {
 	display: inline-block;
 	text-align: center;
 	width: 9%;
-	oveerflow: hidden;
+	overflow: hidden;
 }
 
 nav a {
@@ -104,5 +103,5 @@ footer {
     height: 20px;
     color: var(--black);
     text-align: center;
-    padding: 20px 30px;
+    padding: 40px 30px;
     }
