@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300" rel="stylesheet">
 
-        <title>Emory AQ</title>
+        <title>Air Emory</title>
 
 		<!-- include leaflet css and javascript -->
 		<link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
@@ -14,19 +14,14 @@
 		<!-- include our own css -->
 		<link rel="stylesheet" href="style.css" />
 
+        <!-- include w3.js javascript -->
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+
 		<!-- we include the javascript at the bottom, see below -->
     </head>
 
-    <nav>
-        <ul>
-            <li style="float:left"><a href=https://emoryair.github.io/>Air Emory</a></li>
-            <li><a href="data.html">Data</a></li>
-            <li><a href="sensors.html">Sensors</a></li>
-            <li><a href="info.html">Info</a></li>
-            <li><a href="map.html">Map</a></li>
-            <li><a href="index.html">Home</a></li>
-        </ul>
-    </nav>
+    <div w3-include-html="nav.html"></div>
+    <script> w3.includeHTML(); </script>
 
 	<body>
 		<h1>Air Emory</h1>
