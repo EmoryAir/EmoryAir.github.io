@@ -4,12 +4,13 @@
         <meta charset="utf-8" />
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300" rel="stylesheet">
 
-        <title>Sensors | Air Emory</title>
+        <title>MSC | Air Emory</title>
 
 		<!-- include leaflet css and javascript -->
 		<link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
 		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
-
+	        <!--JQuery library-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<!-- include our own css -->
 		<link rel="stylesheet" href="style.css" />
 
@@ -23,18 +24,10 @@
     <script> w3.includeHTML(); </script>
 
 	<body>
-		<h1>Sensors</h1>
-        <h3>What's in a Sensor?</h3>
-        <ul>
-            <li>Dylos DC1100: Laser particle counter that provides large and small particle counts.</li>
-            <li>DHT22: Digital temperature and humidity sensor </li>
-            <li>Raspberry Pi: Runs Python script and receives digital data from Dylos and DHT22 sensor. This data is stored internally in a CSV file and is transmitted to a google sheets. </li>
-        </ul>
-        <img display: inline-block src="IMG_1.JPG">
-        <img src="IMG_2.JPG">
-        <img src="IMG_3.JPG">
-        <img src="IMG_4.JPG">
-
+		<h1>MSC</h1>
+        <p>All of our data is available <a href="https://docs.google.com/spreadsheets/d/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/edit?usp=sharing">here</a>
+        </p>
+        <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSQOMC28FoDY__7p7h4ZWvVPLtuK21D-9pikN4toM6F5Bv5fkviZ6fUd8lXJ0vhlXD6XbKp7PHnrazW/pubchart?oid=201588293&amp;format=interactive"></iframe>
 
 		<!-- include our own javascript -->
 		<script src="main.js"></script>
