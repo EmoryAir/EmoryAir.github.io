@@ -14,7 +14,22 @@
 
 #map {
 	height: 500px;
+}.legend {
+    line-height: 18px;
+	color: #555;
+	background: white;
 }
+.legend i {
+    width: 18px;
+	height: 18px;
+	border-radius: 50%;
+    float: left;
+    margin-right: 8px;
+	opacity: 0.9;
+	background: white;
+}
+
+
 
 /* Navbar container */
 .navbar {
