@@ -13,6 +13,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<!-- include our own css -->
 		<link rel="stylesheet" href="style.css" />
+	    	<!-- Canvas JS -->
+	    	<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	    	
 
         <!-- include w3.js javascript -->
         <script src="https://www.w3schools.com/lib/w3.js"></script>
@@ -25,13 +29,42 @@
 
 	<body>
 		<h1>MSC</h1>
+	/*	
         <p>All of our data is available <a href="https://docs.google.com/spreadsheets/d/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/edit?usp=sharing">here</a>
         </p>
         <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSQOMC28FoDY__7p7h4ZWvVPLtuK21D-9pikN4toM6F5Bv5fkviZ6fUd8lXJ0vhlXD6XbKp7PHnrazW/pubchart?oid=201588293&amp;format=interactive"></iframe>
-
+	*/
 		<!-- include our own javascript -->
 		<script src="main.js"></script>
+		
+		<div class="buttongrp">
+			<button id="btnHour" class="button">Hourly</button>
+			<button id="btnDay" class="button" >Current Day</button>
+			<button id="btnSeven" class="button" >Past 7 Days</button>
+			<button id="btnAvgDay" class="button" >Average Day</button>
+		</div>
+	
+		<div id ="currentDayGraph"></div>
 
+		<table id = "display" class="center"></table>
+		<table id = "hour" class="center"></table>
+		<table id = "seven" class="center"></table>
+		<table id = "avgDay" class="center"></table>
+		
+		<script>
+		
+		createHour();
+		hideHour();
+
+		createSeven();
+		hide7();
+
+		avgDayData();
+		hideAvgDay();
+
+		currDayGraphData();
+		createDay();
+		</script>
 	</body>
     <footer>
         Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a>
