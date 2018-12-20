@@ -1,3 +1,458 @@
+//create current day graph
+function currDayGraphData() {
+
+
+var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
+var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
+
+var dataPoints = [];
+var chart = new CanvasJS.Chart("currentDayGraph", {
+	title: {
+		text: "Current Day Data"
+	},
+	axisX:{
+		title: "time (hour)"
+	},
+	data: [{
+		type: "scatter",
+		showInLegend: true,
+		name: "series1",
+		legendText: "PM10",
+		markerColor: "black",
+		dataPoints : dataPoints,
+	}]
+});
+
+$.getJSON(url, function(data) {
+
+			var entry = data.feed.entry;
+
+			$(entry).each(function() {
+				var pm10 = this.gsx$pm10.$t;
+				var time = this.gsx$time.$t;
+
+				//turn time string into a number
+				var hour = 0;
+				var min = 0;
+
+				if (time.charAt(1) == "0") {
+					hour = parseInt(time.charAt(2));
+				} else {
+					hour = parseInt(time.charAt(1) + time.charAt(2));
+				}
+
+				if (time.charAt(4) == "0") {
+					min = parseInt(time.charAt(5));
+				} else {
+					min = parseInt(time.charAt(4) + time.charAt(5));
+				}
+
+			
+				
+				var timeNum = ((hour*60) + min) / 60.0; 
+
+				dataPoints.push({x: timeNum, y: parseFloat(pm10)});
+				
+
+			});
+			chart.render();
+
+		});
+
+
+}
+
+//create avg day data
+function avgDayData() {
+
+	var date = new Date();
+	var year = date.getFullYear();
+	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	var month = months[date.getMonth()];
+
+
+
+
+	$('#avgDay').append(
+		'<tr><th>Hour</th><th>Average PM10</th></tr>' +
+		'<tr><td>00:00</td><td></td></tr>' +
+		'<tr><td>01:00</td><td></td></tr>' +
+		'<tr><td>02:00</td><td></td></tr>' +
+		'<tr><td>03:00</td><td></td></tr>' +
+		'<tr><td>04:00</td><td></td></tr>' +
+		'<tr><td>05:00</td><td></td></tr>' +
+		'<tr><td>06:00</td><td></td></tr>' +
+		'<tr><td>07:00</td><td></td></tr>' +
+		'<tr><td>08:00</td><td></td></tr>' +
+		'<tr><td>09:00</td><td></td></tr>' +
+		'<tr><td>10:00</td><td></td></tr>' +
+		'<tr><td>11:00</td><td></td></tr>' +
+		'<tr><td>12:00</td><td></td></tr>' +
+		'<tr><td>13:00</td><td></td></tr>' +
+		'<tr><td>14:00</td><td></td></tr>' +
+		'<tr><td>15:00</td><td></td></tr>' +
+		'<tr><td>16:00</td><td></td></tr>' +
+		'<tr><td>17:00</td><td></td></tr>' +
+		'<tr><td>18:00</td><td></td></tr>' +
+		'<tr><td>19:00</td><td></td></tr>' +
+		'<tr><td>20:00</td><td></td></tr>' +
+		'<tr><td>21:00</td><td></td></tr>' +
+		'<tr><td>22:00</td><td></td></tr>' +
+		'<tr><td>23:00</td><td></td></tr>' 
+		);
+
+	var r0tot = 0;
+	var r1tot = 0;
+	var r2tot = 0;
+	var r3tot = 0;
+	var r4tot = 0;
+	var r5tot = 0;
+	var r6tot = 0;
+	var r7tot = 0;
+	var r8tot = 0;
+	var r9tot = 0;
+	var r10tot = 0;
+	var r11tot = 0;
+	var r12tot = 0;
+	var r13tot = 0;
+	var r14tot = 0;
+	var r15tot = 0;
+	var r16tot = 0;
+	var r17tot = 0;
+	var r18tot = 0;
+	var r19tot = 0;
+	var r20tot = 0;
+	var r21tot = 0;
+	var r22tot = 0;
+	var r23tot = 0;
+
+	var r0pm10 = 0;
+	var r1pm10 = 0;
+	var r2pm10 = 0;
+	var r3pm10 = 0;
+	var r4pm10 = 0;
+	var r5pm10 = 0;
+	var r6pm10 = 0;
+	var r7pm10 = 0;
+	var r8pm10 = 0;
+	var r9pm10 = 0;
+	var r10pm10 = 0;
+	var r11pm10 = 0;
+	var r12pm10 = 0;
+	var r13pm10 = 0;
+	var r14pm10 = 0;
+	var r15pm10 = 0;
+	var r16pm10 = 0;
+	var r17pm10 = 0;
+	var r18pm10 = 0;
+	var r19pm10 = 0;
+	var r20pm10 = 0;
+	var r21pm10 = 0;
+	var r22pm10 = 0;
+	var r23pm10 = 0;
+	
+
+	var d = new Date();
+	var x = d.getDate(); //get day of the month as a number
+	var i;
+
+	for (i = 1; i <= x; i++) {
+	
+	var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
+	var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/" + i + "/public/values?alt=json";
+
+
+	$.getJSON(url, function(data) {
+
+			var entry = data.feed.entry;
+
+			$(entry).each(function() {
+				var pm10 = this.gsx$pm10.$t;
+				var time = this.gsx$time.$t;
+
+				var pm10num = parseFloat(pm10);
+				
+		
+				if (pm10 !='') {
+					if (time.charAt(1) == '0' && time.charAt(2) == '0') {
+						r0tot++;
+						r0pm10 += pm10num;
+						
+					}
+
+					if (time.charAt(1) == '0' && time.charAt(2) == '1') {
+						r1tot++;
+						r1pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '0' && time.charAt(2) == '2') {
+						r2tot++;
+						r2pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '0' && time.charAt(2) == '3') {
+						r3tot++;
+						r3pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '0' && time.charAt(2) == '4') {
+						r4tot++;
+						r4pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '0' && time.charAt(2) == '5') {
+						r5tot++;
+						r5pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '0' && time.charAt(2) == '6') {
+						r6tot++;
+						r6pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '0' && time.charAt(2) == '7') {
+						r7tot++;
+						r7pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '0' && time.charAt(2) == '8') {
+						r8tot++;
+						r8pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '0' && time.charAt(2) == '9') {
+						r9tot++;
+						r9pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '1' && time.charAt(2) == '0') {
+						r10tot++;
+						r10pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '1' && time.charAt(2) == '1') {
+						r11tot++;
+						r11pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '1' && time.charAt(2) == '2') {
+						r12tot++;
+						r12pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '1' && time.charAt(2) == '3') {
+						r13tot++;
+						r13pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '1' && time.charAt(2) == '4') {
+						r14tot++;
+						r14pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '1' && time.charAt(2) == '5') {
+						r15tot++;
+						r15pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '1' && time.charAt(2) == '6') {
+						r16tot++;
+						r16pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '1' && time.charAt(2) == '7') {
+						r17tot++;
+						r17pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '1' && time.charAt(2) == '8') {
+						r18tot++;
+						r18pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '1' && time.charAt(2) == '9') {
+						r19tot++;
+						r19pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '2' && time.charAt(2) == '0') {
+						r20tot++;
+						r20pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '2' && time.charAt(2) == '1') {
+						r21tot++;
+						r21pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '2' && time.charAt(2) == '2') {
+						r22tot++;
+						r22pm10 += pm10num;
+					}
+
+					if (time.charAt(1) == '2' && time.charAt(2) == '3') {
+						r23tot++;
+						r23pm10 += pm10num;
+					}
+
+				}
+
+			});
+
+				if (r0tot == 0) {
+					document.getElementById("avgDay").rows[1].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[1].cells[1].innerHTML = r0pm10 / r0tot;
+				}
+				
+				if (r1tot == 0) {
+					document.getElementById("avgDay").rows[2].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[2].cells[1].innerHTML = r1pm10 / r1tot;
+				}
+
+				if (r2tot == 0) {
+					document.getElementById("avgDay").rows[3].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[3].cells[1].innerHTML = r2pm10 / r2tot;
+				}
+
+				if (r3tot == 0) {
+					document.getElementById("avgDay").rows[4].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[4].cells[1].innerHTML = r3pm10 / r3tot;
+				}
+
+				if (r4tot == 0) {
+					document.getElementById("avgDay").rows[5].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[5].cells[1].innerHTML = r4pm10 / r4tot;
+				}
+				
+				if (r5tot == 0) {
+					document.getElementById("avgDay").rows[6].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[6].cells[1].innerHTML = r5pm10 / r5tot;
+				}
+
+				if (r6tot == 0) {
+					document.getElementById("avgDay").rows[7].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[7].cells[1].innerHTML = r6pm10 / r6tot;
+				}
+
+				if (r7tot == 0) {
+					document.getElementById("avgDay").rows[8].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[8].cells[1].innerHTML = r7pm10 / r7tot;
+				}
+
+				if (r8tot == 0) {
+					document.getElementById("avgDay").rows[9].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[9].cells[1].innerHTML = r8pm10 / r8tot;
+				}
+
+				if (r9tot == 0) {
+					document.getElementById("avgDay").rows[10].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[10].cells[1].innerHTML = r9pm10 / r9tot;
+				}
+
+				if (r10tot == 0) {
+					document.getElementById("avgDay").rows[11].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[11].cells[1].innerHTML = r10pm10 / r10tot;
+				}
+
+				if (r11tot == 0) {
+					document.getElementById("avgDay").rows[12].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[12].cells[1].innerHTML = r11pm10 / r11tot;
+				}
+
+				if (r12tot == 0) {
+					document.getElementById("avgDay").rows[13].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[13].cells[1].innerHTML = r12pm10 / r12tot;
+				}
+
+				if (r13tot == 0) {
+					document.getElementById("avgDay").rows[14].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[14].cells[1].innerHTML = r13pm10 / r13tot;
+				}
+
+				if (r14tot == 0) {
+					document.getElementById("avgDay").rows[15].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[15].cells[1].innerHTML = r14pm10 / r14tot;
+				}
+
+				if (r15tot == 0) {
+					document.getElementById("avgDay").rows[16].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[16].cells[1].innerHTML = r15pm10 / r15tot;
+				}
+
+				if (r16tot == 0) {
+					document.getElementById("avgDay").rows[17].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[17].cells[1].innerHTML = r16pm10 / r16tot;
+				}
+
+				if (r17tot == 0) {
+					document.getElementById("avgDay").rows[18].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[18].cells[1].innerHTML = r17pm10 / r17tot;
+				}
+
+				if (r18tot == 0) {
+					document.getElementById("avgDay").rows[19].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[19].cells[1].innerHTML = r18pm10 / r18tot;
+				}
+
+				if (r19tot == 0) {
+					document.getElementById("avgDay").rows[20].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[20].cells[1].innerHTML = r19pm10 / r19tot;
+				}
+
+				if (r20tot == 0) {
+					document.getElementById("avgDay").rows[21].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[21].cells[1].innerHTML = r20pm10 / r20tot;
+				}
+
+				if (r21tot == 0) {
+					document.getElementById("avgDay").rows[22].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[22].cells[1].innerHTML = r21pm10 / r21tot;
+				}
+
+
+				if (r22tot == 0) {
+					document.getElementById("avgDay").rows[23].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[23].cells[1].innerHTML = r22pm10 / r22tot;
+				}
+
+				if (r23tot == 0) {
+					document.getElementById("avgDay").rows[24].cells[1].innerHTML ="---";
+				} else {
+					document.getElementById("avgDay").rows[24].cells[1].innerHTML = r24pm10 / r24tot;
+				}
+
+
+
+	});
+
+	}
+	
+}
+
+//create hourly data
 function createHour() {
 
 	$('#hour').append(
@@ -634,17 +1089,12 @@ function createHour() {
 
 }
 
+//create current day data
 function createDay() {
 
-		//var div = document.createElement("div");
-		//div.setAttribute("id", "centertable");
-		//document.body.appendChild(div);
 
-		/*var table = document.createElement("TABLE");
-				table.setAttribute("id", "display");
-				document.body.appendChild(table);
 
-		*/	
+			
 				$('#display').append(
 				'<tr><th>Timestamp</th>' + 
 				'<th>Temperature (Celsius)</th>' +
@@ -655,7 +1105,9 @@ function createDay() {
 			//	'<th>PM2.5 microg/m^3</th>' +
 				'</tr>' );
 
-	var spreadsheetID = "16cy4ClKYEN_w5_c6KiR2zSjRsUD9ijxQD9DGffNRXtI";
+				
+
+	var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
 	var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
 
 	//load json data from server using get http request
@@ -718,7 +1170,10 @@ function createDay() {
 		});
 }
 
+
+//create seven day data
 function createSeven() {
+
 
 	$('#seven').append(
 		'<tr><th>Date</th>' +
@@ -736,7 +1191,7 @@ function createSeven() {
 		
 
 
-		var spreadsheetID = "16cy4ClKYEN_w5_c6KiR2zSjRsUD9ijxQD9DGffNRXtI";
+		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
 		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/" + i + "/public/values?alt=json";
 
 			$.ajax( {
@@ -817,30 +1272,48 @@ function hideAvgDay() {
 	x.style.display="none";
 }
 
-function officeDay() {
-	hide7();
-	hideHour();
-	hideAvgDay();
-	showDay();
-}
+//show different data tables based on chosen tab
+$(document).ready(function() {
+	$("#btnDay").click(function() {
+		$("#hour").hide();
+		$("#avgDay").hide();
+		$("#seven").hide();
+		$("#display").show();
+	});
 
-function officeHour() {
-	hideDay();
-	hide7();
-	hideAvgDay();
-	showHour();
-}
+	$("#btnAvgDay").click(function() {
+		$("#hour").hide();
+		$("#avgDay").show();
+		$("#seven").hide();
+		$("#display").hide();
+		$("#currentDayGraph").hide();
+	});
 
-function office7() {
-	hideDay();
-	hideHour();
-	hideAvgDay();
-	show7();
-}
+	$("#btnDay").click(function() {
+		$("#hour").hide();
+		$("#avgDay").hide();
+		$("#seven").hide();
+		$("#display").show();
+		$("#currentDayGraph").show();
+	});
 
-function officeAvgDay() {
-	hideDay();
-	hide7();
-	hideHour();
-	showAvgDay();
-}
+	$("#btnSeven").click(function() {
+		$("#hour").hide();
+		$("#avgDay").hide();
+		$("#seven").show();
+		$("#display").hide();
+		$("#currentDayGraph").hide();
+	});
+
+	$("#btnHour").click(function() {
+		$("#hour").show();
+		$("#avgDay").hide();
+		$("#seven").hide();
+		$("#display").hide();
+		$("#currentDayGraph").hide();
+	});
+
+
+
+});
+
