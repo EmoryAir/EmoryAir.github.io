@@ -9,14 +9,54 @@
  * fonts
  * font-family: 'Josefin Sans', sans-serif;
  * font-family: 'Open Sans', sans-serif;
- *
 */
 
 #map {
 	height: 500px;
 }
 
-/* Navbar container */
+/***********	Body CSS	 ***********/
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: var(--black);
+	position: relative;
+	display: block;
+	padding: 5% 20%;
+}
+
+body a {
+	color: var(--blue);
+	text-decoration: none;
+	font-weight: 700;
+}
+
+body h1 {
+	font-size: 70px;
+}
+
+body h3 {
+	font-size: 30px;
+}
+
+body p {
+	color: var(--black);
+	font-size: x-large;
+}
+
+body a:link {
+	color: var(--blue);
+}
+
+a:hover {
+	color: var(--grey);
+}
+
+b {
+  font-weight: bold;
+}
+
+/***********	Navbar CSS	 ***********/
 .navbar {
   overflow: hidden;
   color: var(--black);
@@ -37,13 +77,13 @@
 }
 
 /* The dropdown container */
-.dropdown {
+.navbar .dropdown {
   float: right;
   overflow: hidden;
 }
 
 /* Dropdown button */
-.dropdown .dropbtn {
+.navbar .dropdown .dropbtn {
   font-size: inherit;
   border: none;
   outline: none;
@@ -54,60 +94,9 @@
 }
 
 /* Add a grey hover font-color to navbar links */
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover, .navbar .dropdown:hover .dropbtn {
   background-color: inherit;
   color: var(--grey);
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  min-width: 160px;
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  float: none;
-  color: inherit;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-  font-size: 25px;
-}
-
-/* Add a grey font color to dropdown links on hover */
-.dropdown-content a:hover {
-  color: var(--grey);
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-body {
-	font-family: 'Open Sans', sans-serif;
-	color: var(--black);
-	position: relative;
-	display: block;
-	padding: 5% 15%;
-}
-
-body a {
-	color: var(--blue);
-	text-decoration: none;
-	font-weight: 700;
-}
-
-body a:link {
-	color: var(--blue);
-}
-
-body a:hover, .navbar a:hover {
-    color: var(--grey);
 }
 
 .navbar a, .navbar a:link, .navbar a:visited {
@@ -118,23 +107,41 @@ body a:hover, .navbar a:hover {
     color: var(--grey);
 }
 
-h1 {
-	font-size: 70px;
+/* Dropdown content (hidden by default) */
+.navbar .dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  z-index: 1;
 }
 
-h3 {
-	font-size: 30px;
+/* Links inside the dropdown */
+.navbar .dropdown-content a {
+  float: none;
+  color: inherit;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-size: 25px;
 }
 
-p {
-	color: var(--black);
-	font-size: x-large;
+/* Add a grey font color to dropdown links on hover */
+.navbar .dropdown-content a:hover {
+  color: var(--grey);
 }
+
+/* Show the dropdown menu on hover */
+.navbar .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/***********	Footer CSS	 ***********/
 
 footer {
     position: relative;
     height: 20px;
     color: var(--black);
     text-align: center;
-    padding: 40px 30px;
+    padding: 50px 30px;
 }
