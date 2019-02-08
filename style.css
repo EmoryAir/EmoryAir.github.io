@@ -28,20 +28,24 @@ body {
 body a {
 	color: var(--blue);
 	text-decoration: none;
-	font-weight: 700;
 }
 
-body h1 {
+h1 {
 	font-size: 70px;
 }
 
-body h3 {
+h3 {
 	font-size: 30px;
 }
 
 body p {
 	color: var(--black);
-	font-size: x-large;
+	font-size: large;
+	font-weight: 300;
+}
+
+b {
+	font-weight: 700;
 }
 
 body a:link {
@@ -52,8 +56,13 @@ a:hover {
 	color: var(--grey);
 }
 
-b {
-  font-weight: bold;
+/***********	Table CSS	 ***********/
+
+th, td {
+  padding: 3%;
+}
+th {
+	text-align: left;
 }
 
 /***********	Navbar CSS	 ***********/
