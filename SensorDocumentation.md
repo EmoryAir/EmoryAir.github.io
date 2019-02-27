@@ -34,16 +34,16 @@ There are 2 functions in the code that collects measurements from the sensors: o
 ```
 def dhtdata():
     try:
-1)        sensor=22
-2)        pin=4
-3)        humidity,temperature = Adafruit_DHT.read(sensor, pin)
-4)    except:
-5)        print('sensor or pin error, try checking GPIOpin#')
-6)    if humidity !=None and temperature !=None:
-7)        print('Temp={0:0.1f}* Humidity={1:0.1f}%'. format(temperature, humidity))
-8)    else:
-9)        print('Failed to obtain reading')
-10)    return temperature, humidity
+1.        sensor=22
+2.        pin=4
+3.        humidity,temperature = Adafruit_DHT.read(sensor, pin)
+4.    except:
+5.        print('sensor or pin error, try checking GPIOpin#')
+6.    if humidity !=None and temperature !=None:
+7.        print('Temp={0:0.1f}* Humidity={1:0.1f}%'. format(temperature, humidity))
+8.    else:
+9.        print('Failed to obtain reading')
+10.    return temperature, humidity
 ```
 ### Data Recording Platforms
 The measurements described above are sent to the Raspberry Pi once per minute. The Pi then sends the measurements to:
@@ -56,10 +56,10 @@ In order to add the new measurements to the premade CSV file in the computer, we
 ```
 def cssv():
     try:
-1)        with open('data.csv', 'a', newline='') as csv_file:
-2)            writer= csv.writer(csv_file, delimiter=',')
-3)            writer.writerow(alldata)
-4)        print("wrote to csv")
+1.        with open('data.csv', 'a', newline='') as csv_file:
+2.            writer= csv.writer(csv_file, delimiter=',')
+3.            writer.writerow(alldata)
+4.        print("wrote to csv")
     except:
         print("Failed to log to CSV")
 ```
