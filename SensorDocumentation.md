@@ -45,6 +45,24 @@ def dhtdata():
 9.        print('Failed to obtain reading')
 10.    return temperature, humidity
 ```
+#### Dylos Sensor (dylosdata() function in the code)
+
+```
+def dylosdata():
+1.    serialport=serial.Serial('//dev/ttyUSB0',
+2.                             baudrate=9600,
+3.                             parity=serial.PARITY_NONE,
+4.                             bytesize=serial.EIGHTBITS,
+5.                             timeout=None,
+6.                             writeTimeout=1,)
+7.    y=serialport.readline().strip()
+8.    PM25,PM10=[int(_) for _ in y.decode('ascii').strip().split(',')]
+    try:
+        print(PM25,PM10)
+    except:
+        print("not working1")
+    return PM25,PM10
+```
 ### Data Recording Platforms
 The measurements described above are sent to the Raspberry Pi once per minute. The Pi then sends the measurements to:
 * a CSV file stored in the Pi 
