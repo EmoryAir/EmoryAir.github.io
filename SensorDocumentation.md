@@ -46,7 +46,9 @@ def dhtdata():
 10.    return temperature, humidity
 ```
 #### Dylos Sensor (dylosdata() function in the code)
-
+* The function is specifiying to import the measurement data every minute from a certain serial port:Line 1-6 
+* Then it is splitting appart that data and storing it into the variable y: Line 7
+* Then it is parsing(breaking down) the measurements even more and storing PM2.5 data in the PM25 variable, and stores the PM 10 measurement in the PM10 variable: Line: 8
 ```
 def dylosdata():
 1.    serialport=serial.Serial('//dev/ttyUSB0',
