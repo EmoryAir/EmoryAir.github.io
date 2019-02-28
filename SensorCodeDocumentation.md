@@ -103,5 +103,15 @@ def gdoc():
             except:
                 print("Failed to log to gdoc")
 ```
+### Running The Sensor Functions 
+* First we compile all of the measurements into one variable: Line 1
+* Then we call the functions: Line 2-3
+* This line ensures that that we collect and record data from the sensors every minute 
+```
+1. alldata=[timestamp,temperature, humidity, PM25, PM10]
+2.    cssv()
+3.    gdoc()
+4.    time.sleep(60.0-((time.time()-starttime)%60))
+```
 
 
