@@ -1,48 +1,46 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300" rel="stylesheet">
+<head>
+    <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300" rel="stylesheet">
+    <!-- include leaflet css and javascript -->
+    <link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+    <!--JQuery library-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- include our own css -->
+    <link rel="stylesheet" href="style.css" />
 
-        <title>Air Emory</title>
+    <!-- include w3.js javascript -->
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
 
-		<!-- include leaflet css and javascript -->
-		<link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
-	        <!--JQuery library-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<!-- include our own css -->
-		<link rel="stylesheet" href="style.css" />
+    <!-- we include the javascript at the bottom, see below -->
+    <title>TITLE | Air Emory</title>
 
-        <!-- include w3.js javascript -->
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
+</head>
+<div w3-include-html="nav.html"></div>
+<script> w3.includeHTML(); </script>
 
-		<!-- we include the javascript at the bottom, see below -->
-    </head>
+<body>
+    <h1>Air Emory</h1>
+    <h3>
+        We are a student-led air quality sensor network. This is the first of its kind at Emory that displays live data from around campus.
+    </h3>
+    <h3>
+        Our goal is to promote awareness, general knowledge, and engagement for both students and faculty about our interaction with the environment.
+    </h3>
+    <h3>
+        We display our map data on our <a href="map.html">map</a> page.
+    </h3>
+    <h3>
+        More info about Air Emory can be found on our <a href="info.html">info</a> page.
+    </h3>
 
-    <div w3-include-html="nav.html"></div>
-    <script> w3.includeHTML(); </script>
+    <!-- include our own javascript -->
+    <script src="main.js"></script>
 
-	<body>
-		<h1>Air Emory</h1>
-        <h3>
-            We are a student-led air quality sensor network. This is the first of its kind at Emory that displays live data from around campus.
-        </h3>
-        <h3>
-            Our goal is to promote awareness, general knowledge, and engagement for both students and faculty about our interaction with the environment.
-        </h3>
-        <h3>
-            We display our map data on our <a href="map.html">map</a> page.
-        </h3>
-        <h3>
-            More info about Air Emory can be found on our <a href="info.html">info</a> page.
-        </h3>
-
-		<!-- include our own javascript -->
-		<script src="main.js"></script>
-
-	</body>
-    <footer>
-        Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a>
-    </footer>
+</body>
+<footer>
+    Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a>
+</footer>
 </html>

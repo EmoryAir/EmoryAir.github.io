@@ -1,14 +1,14 @@
 :root {
 	--black: #110B11;
-    --grey: #BFBFBF;
-    --white: #FFFFFF;
-    --red: #A53F2B;
-    --blue: #2e7eb8;
+	--grey: #BFBFBF;
+	--white: #FFFFFF;
+	--red: #A53F2B;
+	--blue: #2e7eb8;
 }
 /*
- * fonts
- * font-family: 'Josefin Sans', sans-serif;
- * font-family: 'Open Sans', sans-serif;
+* fonts
+* font-family: 'Josefin Sans', sans-serif;
+* font-family: 'Open Sans', sans-serif;
 */
 
 #map {
@@ -59,7 +59,7 @@ a:hover {
 /***********	Table CSS	 ***********/
 
 th, td {
-  padding: 3%;
+	padding: 3%;
 }
 th {
 	text-align: left;
@@ -67,45 +67,45 @@ th {
 
 /***********	Navbar CSS	 ***********/
 .navbar {
-  overflow: hidden;
-  color: var(--black);
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 30px;
-  display: block;
-  list-style-type: none;
-  margin-top: 0;
-  width: 100%;
+	overflow: hidden;
+	color: var(--black);
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 30px;
+	display: block;
+	list-style-type: none;
+	margin-top: 0;
+	width: 100%;
 }
 
 /* Links inside the navbar */
 .navbar a {
-  float: right;
-  text-align: center;
-  padding: 14px 20px;
-  text-decoration: none;
+	float: right;
+	text-align: center;
+	padding: 14px 20px;
+	text-decoration: none;
 }
 
 /* The dropdown container */
 .navbar .dropdown {
-  float: right;
-  overflow: hidden;
+	float: right;
+	overflow: hidden;
 }
 
 /* Dropdown button */
 .navbar .dropdown .dropbtn {
-  font-size: inherit;
-  border: none;
-  outline: none;
-  color: var(--black);
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
+	font-size: inherit;
+	border: none;
+	outline: none;
+	color: var(--black);
+	background-color: inherit;
+	font-family: inherit; /* Important for vertical align on mobile phones */
+	margin: 0; /* Important for vertical align on mobile phones */
 }
 
 /* Add a grey hover font-color to navbar links */
 .navbar a:hover, .navbar .dropdown:hover .dropbtn {
-  background-color: inherit;
-  color: var(--grey);
+	background-color: inherit;
+	color: var(--grey);
 }
 
 .navbar a, .navbar a:link, .navbar a:visited {
@@ -113,44 +113,44 @@ th {
 }
 
 .navbar a:hover {
-    color: var(--grey);
+	color: var(--grey);
 }
 
 /* Dropdown content (hidden by default) */
 .navbar .dropdown-content {
-  display: none;
-  position: absolute;
-  min-width: 160px;
-  z-index: 1;
+	display: none;
+	position: absolute;
+	min-width: 160px;
+	z-index: 1;
 }
 
 /* Links inside the dropdown */
 .navbar .dropdown-content a {
-  float: none;
-  color: inherit;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-  font-size: 25px;
+	float: none;
+	color: inherit;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+	font-size: 25px;
 }
 
 /* Add a grey font color to dropdown links on hover */
 .navbar .dropdown-content a:hover {
-  color: var(--grey);
+	color: var(--grey);
 }
 
 /* Show the dropdown menu on hover */
 .navbar .dropdown:hover .dropdown-content {
-  display: block;
+	display: block;
 }
 
 /***********	Footer CSS	 ***********/
 
 footer {
-    position: relative;
-    height: 20px;
-    color: var(--black);
-    text-align: center;
-    padding: 50px 30px;
+	position: relative;
+	height: 20px;
+	color: var(--black);
+	text-align: center;
+	padding: 50px 30px;
 }

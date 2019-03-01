@@ -1,75 +1,75 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300" rel="stylesheet">
+<head>
+    <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300" rel="stylesheet">
 
-        <title>Info | Air Emory</title>
+    <title>Info | Air Emory</title>
 
-		<!-- include leaflet css and javascript -->
-		<link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+    <!-- include leaflet css and javascript -->
+    <link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
 
-		<!-- include our own css -->
-		<link rel="stylesheet" href="style.css" />
+    <!-- include our own css -->
+    <link rel="stylesheet" href="style.css" />
 
-        <!-- include w3.js javascript -->
-        <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <!-- include w3.js javascript -->
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
 
-		<!-- we include the javascript at the bottom, see below -->
-    </head>
+    <!-- we include the javascript at the bottom, see below -->
+</head>
 
-    <div w3-include-html="nav.html"></div>
-    <script> w3.includeHTML(); </script>
+<div w3-include-html="nav.html"></div>
+<script> w3.includeHTML(); </script>
 
-	<body>
-		<h1>Information</h1>
-        <p>
-            Emory Air Quality (Emory AQ) is an effort to monitor and report air quality around Emory University’s Main Campus. The high levels of development and traffic in and around Emory University raised the question “how clean is the air we breathe?”. For this reason, Emory AQ currently monitors <a href= "https://www.google.com/url?q=https%3A%2F%2Fwww.epa.gov%2Fpm-pollution&sa=D&sntz=1&usg=AFQjCNEqR11NWDIwpo629hjVJ-ZLgCEoew" target="_blank">particulate matter</a>(PM), temperature, and <a href= "https://zehnderamerica.com/absolute-vs-relative-humidity-whats-the-difference/" target="_blank">relative humidity</a>.
-        </p>
-        <h3>What is PM?</h3>
-        <p>
-            Particulate Matter (PM) consists of small particles and liquid droplets suspended in the air. Their chemical properties are determined the composition of these solid and liquid particles. We measure PM using a <a href= "http://www.google.com/url?q=http%3A%2F%2Fwww.dylosproducts.com%2Fornodcproair.html&sa=D&sntz=1&usg=AFQjCNFynFzk83b1Evs7FTrJv1rswOeLfw" target="_blank">Dylos sensor</a> which divides PM into two categories:  2.5 to 10 micrometers in diameter(PM10), and 2.5 micrometers or smaller in diameter(PM2.5). The <a href= "https://www.google.com/url?q=https%3A%2F%2Fwww3.epa.gov%2Fregion1%2Fairquality%2Fpm-aq-standards.html&sa=D&sntz=1&usg=AFQjCNFX2pLT3u8gqZg6mwxXjcMmmmQElA" target="_blank">national standard</a> for PM2.5 is 12 μg/m3 and for PM10 is 35 μg/m3.
-        </p>
-        <h3>Why Relative Humidity?</h3>
-        <p>
-            The Dylos particle counter doesn't take into account relative humidity when measuring the PM. This is a problem because if humidity is high, water will attach to particles and cause the particles to become larger. Thus the Dylos measures the particle as bigger than it actually is.
-        </p>
-        <p>
-            A good write-up of how humidity affects PM can be found <a href = "https://smartairfilters.com/en/blog/are-particle-counters-and-government-machines-the-same/" target="_blank">here</a>, a paper on research done in China can be found <a href = "https://www.ncbi.nlm.nih.gov/pubmed/29063278" target="_blank">here</a>, and information from the EPA on PM 2.5 formation and relative humidity can be found <a href = "https://cfpub.epa.gov/ncer_abstracts/index.cfm/fuseaction/display.highlight/abstract/7591" target="_blank">here</a>.
-        </p>
-        <h3>Environmental and Health Concerns</h3>
-        <p>
-            PM, when inhaled, possesses a risk of aggravating or causing cardiorespiratory problems: asthma, lung and heart disease, difficulty breathing, and irritation. The smaller the particle, the deeper it can penetrate your lungs or even your blood stream. For this reason, PM2.5 poses a greater health risk than PM10, pollen, or other large dust particles.
+<body>
+    <h1>Information</h1>
+    <p>
+        Emory Air Quality (Emory AQ) is an effort to monitor and report air quality around Emory University’s Main Campus. The high levels of development and traffic in and around Emory University raised the question “how clean is the air we breathe?”. For this reason, Emory AQ currently monitors <a href= "https://www.google.com/url?q=https%3A%2F%2Fwww.epa.gov%2Fpm-pollution&sa=D&sntz=1&usg=AFQjCNEqR11NWDIwpo629hjVJ-ZLgCEoew" target="_blank">particulate matter</a>(PM), temperature, and <a href= "https://zehnderamerica.com/absolute-vs-relative-humidity-whats-the-difference/" target="_blank">relative humidity</a>.
+    </p>
+    <h3>What is PM?</h3>
+    <p>
+        Particulate Matter (PM) consists of small particles and liquid droplets suspended in the air. Their chemical properties are determined the composition of these solid and liquid particles. We measure PM using a <a href= "http://www.google.com/url?q=http%3A%2F%2Fwww.dylosproducts.com%2Fornodcproair.html&sa=D&sntz=1&usg=AFQjCNFynFzk83b1Evs7FTrJv1rswOeLfw" target="_blank">Dylos sensor</a> which divides PM into two categories:  2.5 to 10 micrometers in diameter(PM<sub>10</sub>), and 2.5 micrometers or smaller in diameter(PM<sub>2.5</sub>). The <a href= "https://www.google.com/url?q=https%3A%2F%2Fwww3.epa.gov%2Fregion1%2Fairquality%2Fpm-aq-standards.html&sa=D&sntz=1&usg=AFQjCNFX2pLT3u8gqZg6mwxXjcMmmmQElA" target="_blank">national standard</a> for PM<sub>2.5</sub> is 12 μg/m3 and for PM<sub>10</sub> is 35 μg/m3.
+    </p>
+    <h3>Why Relative Humidity?</h3>
+    <p>
+        The Dylos particle counter doesn't take into account relative humidity when measuring the PM. This is a problem because if humidity is high, water will attach to particles and cause the particles to become larger. Thus the Dylos measures the particle as bigger than it actually is.
+    </p>
+    <p>
+        A good write-up of how humidity affects PM can be found <a href = "https://smartairfilters.com/en/blog/are-particle-counters-and-government-machines-the-same/" target="_blank">here</a>, a paper on research done in China can be found <a href = "https://www.ncbi.nlm.nih.gov/pubmed/29063278" target="_blank">here</a>, and information from the EPA on PM<sub>2.5</sub> formation and relative humidity can be found <a href = "https://cfpub.epa.gov/ncer_abstracts/index.cfm/fuseaction/display.highlight/abstract/7591" target="_blank">here</a>.
+    </p>
+    <h3>Environmental and Health Concerns</h3>
+    <p>
+        PM, when inhaled, possesses a risk of aggravating or causing cardiorespiratory problems: asthma, lung and heart disease, difficulty breathing, and irritation. The smaller the particle, the deeper it can penetrate your lungs or even your blood stream. For this reason, PM<sub>2.5</sub> poses a greater health risk than PM<sub>10</sub>, pollen, or other large dust particles.
 
-            Environmentally, the chemical composition of PM can contribute to chemical weathering, crop damage, and alter the pH of aquatic ecosystems.
+        Environmentally, the chemical composition of PM can contribute to chemical weathering, crop damage, and alter the pH of aquatic ecosystems.
 
-            The EPA provides more information <a href= "https://www.google.com/url?q=https%3A%2F%2Fwww.epa.gov%2Fpm-pollution%2Fhealth-and-environmental-effects-particulate-matter-pm&sa=D&sntz=1&usg=AFQjCNElmxSpgWLo-GFN3wPaUtEQgU6rgg" target="_blank">here</a>.
-        </p>
-        <h3>How Do We Report Air Quality?</h3>
-        <p>
-            The Environmental Protection Agency (EPA) establishes a National Ambient Air Quality Standard (NAAQS) for five major air pollutants (ozone, particulate matter, carbon monoxide, sulfur dioxide, and nitrogen dioxide), regulated by the Clean Air Act. These standards are used to establish the U.S <a href= "https://www.google.com/url?q=https%3A%2F%2Fairnow.gov%2F&sa=D&sntz=1&usg=AFQjCNFS4YIywU9_sxj0aIv8ZHirkuvIAQ" target="_blank">Air Quality Index</a> (AQI), a reporting index that categorizes the air into six degrees of health concern. For PM2.5, the <a href= "https://www.google.com/url?q=https%3A%2F%2Fwww.epa.gov%2Fcriteria-air-pollutants%2Fnaaqs-table&sa=D&sntz=1&usg=AFQjCNHbdp9pAbh9QWYGaNpJy6KdJ0ayHw" target="_blank">AQI criteria</a> for “Good”, satisfactory air with little or no risk, is 12.0 μg/m3. Anything beyond this threshold introduces risk to sensitive groups, such as those with asthma, and other people, as air quality decreases further.
-        </p>
-        <h3>Assumptions</h3>
-        <p>
-            In order to translate from PM to volume of particulates, we assumed that all particles are spherical and used an average density to calculate the volume of PM(μg/m3). Both <a href= "https://www.google.com/url?q=https%3A%2F%2Fwww.mdpi.com%2F1424-8220%2F18%2F2%2F59&sa=D&sntz=1&usg=AFQjCNFodj_R1fIVMH90Ok9iYj_AsmF_sQ" target="_blank">temperature and humidity</a> affect the sensors that measure PM, which may skew the data in extreme conditions.
-        </p>
-        &nbsp
-        <p>
-            This is a project by the <a href= "https://www.google.com/url?q=https%3A%2F%2Fesaikawa.wordpress.com%2F&sa=D&sntz=1&usg=AFQjCNHWWQ4l8QlAeAMBihu4exwDp4HicQ" target="_blank">Saikawa lab</a> at Emory University.
-        </p>
-        <p>
-            This project is funded by the <a href= "http://www.google.com/url?q=http%3A%2F%2Fenvs.emory.edu%2Fhome%2F&sa=D&sntz=1&usg=AFQjCNGP_y84QuWA9inB5gS6NzQpQwfj5g" target="_blank">Emory Department of Environmental Science</a> and the <a href= "https://www.google.com/url?q=https%3A%2F%2Fsustainability.emory.edu%2F&sa=D&sntz=1&usg=AFQjCNEP1J6QGk8dYCD28ROEex0T_f3thQ" target="_blank">Office of Sustainability Initiatives</a>(OSI).
-        </p>
-        <p>
-            This project was inspired by Berkeley BEACON.
-        </p>
+        The EPA provides more information <a href= "https://www.google.com/url?q=https%3A%2F%2Fwww.epa.gov%2Fpm-pollution%2Fhealth-and-environmental-effects-particulate-matter-pm&sa=D&sntz=1&usg=AFQjCNElmxSpgWLo-GFN3wPaUtEQgU6rgg" target="_blank">here</a>.
+    </p>
+    <h3>How Do We Report Air Quality?</h3>
+    <p>
+        The Environmental Protection Agency (EPA) establishes a National Ambient Air Quality Standard (NAAQS) for five major air pollutants (ozone, particulate matter, carbon monoxide, sulfur dioxide, and nitrogen dioxide), regulated by the Clean Air Act. These standards are used to establish the U.S <a href= "https://www.google.com/url?q=https%3A%2F%2Fairnow.gov%2F&sa=D&sntz=1&usg=AFQjCNFS4YIywU9_sxj0aIv8ZHirkuvIAQ" target="_blank">Air Quality Index</a> (AQI), a reporting index that categorizes the air into six degrees of health concern. For , the <a href= "https://www.google.com/url?q=https%3A%2F%2Fwww.epa.gov%2Fcriteria-air-pollutants%2Fnaaqs-table&sa=D&sntz=1&usg=AFQjCNHbdp9pAbh9QWYGaNpJy6KdJ0ayHw" target="_blank">AQI criteria</a> for “Good”, satisfactory air with little or no risk, is 12.0 μg/m3. Anything beyond this threshold introduces risk to sensitive groups, such as those with asthma, and other people, as air quality decreases further.
+    </p>
+    <h3>Assumptions</h3>
+    <p>
+        In order to translate from PM to volume of particulates, we assumed that all particles are spherical and used an average density to calculate the volume of PM(μg/m3). Both <a href= "https://www.google.com/url?q=https%3A%2F%2Fwww.mdpi.com%2F1424-8220%2F18%2F2%2F59&sa=D&sntz=1&usg=AFQjCNFodj_R1fIVMH90Ok9iYj_AsmF_sQ" target="_blank">temperature and humidity</a> affect the sensors that measure PM, which may skew the data in extreme conditions.
+    </p>
+    &nbsp
+    <p>
+        This is a project by the <a href= "https://www.google.com/url?q=https%3A%2F%2Fesaikawa.wordpress.com%2F&sa=D&sntz=1&usg=AFQjCNHWWQ4l8QlAeAMBihu4exwDp4HicQ" target="_blank">Saikawa lab</a> at Emory University.
+    </p>
+    <p>
+        This project is funded by the <a href= "http://www.google.com/url?q=http%3A%2F%2Fenvs.emory.edu%2Fhome%2F&sa=D&sntz=1&usg=AFQjCNGP_y84QuWA9inB5gS6NzQpQwfj5g" target="_blank">Emory Department of Environmental Science</a> and the <a href= "https://www.google.com/url?q=https%3A%2F%2Fsustainability.emory.edu%2F&sa=D&sntz=1&usg=AFQjCNEP1J6QGk8dYCD28ROEex0T_f3thQ" target="_blank">Office of Sustainability Initiatives</a>(OSI).
+    </p>
+    <p>
+        This project was inspired by Berkeley BEACON.
+    </p>
 
-		<!-- include our own javascript -->
-		<script src="main.js"></script>
+    <!-- include our own javascript -->
+    <script src="main.js"></script>
 
-	</body>
-    <footer>
-        Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a>
-    </footer>
+</body>
+<footer>
+    Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a>
+</footer>
 </html>
