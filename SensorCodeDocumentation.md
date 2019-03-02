@@ -114,5 +114,5 @@ def gdoc():
 4.    time.sleep(60.0-((time.time()-starttime)%60))
 ```
 ## Thats all there is to it!
-Email 
+Email [mailto](momo.rutkin@emory.edu)
 
