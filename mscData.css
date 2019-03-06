@@ -56,7 +56,7 @@ tr:nth-child(even) {
 
 #pm10AvgContainer {
 	float:left;
-	margin-left:100px;
+	margin-left:12.5%;
 }
 
 #pmfineAvgContainer {
