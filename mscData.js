@@ -86,13 +86,21 @@
 			intervalType: "hour",
 			maximum: 24
 		},
-		axisY:{
-			title: "\u03BC" + "g/m" + "\u00B3",
-			
-		},
+		axisY: [
+			{
+				title: "\u03BC" + "g/m" + "\u00B3",
+			},
+			{
+				title: "Relative Humidity (%)",
+			},
+			{
+				title: "Temperature (Celsius)",
+			}
+		],
 		data: [
-		{
+			{
 			type: "scatter",
+			axisYindex: 0,
 			showInLegend: true,
 			name: "PM10",
 			legendText: "PM10",
@@ -102,6 +110,7 @@
 		},
 			{
 			type: "scatter",
+			axisYindex: 0,
 			showInLegend: true,
 			name:"PM2.5",
 			legendText: "PM2.5",
@@ -112,6 +121,7 @@
 		},
 			{
 			type: "scatter",
+			axisYindex: 2,
 			showInLegend: true,
 			name:"Temperature",
 			legendText: "Temperature(Celsius)",
@@ -121,6 +131,7 @@
 		},
 			{
 			type: "scatter",
+			axisYindex: 1,
 			showInLegend: true,
 			name:"Relative Humidity",
 			legendText: "Relative Humidity",
