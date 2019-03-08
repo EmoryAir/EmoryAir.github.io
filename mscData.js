@@ -72,6 +72,8 @@
 	function currDayGraph() {
 		var data10 = [];
 		var datafine = [];
+		var relhum = [];
+		var temperature = [];
 		var ymax = 0;
 		var chart = new CanvasJS.Chart("currDayGraph", {
 			/*
@@ -86,7 +88,7 @@
 		},
 		axisY:{
 			title: "\u03BC" + "g/m" + "\u00B3",
-			maximum:5
+			
 		},
 		data: [
 		{
@@ -107,6 +109,24 @@
 			markerSize: 4,
 			dataPoints: datafine,
 
+		},
+			{
+			type: "scatter",
+			showInLegend: true,
+			name:"Temperature",
+			legendText: "Temperature(Celsius)",
+			markerColor: "green",
+			markerSize: 4,
+			dataPoints: temperature,
+		},
+			{
+			type: "scatter",
+			showInLegend: true,
+			name:"Relative Humidity",
+			legendText: "Relative Humidity",
+			markerColor: "red",
+			markerSize: 4,
+			dataPoints: relhum,
 		}
 
 		]
@@ -123,6 +143,8 @@
 				var pmfine = this.gsx$pmfine.$t;
 				var pm10 = this.gsx$pm10.$t;
 				var time = this.gsx$time.$t;
+				var temp = this.gsx$temperaturec.$t;
+				var rh = this.gsx$relativehumidity.$t;
 
 				var pm10num = parseFloat(pm10);
 				var pmfinenum = parseFloat(pmfine);
@@ -145,8 +167,12 @@
 
 				//if pm10 != 0, plot on graph 
 				//if pmfine != 0, plot on graph
+				//if temp != 0, plot on graph
+				//if relhumi != 0, plot on graph
 				if (pm10 != '0' && pm10 != '') data10.push({x: timeNum, y: parseFloat(pm10)});
 				if (pmfine != '0' && pmfine != '') datafine.push({x: timeNum, y: parseFloat(pmfine)});
+				if (temp != '0' && temp != '') temperature.push({x: timeNum, y: parseFloat(temp)});
+				if (rh != '0' && rh != '') relhum.push({x: timeNum, y: parseFloat(rh)});
 				
 
 			});
