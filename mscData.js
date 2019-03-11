@@ -17,10 +17,10 @@
 		var day = (date.getDate()).toString();
 		var month = (1 + date.getMonth()).toString();
 		var year = date.getFullYear();
-		var dateString = year + "-" + month + "-" + day;
 
 		if (day.length == 1) day = "0" + day;
 		if (month.length == 1) month = "0" + month;
+		var dateString = year + "-" + month + "-" + day;
 
 		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
 		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
