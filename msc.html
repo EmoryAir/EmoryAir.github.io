@@ -36,26 +36,11 @@
 <body>
     <h1>MSC</h1>
 
-    <!--Current Data Analytics-->
-    <div id="cornerInfo">
-        <!--Today's date-->
-        <div id="dateContainer" class="analyticsContainer">
-            <div id="dateTitle" class="analyticsTitle">Date</div>
-            <div id="date" class="analytics"></div>
-        </div>
-
-        <!--Current Daily PM10 Average-->
-        <div id="pm10AvgContainer" class="analyticsContainer">
-            <div id="pm10avgTitle" class="analyticsTitle">PM10 Avg</div>
-            <div id="pm10avg" class="analytics"></div>
-        </div>
-
-        <!--Current Daily PM2.5 Average-->
-        <div id="pmfineAvgContainer" class="analyticsContainer">
-            <div id="pmfineavgTitle" class="analyticsTitle">PM2.5 Avg</div>
-            <div id="pmfineavg" class="analytics"></div>
-        </div>
-    </div>
+    <!--Data Analytics-->
+    <table id="dataAnalytics" align="center">
+		<tr><th>Today's Date</th><th>Average PM<sub>10</sub></th><th>Average PM<sub>2.5</sub></th><th>Average Temperature</th><th>Average Relative Humidity</th></tr>
+		<tr><td></td><td></td><td></td><td></td><td></td></tr>
+	</table>
 
     <!--Current Day Data-->
     <div id="currentDayData" class="dataSect">Current Day Data
