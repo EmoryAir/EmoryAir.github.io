@@ -6,11 +6,21 @@
 		var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 		var month = months[date.getMonth()];
 
-		document.getElementById('date').innerHTML = month + " " + day + ", " + year;
+		document.getElementById('dataAnalytics').rows[1].cells[0].innerHTML = month + " " + day + ", " + year;
 	}
 
-	//display PM10 and PM2.5 averages for the current day 
+	//display PM10, PM2.5, temperature, relative humidity averages for the current day 
 	function averages() {
+		
+		//fix for google sheets algorithm: get only current day on spreadsheet1
+		var date = new Date();
+		var day = (date.getDate()).toString();
+		var month = (1 + date.getMonth()).toString();
+		var year = date.getFullYear();
+		var dateString = year + "-" + month + "-" + day;
+
+		if (day.length == 1) day = "0" + day;
+		if (month.length == 1) month = "0" + month;
 
 		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
 		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
@@ -20,17 +30,29 @@
 		var pm10sum = 0;
 		var pmfinetot = 0;
 		var pm10tot = 0;
+		var tempsum = 0;
+		var temptot = 0;
+		var rhsum = 0;
+		var rhtot = 0;
 
 		$.getJSON(url, function(data) {
 
 			var entry = data.feed.entry;
 
 			$(entry).each(function() {
+				//fix to google sheets algorithm
+				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
+				if (timestamp != dateString) return;
+				
 				var pmfine = this.gsx$pmfine.$t;
 				var pm10 = this.gsx$pm10.$t;
-
+				var rhStr = this.gsx$relativehumidity.$t;
+				var temperatureStr = this.gsx$temperaturec.$t;
+	
 				var pm10num = parseFloat(pm10);
 				var pmfinenum = parseFloat(pmfine);
+				var rh = parseFloat(rhStr);
+				var temperature = parseFloat(temperatureStr);
 
 				//to get avg
 				if (pm10 != '0' && pm10 != '') {
@@ -42,24 +64,50 @@
 					pmfinesum += pmfinenum;
 					pmfinetot++;
 				}
+				
+				if (rhStr != '0' && rhStr != '') {
+					rhsum += rh;
+					rhtot++;
+				}
+
+				if (temperatureStr != '0' && temperatureStr != '') {
+					tempsum += temperature;
+					temptot++;
+				}
 
 				var pm10avg;
 				var pmfineavg;
+				var tempavg;
+				var rhavg;
 
 				if (pm10tot != 0) {
-					pm10avg = (pm10sum/pm10tot).toFixed(3);
+					pm10avg = (pm10sum/pm10tot).toFixed(2) + " \u03BCg/m\u00B3";
 				} else {
 					pm10avg = "No Data";
 				}
 
 				if (pmfinetot != 0) {
-					pmfineavg = (pmfinesum/pmfinetot).toFixed(3);
+					pmfineavg = (pmfinesum/pmfinetot).toFixed(2) + " \u03BCg/m\u00B3";
 				} else {
 					pmfineavg = "No Data";
 
 				}
-				document.getElementById("pm10avg").innerHTML = pm10avg;
-				document.getElementById("pmfineavg").innerHTML = pmfineavg;
+				
+				if (temptot != 0) {
+					tempavg = (tempsum/temptot).toFixed(2) + " &deg;C";
+				} else {
+					tempavg = "No Data";
+				}
+
+				if (rhtot != 0) {
+					rhavg = (rhsum/rhtot).toFixed(2) + "%";
+				} else {
+					rhavg = "No Data";
+				}
+				document.getElementById("dataAnalytics").innerHTML = pm10avg;
+				document.getElementById("dataAnalytics").innerHTML = pmfineavg;
+				document.getElementById("dataAnalytics").rows[1].cells[3].innerHTML = tempavg;
+				document.getElementById("dataAnalytics").rows[1].cells[4].innerHTML = rhavg;
 			});
 		});
 
@@ -74,22 +122,45 @@
 		var datafine = [];
 		var relhum = [];
 		var temperature = [];
-		var ymax = 0;
+		
 		var chart = new CanvasJS.Chart("currDayGraph", {
-			/*
+			
 		title: {
-			text: 
-		},*/
+			text: "",
+		},
 		axisX:{
 			title: "time (hour)",
 			interval: 1,
 			intervalType: "hour",
-			maximum: 24
+			maximum: 25
 		},
 		axisY: 
 			{
 				title: "\u03BC" + "g/m" + "\u00B3",
+				title: "PM (\u03BCg/m\u00B3)",
+				maximum: 100
 			},
+		axisY2: [
+			{
+				title: "Relative Humidity (%)",
+				lineColor:"red",
+				labelFontColor:"red",
+				titleFontColor:"red",
+			},
+			{
+				title: "Temperature (Celsius)",
+				lineColor:"green",
+				labelFontColor:"green",
+				titleFontColor:"green",
+			}
+		],
+		toolTip: {
+			shared:true,
+		},
+		legend: {
+			cursor:"pointer",
+			itemclick: toggleDataSeries,
+		},
 		
 		data: [
 			{
@@ -98,7 +169,7 @@
 			name: "PM10",
 			legendText: "PM10",
 			markerColor: "black",
-			markerSize: 4,
+			markerSize: 3,
 			dataPoints : data10,
 		},
 			{
@@ -107,11 +178,42 @@
 			name:"PM2.5",
 			legendText: "PM2.5",
 			markerColor: "blue",
-			markerSize: 4,
+			markerSize: 3,
 			dataPoints: datafine,
+		},
+			{
+			type: "scatter",
+			axisYindex: 1,
+			axisYType: "secondary",
+			showInLegend: true,
+			name:"Temperature",
+			legendText: "Temperature(C)",
+			markerColor: "green",
+			markerSize: 3,
+			dataPoints: temperature,
+		},
+			{
+			type: "scatter",
+			axisYindex: 0,
+			axisYType: "secondary",
+			showInLegend: true,
+			name:"Relative Humidity",
+			legendText: "Relative Humidity(%)",
+			markerColor: "red",
+			markerSize: 3,
+			dataPoints: relhum,
 		}
 		]
 		});
+		
+		var date = new Date();
+		var day = (date.getDate()).toString();
+		var month = (1 + date.getMonth()).toString();
+		var year = date.getFullYear();
+
+		if (day.length == 1) day = "0" + day;
+		if (month.length == 1) month = "0" + month;
+		var dateString = year + "-" + month + "-" + day;
 
 		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
 		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
@@ -121,30 +223,29 @@
 			var entry = data.feed.entry;
 
 			$(entry).each(function() {
+				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
+				if (timestamp != dateString) return;
 				var pmfine = this.gsx$pmfine.$t;
 				var pm10 = this.gsx$pm10.$t;
-				var time = this.gsx$time.$t;
+				var time = this.gsx$timestamp.$t;
 				var temp = this.gsx$temperaturec.$t;
 				var rh = this.gsx$relativehumidity.$t;
-
-				var pm10num = parseFloat(pm10);
-				var pmfinenum = parseFloat(pmfine);
 
 				//turn time string into a number
 				var hour;
 				var min;
 
-				if (time.charAt(1) == '0') {
-					hour = parseInt(time.charAt(2));
+				if (time.charAt(11) == '0') {
+					hour = parseInt(time.charAt(12));
 				} else {
-					hour = parseInt(time.charAt(1) + time.charAt(2));
+					hour = parseInt(time.charAt(11) + time.charAt(12));
 				}
-				if (time.charAt(4) == '0') {
-					min = parseInt(time.charAt(5));
+				if (time.charAt(14) == '0') {
+					min = parseInt(time.charAt(15));
 				} else {
-					min = parseInt(time.charAt(4) + time.charAt(5));
+					min = parseInt(time.charAt(14) + time.charAt(15));
 				}
-				var timeNum = ((hour*60) + min) / 60.0; 
+				var timeNum = (((hour*60) + min) / 60.0).toFixed(2); 
 
 				//if pm10 != 0, plot on graph 
 				//if pmfine != 0, plot on graph
@@ -177,6 +278,14 @@
 				'<th>Time</th>' +
 				'</tr>' );
 
+		var date = new Date();
+		var day = (date.getDate()).toString();
+		var month = (1 + date.getMonth()).toString();
+		var year = date.getFullYear();
+
+		if (day.length == 1) day = "0" + day;
+		if (month.length == 1) month = "0" + month;
+		var dateString = year + "-" + month + "-" + day;
 		//load json data from server using get http request
 		//parameters: url, callback (function executed when data is loaded)
 		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
@@ -187,6 +296,8 @@
 			var entry = data.feed.entry;
 
 			$(entry).each(function() {
+				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
+				if (timestamp != dateString) return;
 				var timestamp = this.gsx$timestamp.$t;
 				var temp = this.gsx$temperaturec.$t;
 				var rh = this.gsx$relativehumidity.$t;
@@ -201,7 +312,7 @@
 				if (timestamp == '') timestamp = '---';
 				if (temp == '') temp = '---';
 				if (rh == '') rh = '---';
-				if (pmfine == '0') pmfine = '---';
+				if (pmfine == '0' || pmfine == "") pmfine = '---';
 				if (pm10 == '0') pm10 = '---';
 				if (time == '') time = '---';
 			
