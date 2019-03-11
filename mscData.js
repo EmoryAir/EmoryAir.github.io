@@ -6,7 +6,7 @@
 		var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 		var month = months[date.getMonth()];
 
-		document.getElementById('dataAnalytics').rows[1].cells[0].innerHTML = month + " " + day + ", " + year;
+		document.getElementById("dataAnalytics").rows[1].cells[0].innerHTML = month + " " + day + ", " + year;
 	}
 
 	//display PM10, PM2.5, temperature, relative humidity averages for the current day 
@@ -104,8 +104,8 @@
 				} else {
 					rhavg = "No Data";
 				}
-				document.getElementById("dataAnalytics").innerHTML = pm10avg;
-				document.getElementById("dataAnalytics").innerHTML = pmfineavg;
+				document.getElementById("dataAnalytics").rows[1].cells[1].innerHTML = pm10avg;
+				document.getElementById("dataAnalytics").rows[1].cells[2].innerHTML = pmfineavg;
 				document.getElementById("dataAnalytics").rows[1].cells[3].innerHTML = tempavg;
 				document.getElementById("dataAnalytics").rows[1].cells[4].innerHTML = rhavg;
 			});
