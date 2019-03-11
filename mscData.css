@@ -1,8 +1,9 @@
+/*data section headings*/
 h1 {
 	text-align:center;
 	font-size:40px;
 }
-
+/*default table styling for scrollable data*/
 table.center {
 	margin-left:auto;
 	margin-right:auto;
@@ -18,70 +19,39 @@ th, td {
 tr:nth-child(even) {
 	background-color:#cdcdcd;
 }
-
+/*contain overflow for scrolling tables*/
 .scroll {
 	overflow-y:auto;
 }
 
-#cornerInfo {
+/*data Analytics table*/
+#dataAnalytics {
 	position:relative;
-	width:800px;
-	height:180px;
-	margin-left:auto;
-	margin-right:auto;
-	padding-left:10px;
-	padding-right:10px;
-
-
+	width:85%;
+	height:150px;
+	padding:15px;
+	border-spacing:30px 0px;
 }
 
-.analyticsTitle {
-	position:absolute;
-	top:20px;
-	left:5px;
-	font-size:15px;
-	font-weight:bold;
-}
-
-.analyticsContainer {
-	position:relative;
-	width:200px;
-	height:140px;
-	background-color:lightblue;
-}
-
-#dateContainer {
-	float:left;
-}
-
-#pm10AvgContainer {
-	float:left;
-	margin-left:12.5%;
-}
-
-#pmfineAvgContainer {
-	float:right;
-}
-
-.analytics {
-	position:absolute;
+#dataAnalytics td {
+	padding:5px;
+	width:20%;
 	background-color:lightgrey;
-	width:100%;
-	height:100px;
-	bottom:0px;
 	text-align:center;
-	font-size:30px;
-	font-weight:bold;
+	border:0px;
+	font-size:25px;
 }
 
-#pmfineavg {
-	font-size:50px;
+#dataAnalytics th {
+	width:20%;
+	padding:0px;
+	height:20px;
+	background-color:lightblue;
+	border:0px;
+	font-size:15px;
+	vertical-align:bottom;
 }
-
-#pm10avg {
-	font-size:50px;
-}
-
+/*horizontal data sections*/
 .dataSect {
 	font-size:25px;
 	position:relative;
@@ -93,7 +63,7 @@ tr:nth-child(even) {
 	border-top:2px solid darkgrey;
 }
 
-
+/*current day data*/
 #currDayTableBlock {
 	position:absolute;
 	top: 100px;
@@ -110,7 +80,7 @@ tr:nth-child(even) {
 	width:500px;
 }
 
-
+/*hourly data*/
 #hourlyGraphBlock {
 	position:absolute;
 	top:95px;
@@ -126,7 +96,7 @@ tr:nth-child(even) {
 	height:345px;
 	width:460px;
 }
-
+/*avg day data*/
 #avgDayGraphBlock {
 	height: 300px;
 	width:500px;
@@ -139,7 +109,7 @@ tr:nth-child(even) {
 	height:345px;
 	width:460px;
 }
-
+/*graph center*/
 .graph {
 	margin-left:auto;
 	margin-right:auto;
