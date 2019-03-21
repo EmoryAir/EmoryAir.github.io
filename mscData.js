@@ -149,7 +149,6 @@
 			{
 				title: "\u03BC" + "g/m" + "\u00B3",
 				title: "PM (\u03BCg/m\u00B3)",
-				maximum: 100
 			},
 		axisY2: [
 			{
