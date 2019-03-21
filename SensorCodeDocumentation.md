@@ -114,6 +114,7 @@ def gdoc():
 4.    time.sleep(60.0-((time.time()-starttime)%60))
 ```
 ## The Sensor Code
+Here is all of the above steps, line by line, compiled together to create the sensor code we use!
 ```
 #!/usr/bin/env
 #Modules
