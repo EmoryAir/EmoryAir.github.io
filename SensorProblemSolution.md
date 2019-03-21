@@ -44,7 +44,7 @@ WantedBy=default.target
 ```sudo systemctl enable EmoryAQSensor```
 ```sudo systemctl start EmoryAQSensor```
 
-...If no error messages, stop the service reboot:
+... If no error messages, stop the service reboot:
 ```sudo systemctl stop EmoryAQSensor```
 ```END```
 
@@ -86,6 +86,14 @@ WantedBy=default.target
 ```alias off='sudo shutdown -h now'```
 ```status='systemctl status EmoryAQSensor.service'```
 ```jnl = 'journalctl |grep EmoryAQ'```
+
+## Problem 2: Data Not Recording To Google Docs
+* The CSV was recording the sensor data in the computer but the data was not sending to our online Google Spreadsheet.
+
+## Solution:
+* Make sure that the service ID from the Google Cloud Key ID matches the one in the code.
+* In addition, naming is very important, make sure the name of the google doc matches the one that you mention in the code under the gdoc() function. You can assess the google cloud account through the gmail account. 
+* Make sure that the function is not only declared, but also called. The call must have been accidentally erased somehow. 
 
 
 
