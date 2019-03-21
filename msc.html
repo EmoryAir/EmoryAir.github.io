@@ -63,6 +63,16 @@
         </div>
     </div>
 
+    <!--Hourly averaged over the month -->
+    <div id="avgDayData" class="dataSect">Hourly Averages for Current Month
+	<div id="avgDayGraphBlock">
+		<div id="avgDayGraph" class="graph"></div>
+	</div>
+	<div id="avgDayTableBlock" class="scroll" class="tableBlock">
+		<table id="avgDay" class="center"></div>
+	    </div>
+	</div>
+
     <h3>View all of our data <a href="https://docs.google.com/spreadsheets/d/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/edit?usp=sharing" target="_blank">here</a>.
     </h3>
 
@@ -73,6 +83,8 @@
     currDay();
     hourlyGraph();
     hourly();
+    avgDayGraph();
+    avgDay();
 	   
     </script>
 
