@@ -38,12 +38,14 @@
 		$.getJSON(url, function(data) {
 
 			var entry = data.feed.entry;
+			var count = 0; //check if there exists data for current day 
 
 			$(entry).each(function() {
 				//fix to google sheets algorithm
 				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
 				if (timestamp != dateString) return;
 				
+				count++;
 				var pmfine = this.gsx$pmfine.$t;
 				var pm10 = this.gsx$pm10.$t;
 				var rhStr = this.gsx$relativehumidity.$t;
@@ -104,11 +106,20 @@
 				} else {
 					rhavg = "No Data";
 				}
+				
 				document.getElementById("dataAnalytics").rows[1].cells[1].innerHTML = pm10avg;
 				document.getElementById("dataAnalytics").rows[1].cells[2].innerHTML = pmfineavg;
 				document.getElementById("dataAnalytics").rows[1].cells[3].innerHTML = tempavg;
 				document.getElementById("dataAnalytics").rows[1].cells[4].innerHTML = rhavg;
+				
 			});
+				//output no data if there exists no data for current day
+				if (count == 0) {
+				document.getElementById("dataAnalytics").rows[1].cells[1].innerHTML = "No Data";
+				document.getElementById("dataAnalytics").rows[1].cells[2].innerHTML = "No Data";
+				document.getElementById("dataAnalytics").rows[1].cells[3].innerHTML = "No Data";
+				document.getElementById("dataAnalytics").rows[1].cells[4].innerHTML = "No Data";
+				}
 		});
 
 
