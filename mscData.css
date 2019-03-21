@@ -97,8 +97,11 @@ tr:nth-child(even) {
 }
 /*avg day data*/
 #avgDayGraphBlock {
-	height: 300px;
-	width:500px;
+	position:absolute;
+	top:95px;
+	right:52%;
+	height:400px;
+	width: 500px;
 }
 
 #avgDayTableBlock {
