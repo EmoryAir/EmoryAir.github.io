@@ -354,10 +354,13 @@
 				);
 
 		var date = new Date();
-		var day = date.getDate();
+		var day = (date.getDate()).toString();
 		var year = date.getFullYear();
-		var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-		var month = months[date.getMonth()];
+		var month = (1 + date.getMonth()).toString();
+		
+		if (month.length == 1) month = "0" + month;
+		if (day.length == 1) day = "0" + day;
+		var dateString = year + "-" + month + "-" + day;
 
 		// pm, rh, temp counts
 		var pm10arr = [];
@@ -393,6 +396,7 @@
 
 			$(entry).each(function() {
 				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
+				if (timestamp != dateString) return;
 				var pm10 = this.gsx$pm10.$t;
 				var pmfine = this.gsx$pmfine.$t;
 				var temp = this.gsx$temperaturec.$t;
@@ -511,7 +515,6 @@
 		if (month.length == 1) month = "0" + month;
 		if (day.length == 1) day = "0" + day;
 		var dateString = year + "-" + month + "-" + day;
-		var tempTestDate = "2019-03-11";
 		
 		var data10 = [];
 		var datafine = [];
@@ -632,8 +635,379 @@
 
 			$(entry).each(function() {
 				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
-				//if (timestamp != dateString) return;
-				if (timestamp != tempTestDate) return;
+				if (timestamp != dateString) return;
+				//if (timestamp != tempTestDate) return;
+				var pm10 = this.gsx$pm10.$t;
+				var pmfine = this.gsx$pmfine.$t;
+				var temp = this.gsx$temperaturec.$t;
+				var rh = this.gsx$relativehumidity.$t;
+				var time = this.gsx$timestamp.$t;
+			
+				var pm10num;
+				var pmfinenum;
+				var tempnum;
+				var rhnum;
+
+				if (pm10 == "") {
+					pm10num = 0;
+				} else {
+					pm10num = parseFloat(pm10);
+				}
+
+				if (pmfine == "") {
+					pmfinenum = 0;
+				} else {
+					pmfinenum = parseFloat(pmfine);
+				}
+				
+				if (temp == "") {
+					tempnum = 0;
+				} else {
+					tempnum = parseFloat(temp);
+				}
+
+				if (rh == "") {
+					rhnum = 0;
+				} else {
+					rhnum = parseFloat(rh);
+				}
+				
+				var hrStr = time.substring(11,13);
+				var hour = parseInt(hrStr, 10);
+				
+				pm10arr[hour] += pm10num;
+				pmfinearr[hour] += pmfinenum;
+				temperature[hour] += tempnum;
+				relhumid[hour] += rhnum;
+
+				if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
+				if (pmfine != '0' && pmfine != "") pmfinetot[hour]++;
+				if (temp != '0' && temp != "") temptot[hour]++;
+				if (rh != '0' && rh != "") rhtot[hour]++;
+			});
+
+
+				for (var i = 0; i < 24; i++) {
+
+					var pm10avg;
+					var pmfineavg;
+					var tempavg;
+					var rhavg;
+
+					if (pm10tot[i] != 0) {
+						pm10avg = (pm10arr[i] / pm10tot[i]);
+						data10.push({x: i, y: pm10avg});	
+					} 
+
+					if (pmfinetot[i] != 0) {
+						pmfineavg = (pmfinearr[i] / pmfinetot[i]);
+						datafine.push({x:i, y:pmfineavg});
+					} 
+					if (temptot[i] != 0) {
+						tempavg = (temperature[i] / temptot[i]);
+						datatemp.push({x:i, y:tempavg});
+					} 
+					if (rhtot[i] != 0) {
+						rhavg = (relhumid[i] / rhtot[i]);
+						datarh.push({x:i, y:rhavg});
+					} 
+				}
+				chart.render();
+		});
+	}
+
+	//hourly averages over current month table
+	function avgDay() {
+		$('#avgDay').append(
+				'<tr><th>Hour</th><th>Average Temperature</th><th>Average Relative Humidity</th><th>Average PM<sub>10</sub></th><th>Average PM<sub>2.5</sub></th></tr>'
+				);
+
+		var date = new Date();
+		var day = (date.getDate()).toString();
+		var year = date.getFullYear();
+		var month = (1 + date.getMonth()).toString();
+		
+		if (month.length == 1) month = "0" + month;
+		if (day.length == 1) day = "0" + day;
+		var dateString = month;
+
+		// pm, temp, relhumid counts
+		var pm10arr = [];
+		var pmfinearr = [];
+		var temperature = [];
+		var relhumid = [];
+
+		//total datapoints counts
+		var pm10tot = [];
+		var pmfinetot = [];
+		var temptot = [];
+		var rhtot = [];
+
+		//initialize arrays
+		for (let i = 0; i < 24; i++) {
+			pm10arr[i] = 0;
+			pmfinearr[i] = 0;
+			pm10tot[i] = 0;
+			pmfinetot[i] = 0;
+			temperature[i] = 0;
+			relhumid[i] = 0;
+			temptot[i] = 0;
+			rhtot[i] = 0;
+		}
+
+		//ajax request
+		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
+		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
+
+		$.getJSON(url, function(data) {
+
+			var entry = data.feed.entry;
+
+			$(entry).each(function() {
+				var timestamp = (this.gsx$timestamp.$t).substring(5,7);
+				if (timestamp != dateString) return;
+				var pm10 = this.gsx$pm10.$t;
+				var pmfine = this.gsx$pmfine.$t;
+				var temp = this.gsx$temperaturec.$t;
+				var rh = this.gsx$relativehumidity.$t;
+				var time = this.gsx$timestamp.$t;
+			
+				var pm10num;
+				var pmfinenum;
+				var tempnum;
+				var rhnum;
+
+				if (pm10 == "") {
+					pm10num = 0;
+				} else {
+					pm10num = parseFloat(pm10);
+				}
+
+				if (pmfine == "") {
+					pmfinenum = 0;
+				} else {
+					pmfinenum = parseFloat(pmfine);
+				}
+				
+				if (temp == "") {
+					tempnum = 0;
+				} else {
+					tempnum = parseFloat(temp);
+				}
+
+				if (rh == "") {
+					rhnum = 0;
+				} else {
+					rhnum = parseFloat(rh);
+				}
+
+				var hour;
+				
+				if (time.charAt(11) == '0') {
+					hour = parseInt(time.charAt(12));
+				} else {
+					hour = parseInt(time.charAt(11) + time.charAt(12));
+				}
+				
+				pm10arr[hour] += pm10num;
+				pmfinearr[hour] += pmfinenum;
+				temperature[hour] += tempnum;
+				relhumid[hour] += rhnum;
+
+				if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
+				if (pmfine != '0' && pmfine != "") pmfinetot[hour]++;
+				if (temp != '0' && temp != "") temptot[hour]++;
+				if (rh != '0' && rh != "") rhtot[hour]++;
+			});
+
+
+				for (var i = 0; i < 24; i++) {
+
+					var pm10avg;
+					var pmfineavg;
+					var tempavg;
+					var rhavg;
+
+					if (pm10tot[i] == 0) {
+						pm10avg = '---';
+					} else {
+						pm10avg = (pm10arr[i] / pm10tot[i]);
+						pm10avg = pm10avg.toFixed(2);
+					}
+					if (pmfinetot[i] == 0) {
+						pmfineavg = '---';
+					} else {
+						pmfineavg = (pmfinearr[i] / pmfinetot[i]);
+						pmfineavg = pmfineavg.toFixed(2);
+					}
+					if (temptot[i] == 0) {
+						tempavg = '---';
+					} else {
+						tempavg = (temperature[i] / temptot[i]);
+						tempavg = tempavg.toFixed(2);
+					}
+					if (rhtot[i] == 0) {
+						rhavg = '---';
+					} else {
+						rhavg = (relhumid[i] / rhtot[i]);
+						rhavg = rhavg.toFixed(2);
+					}
+
+						
+					if (i < 10) {
+						$('#avgDay').append(
+						'<tr><td>' + '0' + i + ':00</td><td>' + tempavg + '</td><td>' + rhavg + '</td><td>' + pm10avg +
+						'</td><td>' + pmfineavg + '</td></tr>'
+						);
+					} else {
+						$('#avgDay').append(
+						'<tr><td>' + i + ':00</td><td>' + tempavg + '</td><td>' + rhavg + '</td><td>' + pm10avg +
+						'</td><td>' + pmfineavg + '</td></tr>'
+						);
+					}
+
+				}
+			
+
+
+		});
+
+	}
+
+	//hourly averages over current month graph 
+	function avgDayGraph() {
+
+		var date = new Date();
+		var day = (date.getDate()).toString();
+		var year = date.getFullYear();
+		var month = (1 + date.getMonth()).toString();
+		
+		if (month.length == 1) month = "0" + month;
+		if (day.length == 1) day = "0" + day;
+		var dateString = month;
+		
+		var data10 = [];
+		var datafine = [];
+		var datatemp = [];
+		var datarh = [];
+		var chart = new CanvasJS.Chart("avgDayGraph", {
+			
+		title: {
+			text: "",
+		},
+		axisX:{
+			title: "time (hour)",
+			interval: 1,
+			intervalType: "hour",
+			maximum: 24
+		},
+			
+		axisY:{
+			title: "PM (\u03BCg/m\u00B3)",
+		},
+		axisY2: [
+			{
+				title: "Relative Humidity (%)",
+				lineColor:"red",
+				labelFontColor:"red",
+				titleFontColor:"red",
+			},
+			{
+				title: "Temperature (Celsius)",
+				lineColor:"green",
+				labelFontColor:"green",
+				titleFontColor:"green",
+			}
+		],
+		toolTip: {
+			shared:true,
+		},
+		
+		legend: {
+			cursor:"pointer",
+			itemclick: toggleDataSeries,
+		},
+		data: [
+		{
+			type: "line",
+			showInLegend: true,
+			name: "PM10",
+			legendText: "PM10",
+			markerColor: "black",
+			lineColor: "black",
+			dataPoints : data10,
+		},
+			{
+			type: "line",
+			showInLegend: true,
+			name:"PM2.5",
+			legendText: "PM2.5",
+			markerColor: "blue",
+			lineColor: "blue",
+			dataPoints: datafine,
+		},
+			{
+			type: "line",
+			axisYindex: 1,
+			axisYType: "secondary",
+			showInLegend: true,
+			name:"Temperature",
+			legendText: "Temperature(C)",
+			markerColor: "green",
+			lineColor:"green",
+			dataPoints: datatemp,
+		},
+			{
+			type: "line",
+			axisYindex: 0,
+			axisYType: "secondary",
+			showInLegend: true,
+			name:"Relative Humidity",
+			legendText: "Relative Humidity(%)",
+			markerColor: "red",
+			lineColor: "red",
+			dataPoints: datarh,
+		}
+		]
+		});
+
+		// pm, temp, relhumid counts
+		var pm10arr = [];
+		var pmfinearr = [];
+		var temperature = [];
+		var relhumid = [];
+
+		//total datapoints counts
+		var pm10tot = [];
+		var pmfinetot = [];
+		var temptot = [];
+		var rhtot = [];
+
+		//initialize arrays
+		for (let i = 0; i < 24; i++) {
+			pm10arr[i] = 0;
+			pmfinearr[i] = 0;
+			pm10tot[i] = 0;
+			pmfinetot[i] = 0;
+			temperature[i] = 0;
+			relhumid[i] = 0;
+			temptot[i] = 0;
+			rhtot[i] = 0;
+		}
+
+		//ajax request
+		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
+		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
+
+		$.getJSON(url, function(data) {
+
+			var entry = data.feed.entry;
+
+			$(entry).each(function() {
+				var timestamp = (this.gsx$timestamp.$t).substring(5,7);
+			
+				if (timestamp != dateString) return;
+				
 				var pm10 = this.gsx$pm10.$t;
 				var pmfine = this.gsx$pmfine.$t;
 				var temp = this.gsx$temperaturec.$t;
@@ -719,139 +1093,7 @@
 
 		});
 
-
-
-	}
-
-	function avgDayGraph() {
-
-		var data10 = [];
-		var datafine = [];
-		var chart = new CanvasJS.Chart("avgDayGraph", {
-			/*
-		title: {
-			text: 
-		},*/
-		axisX:{
-			title: "time (hour)",
-			interval: 1,
-			intervalType: "hour",
-			maximum: 24
-		},
-		axisY:{
-			title: "\u03BC" + "g/m" + "\u00B3",
-		},
-		data: [
-		{
-			type: "line",
-			showInLegend: true,
-			name: "PM10",
-			legendText: "PM10",
-			markerColor: "black",
-			lineColor: "black",
-			dataPoints : data10,
-		},
-			{
-			type: "line",
-			showInLegend: true,
-			name:"PM2.5",
-			legendText: "PM2.5",
-			markerColor: "blue",
-			lineColor: "blue",
-			dataPoints: datafine,
-		},
-		]
-		});
-
-		// pm counts
-		var pm10arr = [];
-		var pmfinearr = [];
-
-		//total datapoints counts
-		var pm10tot = [];
-		var pmfinetot = [];
-
-		//initialize arrays
-		for (var i = 0; i < 24; i++) {
-			pm10arr[i] = 0;
-			pmfinearr[i] = 0;
-			pm10tot[i] = 0;
-			pmfinetot[i] = 0;
-		}
-
-		var d = new Date();
-		var date = d.getDate();
-		
-		var i;
-		for (i = 1; i <= d; i++) {
-
-		//ajax request
-		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
-		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
-
-		$.ajax( {
-			async:false,
-			url:url,
-			success:function(data) {
-				var entry = data.feed.entry;
-				$(entry).each(function() {
-				var pm10 = this.gsx$pm10.$t;
-				var pmfine = this.gsx$pmfine.$t;
-				var time = this.gsx$time.$t;
-
-				var pm10num = parseFloat(pm10);
-				var pmfinenum = parseFloat(pmfine);
-
-				var hrStr = time.charAt(1) + time.charAt(2);
-				var hour = parseInt(hrStr, 10);
-				
-
-				if (pm10 != '0' && pm10 != '') {
-					pm10arr[hour] += pm10num;
-					pm10tot[hour]++;
-				}
-		
-				if (pmfine != '0' && pmfine != '') {
-					pmfinearr[hour] += pmfinenum;
-					pmfinetot[hour]++;
-				}
-		
-				
-			});
-
-			
-				for (var i = 0; i < 24; i++) {
-
-					var pm10avg;
-					var pmfineavg;
-
-					if (pm10tot[i] != 0) {
-						pm10avg = (pm10arr[i] / pm10tot[i]);
-						data10.push({x: i, y: pm10avg});
-						//pm10avg = pm10avg.toFixed(3);
-					}
-					if (pmfinetot[i] != 0) {
-						pmfineavg = (pmfinearr[i] / pmfinetot[i]);
-						datafine.push({x:i, y:pmfineavg});
-						//pmfineavg = pmfineavg.toFixed(3);
-					}
-
-
-				}
-				
-				chart.render();	
-			}
-
-
-			
-		});
-
 	
-		}
-
-	
-		
-		
 	}
 
 function toggleDataSeries(e) {
