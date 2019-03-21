@@ -305,10 +305,12 @@
 		$.getJSON(url, function(data) {
 
 			var entry = data.feed.entry;
+			var count = 0;
 
 			$(entry).each(function() {
 				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
 				if (timestamp != dateString) return;
+				count++;
 				var timestamp = this.gsx$timestamp.$t;
 				var temp = this.gsx$temperaturec.$t;
 				var rh = this.gsx$relativehumidity.$t;
@@ -336,6 +338,10 @@
 					'</td><td>' + time + 
 					'</td></tr>');
 			});
+			//if no data exists, append empty row
+			if (count == 0) {
+				$('#currDay').append('<tr><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr>');
+			}
 	
 		});
 	}
