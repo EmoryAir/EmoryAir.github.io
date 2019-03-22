@@ -1249,19 +1249,23 @@ var updateChart = function update() {
 
 						if (temp == "") {
 							temp = "No Data";
-						}
+						} else {
+							temp = temp.toFixed(2);
 
 						if (rh == "") {
 							rh = "No Data";
-						}
+						} else {
+							rh = rh.toFixed(2);
 
 						if (pm10 == 0) {
 							pm10 = "No Data";
-						}
+						} else {
+							pm10 = pm10.toFixed(2);
 
 						if (pm25 == 0) {
 							pm25 = "No Data";
-						}
+						} else {
+							pm25 = pm25.toFixed(2);
 
 
 						document.getElementById("lastEntry").rows[2].cells[0].innerHTML = time;
