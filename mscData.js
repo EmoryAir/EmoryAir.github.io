@@ -281,10 +281,10 @@
 
 		$('#currDay').append(
 				'<tr><th>Timestamp</th>' + 
-				'<th>Temperature (Celsius)</th>' +
-				'<th>Relative Humidity</th>' +
-				'<th>PM2.5</th>' +
-				'<th>PM10</th>' +
+				'<th>Temperature&deg;C</th>' +
+				'<th>Relative Humidity (%)</th>' +
+				'<th>PM<sub>2.5</sub> (\u03BCg/m\u00B3)</th>' +
+				'<th>PM<sub>10</sub> (\u03BCg/m\u00B3)</th>' +
 				'<th>Time</th>' +
 				'</tr>' );
 
@@ -349,7 +349,7 @@
 	function hourly() {
 
 		$('#hourly').append(
-				'<tr><th>Hour</th><th>Average Temperature</th><th>Average Relative Humidity</th><th>Average PM<sub>10</sub></th><th>Average PM<sub>2.5</sub></th></tr>'
+				'<tr><th>Hour</th><th>Average Temperature &deg;C</th><th>Average Relative Humidity (%)</th><th>Average PM<sub>10</sub> (\u03BCg/m\u00B3)</th><th>Average PM<sub>2.5</sub> (\u03BCg/m\u00B3)</th></tr>'
 				);
 
 		var date = new Date();
@@ -718,7 +718,7 @@
 	//hourly averages over current month table
 	function avgDay() {
 		$('#avgDay').append(
-				'<tr><th>Hour</th><th>Average Temperature</th><th>Average Relative Humidity</th><th>Average PM<sub>10</sub></th><th>Average PM<sub>2.5</sub></th></tr>'
+				'<tr><th>Hour</th><th>Average Temperature &deg;C</th><th>Average Relative Humidity (%)</th><th>Average PM<sub>10</sub> (\u03BCg/m\u00B3)</th><th>Average PM<sub>2.5</sub> (\u03BCg/m\u00B3)</th></tr>'
 				);
 
 		var date = new Date();
@@ -1094,6 +1094,208 @@
 
 	
 	}
+
+//demo graph
+function demoGraph() {
+
+	var data10 = [];
+	var datafine = [];
+	var temperature = [];
+	var relhumid = [];
+	var chart = new CanvasJS.Chart("demoGraph", {
+	title: {
+			text: "",
+		},
+		axisX:{
+			title: "time (hour)",
+			intervalType: "hour",
+	
+		},
+		axisY: 
+			{
+				title: "PM (\u03BCg/m\u00B3)",
+				//maximum: 100
+			},
+		axisY2: [
+			{
+				title: "Relative Humidity (%)",
+				lineColor:"red",
+				labelFontColor:"red",
+				titleFontColor:"red",
+			},
+			{
+				title: "Temperature (Celsius)",
+				lineColor:"green",
+				labelFontColor:"green",
+				titleFontColor:"green",
+			}
+		],
+		toolTip: {
+			shared:true,
+		},
+		legend: {
+			cursor:"pointer",
+			itemclick: toggleDataSeries,
+		},
+		data: [
+			{
+			type: "scatter",
+			showInLegend: true,
+			name: "PM10",
+			legendText: "PM10",
+			markerColor: "black",
+			dataPoints : data10,
+		},
+			{
+			type: "scatter",
+			showInLegend: true,
+			name:"PM2.5",
+			legendText: "PM2.5",
+			markerColor: "blue",
+			dataPoints: datafine,
+
+		},
+			{
+			type: "scatter",
+			axisYindex: 1,
+			axisYType: "secondary",
+			showInLegend: true,
+			name:"Temperature",
+			legendText: "Temperature(C)",
+			markerColor: "green",
+			dataPoints: temperature,
+		},
+			{
+			type: "scatter",
+			axisYindex: 0,
+			axisYType: "secondary",
+			showInLegend: true,
+			name:"Relative Humidity",
+			legendText: "Relative Humidity(%)",
+			markerColor: "red",
+			dataPoints: relhumid,
+		}
+
+		]
+});
+
+
+ 
+
+var updateInterval = 1000;
+var dataLength = 50; // number of dataPoints visible at any point
+var globupdated = 0;
+ 
+var updateChart = function update() {
+
+	var url = "https://spreadsheets.google.com/feeds/list/1Mfs43knm9-S6IUFdbuDbZ3Lq8vFqh4gkc7PQ3enlZpk/od6/public/values?alt=json";
+
+	$.getJSON(url, function(data) {
+			console.log("start ajax request");
+			var entry = data.feed.entry;
+			var numEntries = data.feed.openSearch$totalResults.$t;
+			var updated = data.feed.updated.$t;
+
+			if (updated == globupdated || numEntries == 0) { //no updates 
+				console.log("no update");
+				return;
+			} else { //there is an update
+				globupdated  = updated;
+				console.log("globupdated: " + globupdated);
+				var count  = 0;
+				$(entry).each(function() {
+					count++;
+					
+					var time = this.gsx$timestamp.$t;
+					var temp = this.gsx$temperaturec.$t;
+					var rh = this.gsx$relativehumidity.$t;
+					var pm10 = this.gsx$pm10.$t;
+					var pm25 = this.gsx$pmfine.$t;
+
+					if (count == numEntries) {
+						 //get last entry
+						console.log("There was an update, get last entry");
+
+						//turn time string into a number
+						var hour;
+						var min;
+						
+						if (time.charAt(11) == '0') {
+							hour = parseInt(time.charAt(12));
+						} else {
+							hour = parseInt(time.charAt(11) + time.charAt(12));
+						}
+						//console.log("hour: " + hour);
+						if (time.charAt(14) == '0') {
+							min = parseInt(time.charAt(15));
+						} else {
+							min = parseInt(time.charAt(14) + time.charAt(15));
+						}
+						//console.log("min: " + min);
+						//var timeNum = (((hour*60) + min) / 60.0); 
+						var timeNum = (((hour*60) + min) / 60.0);
+						console.log("TimeNum: " + timeNum);
+						console.log("PM10: " + pm10);
+
+						if (pm10 != '0' && pm10 != '') data10.push({x: timeNum, y: parseFloat(pm10)});
+						if (pm25 != '0' && pm25 != '') datafine.push({x: timeNum, y: parseFloat(pm25)});
+						if (temp != '0' && temp != '') temperature.push({x: timeNum, y: parseFloat(temp)});
+						if (rh != '0' && rh != '') relhumid.push({x: timeNum, y: parseFloat(rh)});
+
+						//check for nulls 
+						if (time == "") {
+							time = "No Data";
+						}
+
+						if (temp == "") {
+							temp = "No Data";
+						}
+
+						if (rh == "") {
+							rh = "No Data";
+						}
+
+						if (pm10 == 0) {
+							pm10 = "No Data";
+						}
+
+						if (pm25 == 0) {
+							pm25 = "No Data";
+						}
+
+
+						document.getElementById("lastEntry").rows[2].cells[0].innerHTML = time;
+						document.getElementById("lastEntry").rows[2].cells[1].innerHTML = temp + " &deg;C";
+						document.getElementById("lastEntry").rows[2].cells[2].innerHTML = rh + "%";
+						document.getElementById("lastEntry").rows[2].cells[3].innerHTML = pm10 + " \u03BCg/m\u00B3";
+						document.getElementById("lastEntry").rows[2].cells[4].innerHTML = pm25 + " \u03BCg/m\u00B3";
+					
+
+						console.log("push datapoints");
+
+
+					if (relhumid.length > dataLength) relhumid.shift();
+					if (data10.length > dataLength) data10.shift();
+					if (temperature.length > dataLength) temperature.shift();
+					if (relhumid.length > dataLength) relhumid.shift();
+					}
+		 
+					
+						});
+				
+					}
+			chart.render();
+			
+	});
+ 
+ 
+	
+};
+ 
+updateChart(dataLength);
+setInterval(function(){updateChart()}, updateInterval);
+ 
+}
 
 function toggleDataSeries(e) {
 	if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
