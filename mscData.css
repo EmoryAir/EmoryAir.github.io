@@ -115,7 +115,16 @@ tr:nth-child(even) {
 .graph {
 	margin-left:auto;
 	margin-right:auto;
+}
 
+#demoGraphBlock {
+	position:relative;
+	top:30px;
+}
+
+#lastEntry {
+	position:relative;
+	top:450px
 }
 
 
