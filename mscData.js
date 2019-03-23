@@ -1290,7 +1290,7 @@ var updateChart = function update() {
 					}
 			chart.render();
 			
-	});
+	};
  
  
 	
