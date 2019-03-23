@@ -76,7 +76,7 @@ Tabletop.init({
 /////////end of makrer cluster group 2//////////////////
 
 /////////marker cluster group 1//////////////////
-
+/*
   for ( var i = 0; i < markers.length; ++i )
   {
 	var popup = markers[i].name +
@@ -101,6 +101,7 @@ Tabletop.init({
   }
 
   map.addLayer( markerClusters );
+  */
 /////////end of marker cluster group 1//////////////////
 
 //////////////legend stuff /////////////////////////////////////////////////
