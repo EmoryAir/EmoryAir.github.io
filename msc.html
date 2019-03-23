@@ -489,7 +489,7 @@
 		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
 		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
 
-		$.getJSON(url, function(data) {
+		$.getJSON(url, function(data)) {
 
 			var entry = data.feed.entry;
 
