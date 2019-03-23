@@ -144,7 +144,8 @@
 			title: "time (hour)",
 			interval: 1,
 			intervalType: "hour",
-			maximum: 25
+			maximum: 25,
+			minimum: 8,
 		},
 		axisY: 
 			{
