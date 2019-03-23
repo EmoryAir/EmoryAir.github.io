@@ -1095,6 +1095,7 @@
 	
 	}
 
+var globupdated = 0;
 //demo graph
 function demoGraph() {
 
@@ -1184,7 +1185,6 @@ function demoGraph() {
 
 var updateInterval = 1000;
 var dataLength = 50; // number of dataPoints visible at any point
-var globupdated = 0;
  
 var updateChart = function update() {
 
@@ -1285,12 +1285,12 @@ var updateChart = function update() {
 					}
 		 
 					
-						};
+						});
 				
 					}
 			chart.render();
 			
-	};
+	});
  
  
 	
