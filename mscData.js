@@ -131,7 +131,7 @@
 	//Current Day table, graph, current avg
 
 	function currDayGraph() {
-		//var data10 = [];
+		var data10 = [];
 		var datafine = [];
 		var relhum = [];
 		var temperature = [];
@@ -520,7 +520,7 @@
 		if (day.length == 1) day = "0" + day;
 		var dateString = year + "-" + month + "-" + day;
 		
-		//var data10 = [];
+		var data10 = [];
 		var datafine = [];
 		var datatemp = [];
 		var datarh = [];
@@ -890,7 +890,7 @@
 		if (day.length == 1) day = "0" + day;
 		var dateString = month;
 		
-		//var data10 = [];
+		var data10 = [];
 		var datafine = [];
 		var datatemp = [];
 		var datarh = [];
@@ -1105,7 +1105,7 @@ var globupdated = 0;
 //demo graph
 function demoGraph() {
 
-	//var data10 = [];
+	var data10 = [];
 	var datafine = [];
 	var temperature = [];
 	var relhumid = [];
