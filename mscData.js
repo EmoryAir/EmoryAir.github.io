@@ -404,7 +404,7 @@
 				var pmfine = this.gsx$pmfine.$t;
 				var temp = this.gsx$temperaturec.$t;
 				var rh = this.gsx$relativehumidity.$t;
-				var time = this.gsx$.timestamp.$t;
+				var time = this.gsx$timestamp.$t;
 				
 				var pm10num;
 				var pmfinenum;
