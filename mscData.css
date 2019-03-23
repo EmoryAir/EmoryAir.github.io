@@ -127,6 +127,11 @@ tr:nth-child(even) {
 	top:450px
 }
 
+h3 {
+	position:absolute;
+	top:20px;
+}
+
 
 
 
