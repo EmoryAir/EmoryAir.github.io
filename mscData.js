@@ -1243,7 +1243,7 @@ var updateChart = function () {
 						//var timeNum = (((hour*60) + min) / 60.0); 
 						var timeNum = (((hour*60) + min) / 60.0);
 						console.log("TimeNum: " + timeNum);
-						console.log("PM10: " + pm10);
+						//console.log("PM10: " + pm10);
 
 						//if (pm10 != '0' && pm10 != '') data10.push({x: timeNum, y: parseFloat(pm10)});
 						if (pm25 != '0' && pm25 != '') datafine.push({x: timeNum, y: parseFloat(pm25)});
