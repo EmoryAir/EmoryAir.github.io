@@ -131,7 +131,7 @@
 	//Current Day table, graph, current avg
 
 	function currDayGraph() {
-		var data10 = [];
+		//var data10 = [];
 		var datafine = [];
 		var relhum = [];
 		var temperature = [];
@@ -240,7 +240,7 @@
 				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
 				if (timestamp != dateString) return;
 				var pmfine = this.gsx$pmfine.$t;
-				var pm10 = this.gsx$pm10.$t;
+				//var pm10 = this.gsx$pm10.$t;
 				var time = this.gsx$timestamp.$t;
 				var temp = this.gsx$temperaturec.$t;
 				var rh = this.gsx$relativehumidity.$t;
@@ -344,7 +344,7 @@
 			});
 			//if no data exists, append empty row
 			if (count == 0) {
-				$('#currDay').append('<tr><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr>');
+				$('#currDay').append('<tr><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr>');
 			}
 	
 		});
@@ -380,7 +380,7 @@
 
 		//initialize arrays with 0
 		for (let i = 0; i < 24; i++) {
-			pm10arr[i] = 0;
+			//pm10arr[i] = 0;
 			pmfinearr[i] = 0;
 			//pm10tot[i] = 0;
 			pmfinetot[i] = 0;
@@ -520,7 +520,7 @@
 		if (day.length == 1) day = "0" + day;
 		var dateString = year + "-" + month + "-" + day;
 		
-		var data10 = [];
+		//var data10 = [];
 		var datafine = [];
 		var datatemp = [];
 		var datarh = [];
