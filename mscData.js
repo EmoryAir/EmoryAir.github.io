@@ -1260,26 +1260,34 @@ var updateChart = function () {
 
 						if (temp == "") {
 							temp = "No Data";
+						} else {
+							temp = temp.toFixed(2) + "&deg;C";
 						}
 
 						if (rh == "") {
 							rh = "No Data";
+						} else {
+							rh = rh.toFixed(2) + "%";
 						}
 
 						if (pm10 == 0) {
 							pm10 = "No Data";
+						} else {
+							pm10 = pm10 + " \u03BCg/m\u00B3";
 						}
-
+						
 						if (pm25 == 0) {
 							pm25 = "No Data";
+						} else {
+							pm25 = pm25 + " \u03BCg/m\u00B3";
 						}
 
 
 						document.getElementById("lastEntry").rows[2].cells[0].innerHTML = time;
-						document.getElementById("lastEntry").rows[2].cells[1].innerHTML = temp + " &deg;C";
-						document.getElementById("lastEntry").rows[2].cells[2].innerHTML = rh + "%";
-						document.getElementById("lastEntry").rows[2].cells[3].innerHTML = pm10 + " \u03BCg/m\u00B3";
-						document.getElementById("lastEntry").rows[2].cells[4].innerHTML = pm25 + " \u03BCg/m\u00B3";
+						document.getElementById("lastEntry").rows[2].cells[1].innerHTML = temp;
+						document.getElementById("lastEntry").rows[2].cells[2].innerHTML = rh;
+						document.getElementById("lastEntry").rows[2].cells[3].innerHTML = pm10;
+						document.getElementById("lastEntry").rows[2].cells[4].innerHTML = pm25;
 					
 
 						console.log("push datapoints");
