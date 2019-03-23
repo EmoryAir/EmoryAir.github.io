@@ -1269,10 +1269,10 @@ var updateChart = function update() {
 
 
 						document.getElementById("lastEntry").rows[2].cells[0].innerHTML = time;
-						document.getElementById("lastEntry").rows[2].cells[1].innerHTML = temp + " &deg;C";
-						document.getElementById("lastEntry").rows[2].cells[2].innerHTML = rh + "%";
-						document.getElementById("lastEntry").rows[2].cells[3].innerHTML = pm10 + " \u03BCg/m\u00B3";
-						document.getElementById("lastEntry").rows[2].cells[4].innerHTML = pm25 + " \u03BCg/m\u00B3";
+						document.getElementById("lastEntry").rows[2].cells[1].innerHTML = temp;
+						document.getElementById("lastEntry").rows[2].cells[2].innerHTML = rh;
+						document.getElementById("lastEntry").rows[2].cells[3].innerHTML = pm10;
+						document.getElementById("lastEntry").rows[2].cells[4].innerHTML = pm25;
 					
 
 						console.log("push datapoints");
