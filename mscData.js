@@ -1193,13 +1193,11 @@ function demoGraph() {
 var updateInterval = 1000;
 var dataLength = 50; // number of dataPoints visible at any point
  
-var updateInterval = 1000;
-var dataLength = 50; // number of dataPoints visible at any point
-var globupdated = 0;
+
  
 var updateChart = function () {
 
-	var url = "https://spreadsheets.google.com/feeds/list/1Mfs43knm9-S6IUFdbuDbZ3Lq8vFqh4gkc7PQ3enlZpk/od6/public/values?alt=json";
+	var url = "https://spreadsheets.google.com/feeds/list/1JI6X71ukHWQN9AlNA__5JRt85Z2xnx_X1s_Vn5xfG7g/od6/public/values?alt=json";
 
 	$.getJSON(url, function(data) {
 			console.log("start ajax request");
