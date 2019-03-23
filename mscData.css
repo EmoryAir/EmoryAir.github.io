@@ -128,7 +128,7 @@ tr:nth-child(even) {
 }
 
 h3 {
-	position:absolute;
+	position:relative;
 	top:20px;
 }
 
