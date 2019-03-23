@@ -1261,25 +1261,25 @@ var updateChart = function () {
 						if (temp == "") {
 							temp = "No Data";
 						} else {
-							temp = temp.toFixed(2) + "&deg;C";
+							temp = parseFloat(temp).toFixed(2) + "&deg;C";
 						}
 
 						if (rh == "") {
 							rh = "No Data";
 						} else {
-							rh = rh.toFixed(2) + "%";
+							rh = parseFloat(rh).toFixed(2) + "%";
 						}
 
 						if (pm10 == 0) {
 							pm10 = "No Data";
 						} else {
-							pm10 = pm10 + " \u03BCg/m\u00B3";
+							pm10 = parseFloat(pm10).toFixed(2) + " \u03BCg/m\u00B3";
 						}
 						
 						if (pm25 == 0) {
 							pm25 = "No Data";
 						} else {
-							pm25 = pm25 + " \u03BCg/m\u00B3";
+							pm25 = parseFloat(pm25).toFixed(2) + " \u03BCg/m\u00B3";
 						}
 
 
