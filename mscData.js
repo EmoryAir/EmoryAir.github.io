@@ -52,7 +52,7 @@
 				var rhStr = this.gsx$relativehumidity.$t;
 				var temperatureStr = this.gsx$temperaturec.$t;
 	
-				var pm10num = parseFloat(pm10);
+				//var pm10num = parseFloat(pm10);
 				var pmfinenum = parseFloat(pmfine);
 				var rh = parseFloat(rhStr);
 				var temperature = parseFloat(temperatureStr);
@@ -322,7 +322,7 @@
 				//var pm10 = this.gsx$pm10.$t;
 				var time = this.gsx$time.$t;
 
-				var pm10num = parseFloat(pm10);
+				//var pm10num = parseFloat(pm10);
 				var pmfinenum = parseFloat(pmfine);
 
 				//display data on table, changing any 0 or null to dash lines
