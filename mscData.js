@@ -1186,9 +1186,13 @@ function demoGraph() {
 var updateInterval = 1000;
 var dataLength = 50; // number of dataPoints visible at any point
  
-var updateChart = function update() {
+var updateInterval = 1000;
+var dataLength = 50; // number of dataPoints visible at any point
+var globupdated = 0;
+ 
+var updateChart = function () {
 
-	var url = "https://spreadsheets.google.com/feeds/list/1Mfs43knm9-S6IUFdbuDbZ3Lq8vFqh4gkc7PQ3enlZpk/od6/public/values?alt=json";
+	var url = "https://spreadsheets.google.com/feeds/list/1PEWp_nAbiL6I9XDJehF0Ihq0-aixK1Odk8rRidzLHrY/od6/public/values?alt=json";
 
 	$.getJSON(url, function(data) {
 			console.log("start ajax request");
@@ -1249,30 +1253,26 @@ var updateChart = function update() {
 
 						if (temp == "") {
 							temp = "No Data";
-						} else {
-							temp = temp.toFixed(2);
+						}
 
 						if (rh == "") {
 							rh = "No Data";
-						} else {
-							rh = rh.toFixed(2);
+						}
 
 						if (pm10 == 0) {
 							pm10 = "No Data";
-						} else {
-							pm10 = pm10.toFixed(2);
+						}
 
 						if (pm25 == 0) {
 							pm25 = "No Data";
-						} else {
-							pm25 = pm25.toFixed(2);
+						}
 
 
 						document.getElementById("lastEntry").rows[2].cells[0].innerHTML = time;
-						document.getElementById("lastEntry").rows[2].cells[1].innerHTML = temp;
-						document.getElementById("lastEntry").rows[2].cells[2].innerHTML = rh;
-						document.getElementById("lastEntry").rows[2].cells[3].innerHTML = pm10;
-						document.getElementById("lastEntry").rows[2].cells[4].innerHTML = pm25;
+						document.getElementById("lastEntry").rows[2].cells[1].innerHTML = temp + " &deg;C";
+						document.getElementById("lastEntry").rows[2].cells[2].innerHTML = rh + "%";
+						document.getElementById("lastEntry").rows[2].cells[3].innerHTML = pm10 + " \u03BCg/m\u00B3";
+						document.getElementById("lastEntry").rows[2].cells[4].innerHTML = pm25 + " \u03BCg/m\u00B3";
 					
 
 						console.log("push datapoints");
