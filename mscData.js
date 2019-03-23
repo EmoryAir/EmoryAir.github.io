@@ -28,9 +28,9 @@
 
 		//variables for current daily averages
 		var pmfinesum = 0;
-		var pm10sum = 0;
+		//var pm10sum = 0;
 		var pmfinetot = 0;
-		var pm10tot = 0;
+		//var pm10tot = 0;
 		var tempsum = 0;
 		var temptot = 0;
 		var rhsum = 0;
@@ -48,7 +48,7 @@
 				
 				count++;
 				var pmfine = this.gsx$pmfine.$t;
-				var pm10 = this.gsx$pm10.$t;
+				//var pm10 = this.gsx$pm10.$t;
 				var rhStr = this.gsx$relativehumidity.$t;
 				var temperatureStr = this.gsx$temperaturec.$t;
 	
@@ -58,10 +58,11 @@
 				var temperature = parseFloat(temperatureStr);
 
 				//to get avg
+				/*
 				if (pm10 != '0' && pm10 != '') {
 					pm10sum += pm10num;
 					pm10tot++;
-				}
+				}*/
 				
 				if (pmfine != '0' && pmfine != '') {
 					pmfinesum += pmfinenum;
@@ -78,16 +79,16 @@
 					temptot++;
 				}
 
-				var pm10avg;
+				//var pm10avg;
 				var pmfineavg;
 				var tempavg;
 				var rhavg;
-
+/*
 				if (pm10tot != 0) {
 					pm10avg = (pm10sum/pm10tot).toFixed(2) + " \u03BCg/m\u00B3";
 				} else {
 					pm10avg = "No Data";
-				}
+				}*/
 
 				if (pmfinetot != 0) {
 					pmfineavg = (pmfinesum/pmfinetot).toFixed(2) + " \u03BCg/m\u00B3";
@@ -108,10 +109,10 @@
 					rhavg = "No Data";
 				}
 				
-				document.getElementById("dataAnalytics").rows[1].cells[1].innerHTML = pm10avg;
-				document.getElementById("dataAnalytics").rows[1].cells[2].innerHTML = pmfineavg;
-				document.getElementById("dataAnalytics").rows[1].cells[3].innerHTML = tempavg;
-				document.getElementById("dataAnalytics").rows[1].cells[4].innerHTML = rhavg;
+				//document.getElementById("dataAnalytics").rows[1].cells[1].innerHTML = pm10avg;
+				document.getElementById("dataAnalytics").rows[1].cells[1].innerHTML = pmfineavg;
+				document.getElementById("dataAnalytics").rows[1].cells[2].innerHTML = tempavg;
+				document.getElementById("dataAnalytics").rows[1].cells[3].innerHTML = rhavg;
 				
 			});
 				//output no data if there exists no data for current day
@@ -119,7 +120,7 @@
 				document.getElementById("dataAnalytics").rows[1].cells[1].innerHTML = "No Data";
 				document.getElementById("dataAnalytics").rows[1].cells[2].innerHTML = "No Data";
 				document.getElementById("dataAnalytics").rows[1].cells[3].innerHTML = "No Data";
-				document.getElementById("dataAnalytics").rows[1].cells[4].innerHTML = "No Data";
+				//document.getElementById("dataAnalytics").rows[1].cells[4].innerHTML = "No Data";
 				}
 		});
 
@@ -264,7 +265,7 @@
 				//if pmfine != 0, plot on graph
 				//if temp != 0, plot on graph
 				//if relhumi != 0, plot on graph
-				if (pm10 != '0' && pm10 != '') data10.push({x: timeNum, y: parseFloat(pm10)});
+				//if (pm10 != '0' && pm10 != '') data10.push({x: timeNum, y: parseFloat(pm10)});
 				if (pmfine != '0' && pmfine != '') datafine.push({x: timeNum, y: parseFloat(pmfine)});
 				if (temp != '0' && temp != '') temperature.push({x: timeNum, y: parseFloat(temp)});
 				if (rh != '0' && rh != '') relhum.push({x: timeNum, y: parseFloat(rh)});
@@ -287,7 +288,7 @@
 				'<th>Temperature&deg;C</th>' +
 				'<th>Relative Humidity (%)</th>' +
 				'<th>PM<sub>2.5</sub> (\u03BCg/m\u00B3)</th>' +
-				'<th>PM<sub>10</sub> (\u03BCg/m\u00B3)</th>' +
+				//'<th>PM<sub>10</sub> (\u03BCg/m\u00B3)</th>' +
 				'<th>Time</th>' +
 				'</tr>' );
 
@@ -318,7 +319,7 @@
 				var temp = this.gsx$temperaturec.$t;
 				var rh = this.gsx$relativehumidity.$t;
 				var pmfine = this.gsx$pmfine.$t;
-				var pm10 = this.gsx$pm10.$t;
+				//var pm10 = this.gsx$pm10.$t;
 				var time = this.gsx$time.$t;
 
 				var pm10num = parseFloat(pm10);
@@ -329,7 +330,7 @@
 				if (temp == '') temp = '---';
 				if (rh == '') rh = '---';
 				if (pmfine == '0' || pmfine == "") pmfine = '---';
-				if (pm10 == '0') pm10 = '---';
+				//if (pm10 == '0') pm10 = '---';
 				if (time == '') time = '---';
 			
 				$('#currDay').append(
@@ -337,7 +338,7 @@
 					'</td><td>' + temp + 
 					'</td><td>' + rh + 
 					'</td><td>' + pmfine + 
-					'</td><td>' + pm10 + 
+					//'</td><td>' + pm10 + 
 					'</td><td>' + time + 
 					'</td></tr>');
 			});
@@ -353,7 +354,7 @@
 	function hourly() {
 
 		$('#hourly').append(
-				'<tr><th>Hour</th><th>Average Temperature &deg;C</th><th>Average Relative Humidity (%)</th><th>Average PM<sub>10</sub> (\u03BCg/m\u00B3)</th><th>Average PM<sub>2.5</sub> (\u03BCg/m\u00B3)</th></tr>'
+				'<tr><th>Hour</th><th>Average Temperature &deg;C</th><th>Average Relative Humidity (%)</th><th>Average PM<sub>2.5</sub> (\u03BCg/m\u00B3)</th></tr>'
 				);
 
 		var date = new Date();
@@ -366,13 +367,13 @@
 		var dateString = year + "-" + month + "-" + day;
 
 		// pm, rh, temp counts
-		var pm10arr = [];
+		//var pm10arr = [];
 		var pmfinearr = [];
 		var relhumid = [];
 		var temperature = [];
 
 		//total datapoints counts
-		var pm10tot = [];
+		//var pm10tot = [];
 		var pmfinetot = [];
 		var temptot = [];
 		var rhtot = [];
@@ -381,7 +382,7 @@
 		for (let i = 0; i < 24; i++) {
 			pm10arr[i] = 0;
 			pmfinearr[i] = 0;
-			pm10tot[i] = 0;
+			//pm10tot[i] = 0;
 			pmfinetot[i] = 0;
 			temperature[i] = 0;
 			temptot[i] = 0;
@@ -401,22 +402,22 @@
 			$(entry).each(function() {
 				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
 				if (timestamp != dateString) return;
-				var pm10 = this.gsx$pm10.$t;
+				//var pm10 = this.gsx$pm10.$t;
 				var pmfine = this.gsx$pmfine.$t;
 				var temp = this.gsx$temperaturec.$t;
 				var rh = this.gsx$relativehumidity.$t;
 				var time = this.gsx$timestamp.$t;
 				
-				var pm10num;
+				//var pm10num;
 				var pmfinenum;
 				var tempnum;
 				var rhnum;
-				
+				/*
 				if (pm10 == "") {
 					pm10num = 0;
 				} else {
 					pm10num = parseFloat(pm10);
-				}
+				}*/
 				
 				if (pmfine == "") {
 					pmfinenum = 0;
@@ -444,12 +445,12 @@
 					hour = parseInt(time.charAt(11) + time.charAt(12));
 				}
 	
-				pm10arr[hour] += pm10num;
+				//pm10arr[hour] += pm10num;
 				pmfinearr[hour] += pmfinenum;
 				temperature[hour] += tempnum;
 				relhumid[hour] += rhnum;
 
-				if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
+				//if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
 				if (pmfine != '0' && pmfine != "") pmfinetot[hour]++;
 				if (temp != '0' && temp != "") temptot[hour]++;
 				if (rh != '0' && rh != "") rhtot[hour]++;
@@ -457,19 +458,20 @@
 
 				for (let i = 0; i < 24; i++) {
 					//variables for averages for each hour, 0-24
-					var pm10avg;
+					//var pm10avg;
 					var pmfineavg;
 					var tempavg;
 					var rhavg;
 					
 					//if total array is empty, there is no data 
 					//else, get the average for the hour 
+					/*
 					if (pm10tot[i] == 0) {
 						pm10avg = '---';
 					} else {
 						pm10avg = (pm10arr[i] / pm10tot[i]);
 						pm10avg = pm10avg.toFixed(2);
-					}
+					}*/
 					
 					if (pmfinetot[i] == 0) {
 						pmfineavg = '---';
@@ -495,13 +497,11 @@
 					//append averages to graph
 					if (i < 10) {
 						$('#hourly').append(
-						'<tr><td>' + '0' + i + ':00</td><td>' + tempavg + '</td><td>' + rhavg + '</td><td>' + pm10avg +
-						'</td><td>' + pmfineavg + '</td></tr>'
+						'<tr><td>' + '0' + i + ':00</td><td>' + tempavg + '</td><td>' + rhavg + '</td><td>' + pmfineavg + '</td></tr>'
 						);
 					} else {
 						$('#hourly').append(
-						'<tr><td>' + i + ':00</td><td>' + tempavg + '</td><td>' + rhavg + '</td><td>' + pm10avg +
-						'</td><td>' + pmfineavg + '</td></tr>'
+						'<tr><td>' + i + ':00</td><td>' + tempavg + '</td><td>' + rhavg + '</td><td>' + pmfineavg + '</td></tr>'
 						);
 					}
 
@@ -606,22 +606,22 @@
 		});
 
 		// pm, temp, relhumid counts
-		var pm10arr = [];
+		//var pm10arr = [];
 		var pmfinearr = [];
 		var temperature = [];
 		var relhumid = [];
 
 		//total datapoints counts
-		var pm10tot = [];
+		//var pm10tot = [];
 		var pmfinetot = [];
 		var temptot = [];
 		var rhtot = [];
 
 		//initialize arrays
 		for (let i = 0; i < 24; i++) {
-			pm10arr[i] = 0;
+			//pm10arr[i] = 0;
 			pmfinearr[i] = 0;
-			pm10tot[i] = 0;
+			//pm10tot[i] = 0;
 			pmfinetot[i] = 0;
 			temperature[i] = 0;
 			relhumid[i] = 0;
@@ -642,23 +642,23 @@
 				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
 				if (timestamp != dateString) return;
 				//if (timestamp != tempTestDate) return;
-				var pm10 = this.gsx$pm10.$t;
+				//var pm10 = this.gsx$pm10.$t;
 				var pmfine = this.gsx$pmfine.$t;
 				var temp = this.gsx$temperaturec.$t;
 				var rh = this.gsx$relativehumidity.$t;
 				var time = this.gsx$timestamp.$t;
 			
-				var pm10num;
+				//var pm10num;
 				var pmfinenum;
 				var tempnum;
 				var rhnum;
-
+/*
 				if (pm10 == "") {
 					pm10num = 0;
 				} else {
 					pm10num = parseFloat(pm10);
 				}
-
+*/
 				if (pmfine == "") {
 					pmfinenum = 0;
 				} else {
@@ -680,12 +680,12 @@
 				var hrStr = time.substring(11,13);
 				var hour = parseInt(hrStr, 10);
 				
-				pm10arr[hour] += pm10num;
+				//pm10arr[hour] += pm10num;
 				pmfinearr[hour] += pmfinenum;
 				temperature[hour] += tempnum;
 				relhumid[hour] += rhnum;
 
-				if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
+				//if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
 				if (pmfine != '0' && pmfine != "") pmfinetot[hour]++;
 				if (temp != '0' && temp != "") temptot[hour]++;
 				if (rh != '0' && rh != "") rhtot[hour]++;
@@ -694,16 +694,16 @@
 
 				for (var i = 0; i < 24; i++) {
 
-					var pm10avg;
+					//var pm10avg;
 					var pmfineavg;
 					var tempavg;
 					var rhavg;
-
+/*
 					if (pm10tot[i] != 0) {
 						pm10avg = (pm10arr[i] / pm10tot[i]);
 						data10.push({x: i, y: pm10avg});	
 					} 
-
+*/
 					if (pmfinetot[i] != 0) {
 						pmfineavg = (pmfinearr[i] / pmfinetot[i]);
 						datafine.push({x:i, y:pmfineavg});
@@ -724,7 +724,7 @@
 	//hourly averages over current month table
 	function avgDay() {
 		$('#avgDay').append(
-				'<tr><th>Hour</th><th>Average Temperature &deg;C</th><th>Average Relative Humidity (%)</th><th>Average PM<sub>10</sub> (\u03BCg/m\u00B3)</th><th>Average PM<sub>2.5</sub> (\u03BCg/m\u00B3)</th></tr>'
+				'<tr><th>Hour</th><th>Average Temperature &deg;C</th><th>Average Relative Humidity (%)</th><th>Average PM<sub>2.5</sub> (\u03BCg/m\u00B3)</th></tr>'
 				);
 
 		var date = new Date();
@@ -737,22 +737,22 @@
 		var dateString = month;
 
 		// pm, temp, relhumid counts
-		var pm10arr = [];
+		//var pm10arr = [];
 		var pmfinearr = [];
 		var temperature = [];
 		var relhumid = [];
 
 		//total datapoints counts
-		var pm10tot = [];
+		//var pm10tot = [];
 		var pmfinetot = [];
 		var temptot = [];
 		var rhtot = [];
 
 		//initialize arrays
 		for (let i = 0; i < 24; i++) {
-			pm10arr[i] = 0;
+			//pm10arr[i] = 0;
 			pmfinearr[i] = 0;
-			pm10tot[i] = 0;
+			//pm10tot[i] = 0;
 			pmfinetot[i] = 0;
 			temperature[i] = 0;
 			relhumid[i] = 0;
@@ -772,22 +772,22 @@
 			$(entry).each(function() {
 				var timestamp = (this.gsx$timestamp.$t).substring(5,7);
 				if (timestamp != dateString) return;
-				var pm10 = this.gsx$pm10.$t;
+				//var pm10 = this.gsx$pm10.$t;
 				var pmfine = this.gsx$pmfine.$t;
 				var temp = this.gsx$temperaturec.$t;
 				var rh = this.gsx$relativehumidity.$t;
 				var time = this.gsx$timestamp.$t;
 			
-				var pm10num;
+				//var pm10num;
 				var pmfinenum;
 				var tempnum;
 				var rhnum;
-
+/*
 				if (pm10 == "") {
 					pm10num = 0;
 				} else {
 					pm10num = parseFloat(pm10);
-				}
+				}*/
 
 				if (pmfine == "") {
 					pmfinenum = 0;
@@ -815,12 +815,12 @@
 					hour = parseInt(time.charAt(11) + time.charAt(12));
 				}
 				
-				pm10arr[hour] += pm10num;
+				//pm10arr[hour] += pm10num;
 				pmfinearr[hour] += pmfinenum;
 				temperature[hour] += tempnum;
 				relhumid[hour] += rhnum;
 
-				if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
+				//if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
 				if (pmfine != '0' && pmfine != "") pmfinetot[hour]++;
 				if (temp != '0' && temp != "") temptot[hour]++;
 				if (rh != '0' && rh != "") rhtot[hour]++;
@@ -829,17 +829,17 @@
 
 				for (var i = 0; i < 24; i++) {
 
-					var pm10avg;
+					//var pm10avg;
 					var pmfineavg;
 					var tempavg;
 					var rhavg;
-
+/*
 					if (pm10tot[i] == 0) {
 						pm10avg = '---';
 					} else {
 						pm10avg = (pm10arr[i] / pm10tot[i]);
 						pm10avg = pm10avg.toFixed(2);
-					}
+					}*/
 					if (pmfinetot[i] == 0) {
 						pmfineavg = '---';
 					} else {
@@ -862,13 +862,11 @@
 						
 					if (i < 10) {
 						$('#avgDay').append(
-						'<tr><td>' + '0' + i + ':00</td><td>' + tempavg + '</td><td>' + rhavg + '</td><td>' + pm10avg +
-						'</td><td>' + pmfineavg + '</td></tr>'
+						'<tr><td>' + '0' + i + ':00</td><td>' + tempavg + '</td><td>' + rhavg + '</td><td>' + pmfineavg + '</td></tr>'
 						);
 					} else {
 						$('#avgDay').append(
-						'<tr><td>' + i + ':00</td><td>' + tempavg + '</td><td>' + rhavg + '</td><td>' + pm10avg +
-						'</td><td>' + pmfineavg + '</td></tr>'
+						'<tr><td>' + i + ':00</td><td>' + tempavg + '</td><td>' + rhavg + '</td><td>' + pmfineavg + '</td></tr>'
 						);
 					}
 
@@ -892,7 +890,7 @@
 		if (day.length == 1) day = "0" + day;
 		var dateString = month;
 		
-		var data10 = [];
+		//var data10 = [];
 		var datafine = [];
 		var datatemp = [];
 		var datarh = [];
@@ -978,22 +976,22 @@
 		});
 
 		// pm, temp, relhumid counts
-		var pm10arr = [];
+		//var pm10arr = [];
 		var pmfinearr = [];
 		var temperature = [];
 		var relhumid = [];
 
 		//total datapoints counts
-		var pm10tot = [];
+		//var pm10tot = [];
 		var pmfinetot = [];
 		var temptot = [];
 		var rhtot = [];
 
 		//initialize arrays
 		for (let i = 0; i < 24; i++) {
-			pm10arr[i] = 0;
+			//pm10arr[i] = 0;
 			pmfinearr[i] = 0;
-			pm10tot[i] = 0;
+			//pm10tot[i] = 0;
 			pmfinetot[i] = 0;
 			temperature[i] = 0;
 			relhumid[i] = 0;
@@ -1015,23 +1013,23 @@
 			
 				if (timestamp != dateString) return;
 				
-				var pm10 = this.gsx$pm10.$t;
+				//var pm10 = this.gsx$pm10.$t;
 				var pmfine = this.gsx$pmfine.$t;
 				var temp = this.gsx$temperaturec.$t;
 				var rh = this.gsx$relativehumidity.$t;
 				var time = this.gsx$timestamp.$t;
 			
-				var pm10num;
+				//var pm10num;
 				var pmfinenum;
 				var tempnum;
 				var rhnum;
-
+/*
 				if (pm10 == "") {
 					pm10num = 0;
 				} else {
 					pm10num = parseFloat(pm10);
 				}
-
+*/
 				if (pmfine == "") {
 					pmfinenum = 0;
 				} else {
@@ -1053,12 +1051,12 @@
 				var hrStr = time.substring(11,13);
 				var hour = parseInt(hrStr, 10);
 				
-				pm10arr[hour] += pm10num;
+				//pm10arr[hour] += pm10num;
 				pmfinearr[hour] += pmfinenum;
 				temperature[hour] += tempnum;
 				relhumid[hour] += rhnum;
 
-				if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
+				//if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
 				if (pmfine != '0' && pmfine != "") pmfinetot[hour]++;
 				if (temp != '0' && temp != "") temptot[hour]++;
 				if (rh != '0' && rh != "") rhtot[hour]++;
@@ -1072,10 +1070,10 @@
 					var tempavg;
 					var rhavg;
 
-					if (pm10tot[i] != 0) {
+					/*if (pm10tot[i] != 0) {
 						pm10avg = (pm10arr[i] / pm10tot[i]);
 						data10.push({x: i, y: pm10avg});	
-					} 
+					} */
 
 					if (pmfinetot[i] != 0) {
 						pmfineavg = (pmfinearr[i] / pmfinetot[i]);
@@ -1107,7 +1105,7 @@ var globupdated = 0;
 //demo graph
 function demoGraph() {
 
-	var data10 = [];
+	//var data10 = [];
 	var datafine = [];
 	var temperature = [];
 	var relhumid = [];
@@ -1219,7 +1217,7 @@ var updateChart = function () {
 					var time = this.gsx$timestamp.$t;
 					var temp = this.gsx$temperaturec.$t;
 					var rh = this.gsx$relativehumidity.$t;
-					var pm10 = this.gsx$pm10.$t;
+					//var pm10 = this.gsx$pm10.$t;
 					var pm25 = this.gsx$pmfine.$t;
 
 					if (count == numEntries) {
@@ -1247,7 +1245,7 @@ var updateChart = function () {
 						console.log("TimeNum: " + timeNum);
 						console.log("PM10: " + pm10);
 
-						if (pm10 != '0' && pm10 != '') data10.push({x: timeNum, y: parseFloat(pm10)});
+						//if (pm10 != '0' && pm10 != '') data10.push({x: timeNum, y: parseFloat(pm10)});
 						if (pm25 != '0' && pm25 != '') datafine.push({x: timeNum, y: parseFloat(pm25)});
 						if (temp != '0' && temp != '') temperature.push({x: timeNum, y: parseFloat(temp)});
 						if (rh != '0' && rh != '') relhumid.push({x: timeNum, y: parseFloat(rh)});
@@ -1268,13 +1266,13 @@ var updateChart = function () {
 						} else {
 							rh = parseFloat(rh).toFixed(2) + "%";
 						}
-
+/*
 						if (pm10 == 0) {
 							pm10 = "No Data";
 						} else {
 							pm10 = parseFloat(pm10).toFixed(2) + " \u03BCg/m\u00B3";
 						}
-						
+						*/
 						if (pm25 == 0) {
 							pm25 = "No Data";
 						} else {
@@ -1285,15 +1283,15 @@ var updateChart = function () {
 						document.getElementById("lastEntry").rows[2].cells[0].innerHTML = time;
 						document.getElementById("lastEntry").rows[2].cells[1].innerHTML = temp;
 						document.getElementById("lastEntry").rows[2].cells[2].innerHTML = rh;
-						document.getElementById("lastEntry").rows[2].cells[3].innerHTML = pm10;
-						document.getElementById("lastEntry").rows[2].cells[4].innerHTML = pm25;
+						//document.getElementById("lastEntry").rows[2].cells[3].innerHTML = pm10;
+						document.getElementById("lastEntry").rows[2].cells[3].innerHTML = pm25;
 					
 
 						console.log("push datapoints");
 
 
 					if (relhumid.length > dataLength) relhumid.shift();
-					if (data10.length > dataLength) data10.shift();
+					//if (data10.length > dataLength) data10.shift();
 					if (temperature.length > dataLength) temperature.shift();
 					if (relhumid.length > dataLength) relhumid.shift();
 					}
