@@ -146,7 +146,7 @@
 			interval: 1,
 			intervalType: "hour",
 			maximum: 25,
-			minimum: 8,
+			minimum: 0,
 		},
 		axisY: 
 			{
