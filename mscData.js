@@ -6,7 +6,7 @@
 		var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 		var month = months[date.getMonth()];
 
-		document.getElementById("dataAnalytics").rows[1].cells[0].innerHTML = month + " " + day + ", " + year;
+		document.getElementById("date").innerHTML = month + " " + day + ", " + year;
 	}
 
 	//display PM10, PM2.5, temperature, relative humidity averages for the current day 
@@ -21,10 +21,11 @@
 		if (day.length == 1) day = "0" + day;
 		if (month.length == 1) month = "0" + month;
 		var dateString = year + "-" + month + "-" + day;
-
+		
 		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
 		//var spreadsheetID = "1JI6X71ukHWQN9AlNA__5JRt85Z2xnx_X1s_Vn5xfG7g";
-		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
+		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/1/public/values?alt=json";
+		console.log(url);
 
 		//variables for current daily averages
 		var pmfinesum = 0;
@@ -44,6 +45,7 @@
 			$(entry).each(function() {
 				//fix to google sheets algorithm
 				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
+				console.log(timestamp + ", " + dateString);
 				if (timestamp != dateString) return;
 				
 				count++;
@@ -109,18 +111,16 @@
 					rhavg = "No Data";
 				}
 				
-				//document.getElementById("dataAnalytics").rows[1].cells[1].innerHTML = pm10avg;
-				document.getElementById("dataAnalytics").rows[1].cells[1].innerHTML = pmfineavg;
-				document.getElementById("dataAnalytics").rows[1].cells[2].innerHTML = tempavg;
-				document.getElementById("dataAnalytics").rows[1].cells[3].innerHTML = rhavg;
+				document.getElementById("pm25").innerHTML = pmfineavg;
+				document.getElementById("temperature").innerHTML = tempavg;
+				document.getElementById("relhumid").innerHTML = rhavg;
 				
 			});
 				//output no data if there exists no data for current day
 				if (count == 0) {
-				document.getElementById("dataAnalytics").rows[1].cells[1].innerHTML = "No Data";
-				document.getElementById("dataAnalytics").rows[1].cells[2].innerHTML = "No Data";
-				document.getElementById("dataAnalytics").rows[1].cells[3].innerHTML = "No Data";
-				//document.getElementById("dataAnalytics").rows[1].cells[4].innerHTML = "No Data";
+				document.getElementById("pm25").innerHTML = "No Data";
+				document.getElementById("temperature").innerHTML = "No Data";
+				document.getElementById("relhumid").innerHTML = "No Data";
 				}
 		});
 
