@@ -53,6 +53,9 @@
         font-size: 20px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
+        border-style: solid;
+        border-color: #0E2C87;
+        border-width: 1px;
     }
     .grid-body {
         display: grid;
@@ -112,18 +115,13 @@
         <div class="numbers" id="relhumid" style="font-size: 25px;"></div>
     </div>
 
-    <div class="grid-body">
-        <div class="title" id="todayTitle">Current Day Data</div>
-        <div class="graph" id="todayGraph"></div>
-         <div class="title" id="hourlyTitle">Hourly Averages for Current Day</div>
-        <div class="graph" id="hourlyGraph"></div>
-    </div>
-
-   
+        <div id="rawChartContainer" style="position:relative; top: 50px"></div>
+        <div id="hourlyChartContainer"></div>
 
     <script>
         showDate();
         averages();
+        initChart(object);
 	   
     </script>
 
