@@ -126,8 +126,9 @@
 
 	}
 
+
 	var object = {
-		name: "Time Period",
+		name: "Date",
 		elementIds: {
 			"raw": "rawChartContainer"
 		},
@@ -195,6 +196,7 @@
 				text: obj.name
 			},
 			xAxis: {
+				title: 'Hour',
 				labels: {
 					rotation: -45
 				},
@@ -202,23 +204,71 @@
 				endOnTick: false,
 				showLastLabel: true
 			},
-			yAxis: {
-				startOnTick: false,
-				endOnTick: false,
-				showLastLabel: true
-			},
+			yAxis: [{
+				labels: {
+					format: '{value}\u03BCg/m\u00B3',
+					style: {
+						color: Highcharts.getOptions().colors[1]
+					}
+				},
+				title: {
+					text: 'Particulate Matter',
+					style: {
+						color: Highcharts.getOptions().colors[1]
+					}
+				},
+			}, {
+				labels: {
+					format: '{value}°C',
+					style: {
+						color: Highcharts.getOptions().colors[0]
+					}
+				},
+				title: {
+					text: 'Temperature',
+					style: {
+						color: Highcharts.getOptions().colors[0]
+					}
+				},
+				opposite: true
+			}, {
+				labels: {
+					format: '{value}%',
+					style: {
+						color: Highcharts.getOptions().colors[2]
+					}
+				},
+				title: {
+					text: 'Relative Humidity',
+					style: {
+						color: Highcharts.getOptions().colors[2]
+					}
+				},
+				opposite: true
+			}],
 			tooltip: {
 				shared: true
 			},
 			series: [{
 				name: 'Temperature',
-				data: obj.data.temp
+				data: obj.data.temp,
+				yAxis: 2,
+				tooltip: {
+					valueSuffix: '°C'
+				}
 			}, {
 				name: 'Relative Humidity',
-				data: obj.data.rh
+				data: obj.data.rh,
+				tooltip: {
+					valueSuffix: '%'
+				}
 			}, {
-				name: 'PM2.5',
-				data: obj.data.pm25
+				name: 'PM<sub>2.5',
+				data: obj.data.pm25,
+				yAxis: 1,
+				tooltip: {
+					valueSuffix: '\u03BCg/m\u00B3'
+				}
 			}]
 		};
 	}
