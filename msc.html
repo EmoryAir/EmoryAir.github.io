@@ -16,7 +16,8 @@
 
     <!-- include w3.js javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-
+    <!-- include highcharts.js -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
    
     <!--include canvas.js -->
     <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
@@ -27,80 +28,103 @@
     <script src="mscData.js"></script>
 
     <!-- we include the javascript at the bottom, see below -->
+
+<style>
+    body {
+        padding: 2%; 
+    }
+    .grid-analytics {
+        display: grid;
+        grid-gap: 2px 15px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        width: 90%;
+        margin: auto;
+    }
+    .item {
+        background-color: #0E2C87;
+        padding: 5px;
+        text-align: center;
+        color: white;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .numbers {
+        background-color: #ECECEC;
+        padding: 10px;
+        height: 90px;
+        text-align: center;
+        font-size: 20px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-style: solid;
+        border-color: #0E2C87;
+        border-width: 1px;
+    }
+    .grid-body {
+        display: grid;
+        position: relative;
+        grid-gap: 5px;
+        grid-template-rows: 1fr 1fr 50px 1fr 1fr;
+        margin: auto;
+        width: 100%;
+        top: 30px;
+    }
+    .graph {
+        position: relative;
+        text-align: center;
+        width: 100%;
+    }
+    .title {
+        position: relative;
+        text-align: center;
+        font-size: 20px;
+        width:100%;
+    }
+    #todayTitle {
+        grid-row-start: 1;
+        grid-row-end: 2;
+    }
+    #todayGraph {
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+    #hourlyTitle {
+        grid-row-start: 4;
+        grid-row-end: 5;
+    }
+    #hourlyGraph {
+        grid-row-start: 5;
+        grid-row-end: 6;
+    }
+</style>
 </head>
 
+<!--
 <div w3-include-html="nav.html"></div>
 <script> w3.includeHTML(); </script>
+-->
 
 <body>
     <h1>MSC</h1>
 
-    <!--Data Analytics-->
-    <table id="dataAnalytics" align="center">
-		<tr><th>Today's Date</th><th>Average PM<sub>2.5</sub></th><th>Average Temperature</th><th>Average Relative Humidity</th></tr>
-		<tr><td></td><td></td><td></td><td></td></tr>
-	</table>
-
-    <!--Current Day Data-->
-    <div id="currentDayData" class="dataSect">Current Day Data
-        <div id="currDayGraphBlock" class="graphBlock">
-            <div id="currDayGraph" class="graph"></div>
-        </div>
-
-        <div id="currDayTableBlock" class="scroll" class="tableBlock">
-            <table id="currDay" class="center"></table>
-        </div>
+    <div class="grid-analytics">
+        <div class="item">Today's Date</div>
+        <div class="item">Average PM<sub>2.5</div>
+        <div class="item">Average Temperature</div>
+        <div class="item">Average Relative Humidity</div>
+        <div class="numbers" id="date"></div>
+        <div class="numbers" id="pm25" style="font-size: 25px;"></div>
+        <div class="numbers" id="temperature" style="font-size: 25px;"></div>
+        <div class="numbers" id="relhumid" style="font-size: 25px;"></div>
     </div>
 
-    <!--Hourly data from Current Day sheet-->
-    <div id="hourlyData" class="dataSect">Hourly Averages for Current Day
-        <div id="hourlyGraphBlock" class="graphBlock">
-            <div id="hourlyGraph" class="graph"></div>
-        </div>
-        <div id="hourlyTableBlock" class="scroll" class="tableBlock">
-            <table id="hourly" class="center"></table>
-        </div>
-    </div>
-
-    <!--Hourly averaged over the month -->
-<!--
-    <div id="avgDayData" class="dataSect">Hourly Averages for Current Month
-	<div id="avgDayGraphBlock">
-		<div id="avgDayGraph" class="graph"></div>
-	</div>
-	<div id="avgDayTableBlock" class="scroll" class="tableBlock">
-		<table id="avgDay" class="center"></table>
-	    </div>
-	</div>
--->
-
-    <!--Demo Data-->
-<!--
-	<div id="demoData" class="dataSect">Live Sensor Demo
-		<div id="demoGraphBlock">
-			<div id="demoGraph" class="graph"></div>
-		</div>
-		<table id="lastEntry" class="center">
-			<tr><th colspan="5">Last Entry</th></tr>
-			<tr><th>Timestamp</th><th>Temperature</th><th>Relative Humidity</th><th>PM<sub>2.5</sub></th></tr>
-			<tr><td></td><td></td><td></td><td></td></tr>
-		</table>
-	</div>
--->
-   
+        <div id="rawChartContainer" style="position: relative; top: 50px"></div>
+        <div id="hourlyChartContainer" style="position: relative; top: 50px"></div>
 
     <script>
-    showDate();
-    averages();
-    currDayGraph();
-    currDay();
-    hourlyGraph();
-    hourly();
-    //avgDayGraph();
-    //avgDay();
-    //demoGraph();
-	    
-	 
+        showDate();
+        averages();
+        initChart(object);
 	   
     </script>
 
