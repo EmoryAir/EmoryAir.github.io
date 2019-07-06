@@ -130,10 +130,23 @@
 	var object = {
 		name: "Date",
 		elementIds: {
-			"raw": "rawChartContainer"
+			"raw": "rawChartContainer",
+			"hourly": "hourlyChartContainer"
 		},
-		chart: null,
-		data: {
+		chart: {
+			rawChart: null,
+			hourlyChart: null
+		},
+		rawdata: {
+			json: null,
+			formattedData: null,
+			rh: null,
+			temp: null,
+			pm25: null,
+			standard: null,
+			clickedTimes: []
+		},
+		hourlydata: {
 			json: null,
 			formattedData: null,
 			rh: null,
@@ -142,6 +155,7 @@
 			standard: null,
 			clickedTimes: []
 		}
+		
 	};
 
 	//Wait spinner while chart loading
@@ -169,12 +183,6 @@
 		})
 	}
 
-	//Format Json
-	function formatJson(json) {
-		var series = [];
-
-	}
-
 	//Options for raw chart
 	RawChartOptions = function(obj) {
 
@@ -193,10 +201,19 @@
 				enabled: false
 			},
 			title: {
-				text: obj.name
+				text: "Current Day Data"
+			},
+			plotOptions: {
+				series: {
+					marker: {
+						enabled: false
+					}
+				}
 			},
 			xAxis: {
-				title: 'Hour',
+				title: {
+					text: 'Hour'
+				},
 				labels: {
 					rotation: -45
 				},
@@ -251,20 +268,125 @@
 			},
 			series: [{
 				name: 'Temperature',
-				data: obj.data.temp,
+				data: obj.rawdata.temp,
 				yAxis: 2,
 				tooltip: {
 					valueSuffix: '°C'
 				}
 			}, {
 				name: 'Relative Humidity',
-				data: obj.data.rh,
+				data: obj.rawdata.rh,
 				tooltip: {
 					valueSuffix: '%'
 				}
 			}, {
 				name: 'PM<sub>2.5',
-				data: obj.data.pm25,
+				data: obj.rawdata.pm25,
+				yAxis: 1,
+				tooltip: {
+					valueSuffix: '\u03BCg/m\u00B3'
+				}
+			}]
+		};
+	}
+
+	HourlyChartOptions = function(obj) {
+		return {
+			chart: {
+				renderTo: obj.elementIds["hourly"],
+				zoomType: 'x',
+				resetZooButton: {theme: {display: 'none', visibility: 'hidden'}},
+				events: {
+					click: function (event) {
+
+					}
+				}
+			},
+			credits: {
+				enabled: false
+			},
+			title: {
+				text: "Hourly Averages"
+			},
+			plotOptions: {
+				series: {
+					marker: {
+						enabled: false
+					}
+				}
+			},
+			xAxis: {
+				title: {
+					text: 'Hour'
+				},
+				labels: {
+					rotation: -45
+				},
+				startOnTick: false,
+				endOnTick: false,
+				showLastLabel: true
+			},
+			yAxis: [{
+				labels: {
+					format: '{value}\u03BCg/m\u00B3',
+					style: {
+						color: Highcharts.getOptions().colors[1]
+					}
+				},
+				title: {
+					text: 'Particulate Matter',
+					style: {
+						color: Highcharts.getOptions().colors[1]
+					}
+				},
+			}, {
+				labels: {
+					format: '{value}°C',
+					style: {
+						color: Highcharts.getOptions().colors[0]
+					}
+				},
+				title: {
+					text: 'Temperature',
+					style: {
+						color: Highcharts.getOptions().colors[0]
+					}
+				},
+				opposite: true
+			}, {
+				labels: {
+					format: '{value}%',
+					style: {
+						color: Highcharts.getOptions().colors[2]
+					}
+				},
+				title: {
+					text: 'Relative Humidity',
+					style: {
+						color: Highcharts.getOptions().colors[2]
+					}
+				},
+				opposite: true
+			}],
+			tooltip: {
+				shared: true
+			},
+			series: [{
+				name: 'Temperature',
+				data: obj.hourlydata.temp,
+				yAxis: 2,
+				tooltip: {
+					valueSuffix: '°C'
+				}
+			}, {
+				name: 'Relative Humidity',
+				data: obj.hourlydata.rh,
+				tooltip: {
+					valueSuffix: '%'
+				}
+			}, {
+				name: 'PM<sub>2.5',
+				data: obj.hourlydata.pm25,
 				yAxis: 1,
 				tooltip: {
 					valueSuffix: '\u03BCg/m\u00B3'
@@ -276,7 +398,7 @@
 	//Create Raw Data Chart
 	function createRawChart(obj) {
 		console.log("Create raw chart");
-		var chart = obj.chart;
+		var chart = obj.chart.rawChart;
 		if (chart && chart.destroy) chart.destroy();
 		var options = new RawChartOptions(obj);
 		return new Highcharts.chart(
@@ -287,10 +409,25 @@
 		)
 	}
 
+	//Create Hourly Data Chart
+	function createHourlyChart(obj) {
+		console.log("Create hourly chart");
+		var chart = obj.chart.hourlyChart;
+		if (chart && chart.destroy) chart.destroy();
+		var options = new HourlyChartOptions(obj);
+		return new Highcharts.chart(
+			options,
+			function(chart) {
+				//Put cross hair handler here
+			}
+		)
+	}
+
+
 	//Initialize chart
 	function initChart(obj) {
 		console.log("Initialize chart");
-		waitSpinner(obj.elementIds["raw"], "Calculating chart for " + obj.name);
+		//waitSpinner(obj.elementIds["raw"], "Calculating chart for " + obj.name);
 		getRawData(obj, function(data) {
 			var datafine = [];
 			var relhum = [];
@@ -306,17 +443,20 @@
 			var dateString = year + "-" + month + "-" + day;
 
 				var entry = data.feed.entry;
-				console.log(dateString);
 
 				$(entry).each(function() {
 					var timestamp = (this.gsx$timestamp.$t).substring(0,10);
 					console.log(timestamp);
 					if (timestamp != dateString) return;
-					var pmfine = this.gsx$pmfine.$t;
+					var pmfine = parseFloat(this.gsx$pmfine.$t);
 					//var pm10 = this.gsx$pm10.$t;
 					var time = this.gsx$timestamp.$t;
-					var temp = this.gsx$temperaturec.$t;
-					var rh = this.gsx$relativehumidity.$t;
+					var temp = parseFloat(this.gsx$temperaturec.$t);
+					var rh = parseFloat(this.gsx$relativehumidity.$t);
+
+					pmfine = pmfine.toFixed(2);
+					temp = temp.toFixed(2);
+					rh = rh.toFixed(2);
 
 					//turn time string into a number
 					var hour;
@@ -338,11 +478,142 @@
 					if (temp != '0' && temp != '') temperature.push([parseFloat(timeNum), parseFloat(temp)]);
 					if (rh != '0' && rh != '') relhum.push([parseFloat(timeNum), parseFloat(rh)]);
 				});
-			obj.data.rh = relhum;
-			console.log(obj.data.rh);
-			obj.data.temp = temperature;
-			obj.data.pm25 = datafine;
-			obj.chart = createRawChart(obj);
+			obj.rawdata.rh = relhum;
+			obj.rawdata.temp = temperature;
+			obj.rawdata.pm25 = datafine;
+			obj.chart.rawChart = createRawChart(obj);
+		})
+
+		getRawData(obj, function(data) {
+			var date = new Date();
+			var day = (date.getDate()).toString();
+			var year = date.getFullYear();
+			var month = (1 + date.getMonth()).toString();
+			
+			if (month.length == 1) month = "0" + month;
+			if (day.length == 1) day = "0" + day;
+			var dateString = year + "-" + month + "-" + day;
+
+			// pm, rh, temp counts
+			//var pm10arr = [];
+			var pmfinearr = [];
+			var relhumid = [];
+			var temperature = [];
+
+			//total datapoints counts
+			//var pm10tot = [];
+			var pmfinetot = [];
+			var temptot = [];
+			var rhtot = [];
+
+			//initialize arrays with 0
+			for (let i = 0; i < 24; i++) {
+				//pm10arr[i] = 0;
+				pmfinearr[i] = 0;
+				//pm10tot[i] = 0;
+				pmfinetot[i] = 0;
+				temperature[i] = 0;
+				temptot[i] = 0;
+				relhumid[i] = 0;
+				rhtot[i] = 0;
+			}
+
+			var entry = data.feed.entry;
+
+			$(entry).each(function() {
+				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
+				if (timestamp != dateString) return;
+				//var pm10 = this.gsx$pm10.$t;
+				var pmfine = this.gsx$pmfine.$t;
+				var temp = this.gsx$temperaturec.$t;
+				var rh = this.gsx$relativehumidity.$t;
+				var time = this.gsx$timestamp.$t;
+				
+				//var pm10num;
+				var pmfinenum;
+				var tempnum;
+				var rhnum;
+				/*
+				if (pm10 == "") {
+					pm10num = 0;
+				} else {
+					pm10num = parseFloat(pm10);
+				}*/
+				
+				if (pmfine == "") {
+					pmfinenum = 0;
+				} else {
+					pmfinenum = parseFloat(pmfine);
+				}
+				
+				if (temp == "") {
+					tempnum = 0;
+				} else {
+					tempnum = parseFloat(temp);
+				}
+				
+				if (rh == "") {
+					rhnum = 0;
+				} else {
+					rhnum = parseFloat(rh);
+				}
+				
+				//get hour from timestamp
+				var hour;
+				if (time.charAt(11) == '0') {
+					hour = parseInt(time.charAt(12));
+				} else {
+					hour = parseInt(time.charAt(11) + time.charAt(12));
+				}
+	
+				//pm10arr[hour] += pm10num;
+				pmfinearr[hour] += pmfinenum;
+				temperature[hour] += tempnum;
+				relhumid[hour] += rhnum;
+
+				//if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
+				if (pmfine != '0' && pmfine != "") pmfinetot[hour]++;
+				if (temp != '0' && temp != "") temptot[hour]++;
+				if (rh != '0' && rh != "") rhtot[hour]++;
+			});
+
+
+			var pmfineavg = [];
+			var tempavg = [];
+			var rhavg = [];
+
+			for (let i = 0; i < 24; i++) {
+				//variables for averages for each hour, 0-24
+				//var pm10avg;
+				var temppmfine;
+				var temptemp;
+				var temprh;
+				
+				//if total array is empty, there is no data 
+				//else, get the average for the hour 
+				if (pmfinetot[i] != 0) {
+					temppmfine = (pmfinearr[i] / pmfinetot[i]);
+					temppmfine = temppmfine.toFixed(2);
+					pmfineavg.push([parseFloat(i), parseFloat(temppmfine)]);
+				} 
+				if (temptot[i] != 0) {
+					temptemp = (temperature[i] / temptot[i]);
+					temptemp = temptemp.toFixed(2);
+					tempavg.push([parseFloat(i), parseFloat(temptemp)]);
+				} 
+				if (rhtot[i] != 0) {
+					temprh = (relhumid[i] / rhtot[i]);
+					temprh = temprh.toFixed(2);
+					rhavg.push([parseFloat(i), parseFloat(temprh)]);
+				} 
+			}
+			console.log(pmfineavg);
+
+			obj.hourlydata.rh = rhavg;
+			obj.hourlydata.temp = tempavg;
+			obj.hourlydata.pm25 = pmfineavg;
+			obj.chart.hourlyChart = createHourlyChart(obj);
+
 		})
 	}
 
