@@ -190,7 +190,7 @@
 			chart: {
 				renderTo: obj.elementIds["raw"],
 				zoomType: 'x',
-				resetZooButton: {theme: {display: 'none', visibility: 'hidden'}},
+				resetZoomButton: {theme: {display: 'none', visibility: 'hidden'}},
 				events: {
 					click: function (event) {
 
@@ -222,6 +222,7 @@
 				showLastLabel: true
 			},
 			yAxis: [{
+
 				labels: {
 					format: '{value}\u03BCg/m\u00B3',
 					style: {
@@ -268,6 +269,7 @@
 			},
 			series: [{
 				name: 'Temperature',
+				color: Highcharts.getOptions().colors[0],
 				data: obj.rawdata.temp,
 				yAxis: 2,
 				tooltip: {
@@ -276,12 +278,14 @@
 			}, {
 				name: 'Relative Humidity',
 				data: obj.rawdata.rh,
+				color: Highcharts.getOptions().colors[2],
 				tooltip: {
 					valueSuffix: '%'
 				}
 			}, {
-				name: 'PM<sub>2.5',
+				name: 'PM<sub>2.5</sub>',
 				data: obj.rawdata.pm25,
+				color: Highcharts.getOptions().colors[1],
 				yAxis: 1,
 				tooltip: {
 					valueSuffix: '\u03BCg/m\u00B3'
@@ -295,7 +299,7 @@
 			chart: {
 				renderTo: obj.elementIds["hourly"],
 				zoomType: 'x',
-				resetZooButton: {theme: {display: 'none', visibility: 'hidden'}},
+				resetZoomButton: {theme: {display: 'none', visibility: 'hidden'}},
 				events: {
 					click: function (event) {
 
@@ -374,6 +378,7 @@
 			series: [{
 				name: 'Temperature',
 				data: obj.hourlydata.temp,
+				color: Highcharts.getOptions().colors[0],
 				yAxis: 2,
 				tooltip: {
 					valueSuffix: '°C'
@@ -381,12 +386,14 @@
 			}, {
 				name: 'Relative Humidity',
 				data: obj.hourlydata.rh,
+				color: Highcharts.getOptions().colors[2],
 				tooltip: {
 					valueSuffix: '%'
 				}
 			}, {
-				name: 'PM<sub>2.5',
+				name: 'PM<sub>2.5</sub>',
 				data: obj.hourlydata.pm25,
+				color: Highcharts.getOptions().colors[1],
 				yAxis: 1,
 				tooltip: {
 					valueSuffix: '\u03BCg/m\u00B3'
