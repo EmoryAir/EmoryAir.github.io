@@ -271,13 +271,14 @@
 				name: 'Temperature',
 				color: Highcharts.getOptions().colors[0],
 				data: obj.rawdata.temp,
-				yAxis: 2,
+				yAxis: 1,
 				tooltip: {
 					valueSuffix: '°C'
 				}
 			}, {
 				name: 'Relative Humidity',
 				data: obj.rawdata.rh,
+				yAxis: 2,
 				color: Highcharts.getOptions().colors[2],
 				tooltip: {
 					valueSuffix: '%'
@@ -286,7 +287,6 @@
 				name: 'PM<sub>2.5</sub>',
 				data: obj.rawdata.pm25,
 				color: Highcharts.getOptions().colors[1],
-				yAxis: 1,
 				tooltip: {
 					valueSuffix: '\u03BCg/m\u00B3'
 				}
@@ -379,7 +379,7 @@
 				name: 'Temperature',
 				data: obj.hourlydata.temp,
 				color: Highcharts.getOptions().colors[0],
-				yAxis: 2,
+				yAxis: 1,
 				tooltip: {
 					valueSuffix: '°C'
 				}
@@ -387,6 +387,7 @@
 				name: 'Relative Humidity',
 				data: obj.hourlydata.rh,
 				color: Highcharts.getOptions().colors[2],
+				yAxis: 2,
 				tooltip: {
 					valueSuffix: '%'
 				}
@@ -394,7 +395,6 @@
 				name: 'PM<sub>2.5</sub>',
 				data: obj.hourlydata.pm25,
 				color: Highcharts.getOptions().colors[1],
-				yAxis: 1,
 				tooltip: {
 					valueSuffix: '\u03BCg/m\u00B3'
 				}
