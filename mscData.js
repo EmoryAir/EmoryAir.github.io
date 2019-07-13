@@ -1,16 +1,91 @@
-//get today's date in Month Day, Year format
+	//Get today's date in Month Day, Year format
 	function showDate() {
 		var date = new Date();
 		var day = date.getDate();
+		var month = date.getMonth() + 1;
 		var year = date.getFullYear();
-		var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-		var month = months[date.getMonth()];
+		if (month < 10) month = "0" + month;
+		if (day < 10) day = "0" + day;
+		document.getElementById("date").innerHTML = year + "-" + month + "-" + day;
+	}
 
-		document.getElementById("date").innerHTML = month + " " + day + ", " + year;
+	//Get max date for form input
+	function maxDate() {
+		var date = new Date();
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+		if (month < 10) month = "0" + month;
+		if (day < 10) day = "0" + day;
+		console.log(year + "-" + month + "-" + day);
+		return year + "-" + month + "-" + day;
+	}
+
+	//Set max date and value for form input
+	function setDateInput() {
+		document.getElementById("start").value = maxDate();
+        document.getElementById("start").max = maxDate();
+	}
+
+	/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+	function openNav() {
+		document.getElementById("mySidebar").style.width = "250px";
+		document.getElementsByTagName("body")[0].style.marginLeft = "250px";
+		setTimeout(function() {
+			object.chart.rawChart.reflow();
+			object.chart.hourlyChart.reflow();
+		}, 500);
+	}
+  
+  /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+	function closeNav() {
+		document.getElementById("mySidebar").style.width = "0";
+		document.getElementsByTagName("body")[0].style.marginLeft = "0";
+		setTimeout(function() {
+			object.chart.rawChart.reflow();
+			object.chart.hourlyChart.reflow();
+		}, 500);
+	
+	}
+
+
+	//Function to generate the Ajax url 
+	//Use spreadsheet if year and month are in current month/year, otherwise get csv file
+	function generateUrl(newDate) {
+		var year = newDate.substring(0,4);
+		var month = newDate.substring(5,7);
+		var day = newDate.substring(8,10);
+		if (month.charAt(0) == '0') month = month.charAt(1);
+		//if (day.charAt(0) == '0') day = day.charAt(1);
+		day = parseInt(day);
+		console.log("Day: " + day);
+		var url = "";
+		var date = new Date();
+		
+		if (year == date.getFullYear() && month == date.getMonth() + 1) {
+			console.log("Year and month match!");
+			var sheet = date.getDate() - day + 1;
+			console.log("Sheet: " + sheet);
+			url = "https://spreadsheets.google.com/feeds/list/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/" + sheet +  "/public/values?alt=json";
+			console.log("URL: " + url);
+		} else {
+			console.log("Not a match!");
+			url = "past-data/" + newDate.substring(0,7) + "/" + newDate + ".csv";
+			console.log("URL: " + url);
+		}
+		return url;
+	}
+
+	//Function to change date
+	function dateChange(obj, newDate) {
+		console.log("The new date is : " + newDate);
+		document.getElementById("date").innerHTML = newDate;
+		averages(generateUrl(newDate), newDate);
+		initChart(obj, generateUrl(newDate), newDate);
 	}
 
 	//display PM10, PM2.5, temperature, relative humidity averages for the current day 
-	function averages() {
+	function averages(url, thisDate) {
 		
 		//fix for google sheets algorithm: get only current day on spreadsheet1
 		var date = new Date();
@@ -21,10 +96,8 @@
 		if (day.length == 1) day = "0" + day;
 		if (month.length == 1) month = "0" + month;
 		var dateString = year + "-" + month + "-" + day;
-		
-		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
-		//var spreadsheetID = "1JI6X71ukHWQN9AlNA__5JRt85Z2xnx_X1s_Vn5xfG7g";
-		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/1/public/values?alt=json";
+	
+		//var url = "https://spreadsheets.google.com/feeds/list/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/1/public/values?alt=json";
 		console.log(url);
 
 		//variables for current daily averages
@@ -45,7 +118,9 @@
 			$(entry).each(function() {
 				//fix to google sheets algorithm
 				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
-				if (timestamp != dateString) return;
+				if (thisDate == dateString) {
+					if (timestamp != dateString) return;
+				}
 				
 				count++;
 				var pmfine = this.gsx$pmfine.$t;
@@ -170,11 +245,11 @@
 	}
 
 	//Get raw data
-	function getRawData(obj, callback) {
+	function getRawData(obj, url, callback) {
 		console.log("Get raw data");
 		$.ajax({
 			method: "GET",
-			url: "https://spreadsheets.google.com/feeds/list/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/1/public/values?alt=json",
+			url: url,
 			dataType: "json",
 			success: callback,
 			error: function() {
@@ -432,10 +507,10 @@
 
 
 	//Initialize chart
-	function initChart(obj) {
+	function initChart(obj, url, thisDate) {
 		console.log("Initialize chart");
 		//waitSpinner(obj.elementIds["raw"], "Calculating chart for " + obj.name);
-		getRawData(obj, function(data) {
+		getRawData(obj, url, function(data) {
 			var datafine = [];
 			var relhum = [];
 			var temperature = [];
@@ -453,8 +528,9 @@
 
 				$(entry).each(function() {
 					var timestamp = (this.gsx$timestamp.$t).substring(0,10);
-					console.log(timestamp);
-					if (timestamp != dateString) return;
+					if (thisDate == dateString) {
+						if (timestamp != dateString) return;
+					}
 					var pmfine = parseFloat(this.gsx$pmfine.$t);
 					//var pm10 = this.gsx$pm10.$t;
 					var time = this.gsx$timestamp.$t;
@@ -491,7 +567,7 @@
 			obj.chart.rawChart = createRawChart(obj);
 		})
 
-		getRawData(obj, function(data) {
+		getRawData(obj, url, function(data) {
 			var date = new Date();
 			var day = (date.getDate()).toString();
 			var year = date.getFullYear();
@@ -529,7 +605,9 @@
 
 			$(entry).each(function() {
 				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
-				if (timestamp != dateString) return;
+				if (thisDate == dateString) {
+					if (timestamp != dateString) return;
+				}
 				//var pm10 = this.gsx$pm10.$t;
 				var pmfine = this.gsx$pmfine.$t;
 				var temp = this.gsx$temperaturec.$t;
@@ -614,8 +692,6 @@
 					rhavg.push([parseFloat(i), parseFloat(temprh)]);
 				} 
 			}
-			console.log(pmfineavg);
-
 			obj.hourlydata.rh = rhavg;
 			obj.hourlydata.temp = tempavg;
 			obj.hourlydata.pm25 = pmfineavg;
@@ -623,6 +699,20 @@
 
 		})
 	}
+
+	//Get csv data
+	function getCsv(obj, url, callback) {
+		$.ajax({
+			type: 'GET',
+			url: url,
+			dataType: 'text',
+			success: callback,
+			error: function() {
+				console.log("ERROR: Cannot get csv file.");
+			}
+		});
+	}
+	
 
 
 	
