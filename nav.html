@@ -1,19 +1,63 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .navbar-default {
+        border-radius: 0px;
+        background-color: #50BDE4;
+        border: 0px;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+    .navbar-header .navbar-brand {
+        color: white;
+    }
+    .navbar-default .navbar-brand:hover,
+    .navbar-default .navbar-brand:focus {
+        color: lightgrey;
+    }
+    .navbar-default .navbar-nav >li > a {
+        color: white;
+    }
+    .navbar-default .navbar-nav >li > a:hover,
+    .navbar-default .navbar-nav >li > a:focus {
+        color: lightgrey;
+    }
+    .navbar-default .dropdown-menu {
+        background-color: #50BDE4;
+    }
+    .navbar-default .dropdown-menu > li > a {
+        color: white;
+    }
+    .navbar-default .dropdown-menu > li > a:hover,
+    .navbar-default .dropdown-menu> li > a:focus {
+        background-color: #50BDE4;
+        color: lightgrey;
+    }
 
-<div class="navbar">
-    <a style="float:left" href=https://emoryair.github.io/>Air Emory</a>
-    <div class="dropdown">
-        <button class="dropbtn"><a href="data.html">Data<i style="float:right" class="fa fa-caret-down"></i></a>
-
-        </button>
-        <div class="dropdown-content">
-            <a href="msc.html">MSC</a>
+</style>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html" style="font-weight:bold;">Air Emory</a>
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+        </div>
+        <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="info.html">Info</a></li>
+                <li><a href="outreach.html">Outreach</a></li>
+                <li><a href="sensors.html">Sensors</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="members.html">Members</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="data.html">Data<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="msc.html">Msc</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
-    <a href="sensors.html">Sensors</a>
-    <a href="outreach.html">Outreach</a>
-    <a href="info.html">Info</a>
-    <a href="members.html">Members</a>
-    <a href="map.html">Map</a>
-    <a href="index.html">Home</a>
-</div>
+</nav>
