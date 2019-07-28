@@ -1,29 +1,19 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300" rel="stylesheet">
-
     <title>MSC | Air Emory</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-    <!-- include leaflet css and javascript -->
-    <link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
-    <!--JQuery library-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- include our own css -->
-    <link rel="stylesheet" href="style.css" />
-
-    <!-- include w3.js javascript -->
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
     <!-- include highcharts.js -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
    
-    <!--include canvas.js -->
-    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <!--include css -->
     <link rel="stylesheet" type="text/css" href="mscData.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <!--include javascript functions -->
     <script src="mscData.js"></script>
 
@@ -31,8 +21,6 @@
 
 <style>
     body {
-        padding: 2% 5%; 
-        background-color: lightgrey;
         transition: margin-left .5s;
     }
 
@@ -76,6 +64,7 @@
     }
     input {
         font-size: 20px;
+        color: black;
     }
     .grid-analytics {
         display: grid;
@@ -85,7 +74,7 @@
         margin: auto;
     }
     .item {
-        background-color: #8FC1E3;
+        background-color: #50BDE4;
         padding: 5px;
         text-align: center;
         color: white;
@@ -104,20 +93,11 @@
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         border-style: solid;
-        border-color: #8FC1E3;
+        border-color: #50BDE4;
         border-width: 1px;
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-    .grid-body {
-        display: grid;
-        position: relative;
-        grid-gap: 5px;
-        grid-template-rows: 1fr 1fr 50px 1fr 1fr;
-        margin: auto;
-        width: 100%;
-        top: 30px;
     }
     .graph {
         position: relative;
@@ -130,82 +110,65 @@
         font-size: 20px;
         width:100%;
     }
-    #todayTitle {
-        grid-row-start: 1;
-        grid-row-end: 2;
-    }
-    #todayGraph {
-        grid-row-start: 2;
-        grid-row-end: 3;
-    }
-    #hourlyTitle {
-        grid-row-start: 4;
-        grid-row-end: 5;
-    }
-    #hourlyGraph {
-        grid-row-start: 5;
-        grid-row-end: 6;
-    }
-    footer {
-        top: 70px;
+  
+    #submitBtn {
+        background-color:#50BDE4;
+        border: 0px;
+        margin-top: 10px;
     }
 </style>
 </head>
-
-
-<div w3-include-html="nav.html"></div>
-<script> w3.includeHTML(); </script>
-
-
 <body>
-     <div id="toggle">
-                <button class="openbtn" onclick="openNav()">&#9776;</button> 
-                <span>Data Options</span>
-    </div>
+    <div class="content">
+        <div id="nav-placeholder"></div>
+        <script> $(function(){$("#nav-placeholder").load("nav.html");});</script>
 
-    <h1>Math and Science Center</h1>
-
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div id="pickDate" style="text-align: center;">
-            <label for="start">Date:</label>
-            <input type="date" id="start" name="date-start" value="" min="2019-06-01" max="maxDate()">
+        <div id="toggle" style="padding:10px;">
+            <button class="openbtn" onclick="openNav()">&#9776;</button> 
+            <span><b>Data Options</b></span>
         </div>
-        <div id="submitForm" style="text-align: center;">
-            <button type="submit" id="submitBtn" name="submit" onclick="dateChange(object, document.getElementById('start').value)">Submit</button>
+
+        <h5>Math and Science Center</h5>
+
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div id="pickDate" style="text-align: center;">
+                <label for="start">Date:</label>
+                <input type="date" id="start" name="date-start" value="maxDate()" min="2019-06-01" max="maxDate()">
+            </div>
+            <div id="submitForm" style="text-align: center;">
+                <button type="submit" id="submitBtn" name="submit" onclick="dateChange(object, document.getElementById('start').value)">Submit</button>
+            </div>
         </div>
-    </div>
 
-    <div class="grid-analytics">
-        <div class="item">Date</div>
-        <div class="item">Average PM<sub>2.5</div>
-        <div class="item">Average Temperature</div>
-        <div class="item">Average Relative Humidity</div>
-        <div class="numbers" id="date"></div>
-        <div class="numbers" id="pm25" style="font-size: 25px;"></div>
-        <div class="numbers" id="temperature" style="font-size: 25px;"></div>
-        <div class="numbers" id="relhumid" style="font-size: 25px;"></div>
-    </div>
-    
-    <div id="rawChartContainer" style="position: relative; top: 50px"></div>
-    <div id="hourlyChartContainer" style="position: relative; top: 100px"></div>
-
-    <script>
-        var defaultUrl = "https://spreadsheets.google.com/feeds/list/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/1/public/values?alt=json"; 
-        setDateInput();
-        showDate();
-        averages(defaultUrl, maxDate());
-        initChart(object, defaultUrl, maxDate());
-    </script>
-
-    <!-- include our own javascript -->
-    <script src="main.js"></script>
-<!--
- <h3>View all of our data <a href="https://docs.google.com/spreadsheets/d/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/edit?usp=sharing" target="_blank">here</a>.
-    </h3> -->
-
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="grid-analytics">
+                        <div class="item">Date</div>
+                        <div class="item">Average PM<sub>2.5</div>
+                        <div class="item">Average Temperature</div>
+                        <div class="item">Average Relative Humidity</div>
+                        <div class="numbers" id="date"></div>
+                        <div class="numbers" id="pm25" style="font-size: 25px;"></div>
+                        <div class="numbers" id="temperature" style="font-size: 25px;"></div>
+                        <div class="numbers" id="relhumid" style="font-size: 25px;"></div>
+                    </div>
+                
+                <div id="rawChartContainer" style="position: relative; top: 50px"></div>
+                <div id="hourlyChartContainer" style="position: relative; top: 50px"></div>
+            
+                <script>
+                    var defaultUrl = "https://spreadsheets.google.com/feeds/list/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/1/public/values?alt=json"; 
+                    setDateInput();
+                    showDate();
+                    averages(defaultUrl, maxDate());
+                    initChart(object, defaultUrl, maxDate());
+                </script>
+            </div>
+        </div>
+        
+    <br><br><br>
+</div>
+<footer class="footer">Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a></footer>
 </body>
-<footer>
-    Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a>
-</footer>
 </html>

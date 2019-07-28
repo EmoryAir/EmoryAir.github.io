@@ -1,46 +1,100 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300" rel="stylesheet">
-    <!-- include leaflet css and javascript -->
-    <link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
-    <!--JQuery library-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- include our own css -->
-    <link rel="stylesheet" href="style.css" />
-
-    <!-- include w3.js javascript -->
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-
-    <!-- we include the javascript at the bottom, see below -->
     <title>Air Emory</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/cloud.png">
 
+    <style>
+        .logoContainer {
+            padding-top: 20px;
+            padding-left: 25px;
+            padding-right: 30px;
+        }
+        .text {
+            text-align: right;
+        }
+        .infoContainer {
+            text-align: center;
+        }
+        .fas {
+            font-size: 50px;
+            color: #48A9CD;
+        }
+        .fa-cloud {
+            font-size: 300px;
+            color: #48A9CD;
+            text-shadow: 5px 2px 0px white;
+        }
+        .theText {
+            padding-top: 15px;
+            font-size: 18px;
+            font-family: arial;
+            font-weight: bold;
+            color: #747474;
+        }
+    </style>
 </head>
-<div w3-include-html="nav.html"></div>
-<script> w3.includeHTML(); </script>
-
-<body>
-    <h1>Air Emory</h1>
-    <h3>
-        We are a student-led air quality sensor network. This is the first of its kind at Emory that displays live data from around campus.
-    </h3>
-    <h3>
-        Our goal is to promote awareness, general knowledge, and engagement for both students and faculty about our interaction with the environment.
-    </h3>
-    <h3>
-        We display our map data on our <a href="map.html">map</a> page.
-    </h3>
-    <h3>
-        More info about Air Emory can be found on our <a href="info.html">info</a> page.
-    </h3>
-
-    <!-- include our own javascript -->
-    <script src="main.js"></script>
-
+<div class="content">
+    <!--Nav Bar-->
+    <div id="nav-placeholder"></div>
+    <script>$(function(){$("#nav-placeholder").load("nav.html");});</script>
+    <!--Main info-->
+    <div style="background-color: #85D9F7; padding-bottom:50px; padding-top: 50px;">
+    <div class="landingContainer row">
+        <div class="leftContainer col-sm-7">
+        <div class="textContainer">
+            <div class="text">
+            <h2>Community based.<br>Student led.<br>Air quality sensor network.</h2>
+            <h1>AIR EMORY</h1>
+            </div>
+        </div>
+        </div>
+        <div class="rightContainer">
+        <div class="logoContainer col-sm-5">
+            <i class="fas fa-cloud"></i>
+            <!--<img src="images/cloud.png" alt="logo">-->
+        </div>
+        </div>
+    </div>
+    </div>
+    <!--Bottom page info: Monitor Pollution, Raise Awareness, Engage the Community-->
+    <div class="bottomInfo row" style="background-color: white; padding:30px; text-align:center;">
+        <div style="width:80%; display:inline-block; padding-top:20px; padding-bottom:20px;">
+        <div class="box col-sm-4">
+            <div class="infoContainer">
+                <div class="theIcon">
+                    <i class="fas fa-eye"></i>
+                </div>
+            <div class="theText">Monitor Pollution</div>
+            </div>
+        </div>
+        <div class="box col-sm-4">
+            <div class="infoContainer">
+                <div class="theIcon">
+                <i class="fas fa-book-open"></i>
+                </div>
+                <div class="theText">Raise Awareness</div>
+                </div>
+        </div>
+        <div class="box col-sm-4">
+            <div class="infoContainer">
+                <div class="theIcon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <div class="theText">Engage the Community</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    <footer class="footer">Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a></footer>
 </body>
-<footer>
-    Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a>
-</footer>
 </html>

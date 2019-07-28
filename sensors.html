@@ -1,45 +1,49 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300" rel="stylesheet">
-
     <title>Sensors | Air Emory</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="icon" href="/images/cloud.png">
+    <link rel="stylesheet" href="style.css">
 
-    <!-- include leaflet css and javascript -->
-    <link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+    <style>
+        .imgpadding {
+            padding-bottom: 5px;
+        }
+    </style>
 
-    <!-- include our own css -->
-    <link rel="stylesheet" href="style.css" />
-
-    <!-- include w3.js javascript -->
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-
-    <!-- we include the javascript at the bottom, see below -->
 </head>
-
-<div w3-include-html="nav.html"></div>
-<script> w3.includeHTML(); </script>
-
 <body>
-    <h1>Sensors</h1>
-    <h3>What's in a Sensor?</h3>
-    <ul>
-        <li>Dylos DC1100: Laser particle counter that provides large and small particle counts.</li>
-        <li>DHT22: Digital temperature and humidity sensor </li>
-        <li>Raspberry Pi: Runs Python script and receives digital data from Dylos and DHT22 sensor. This data is stored internally in a CSV file and is transmitted to a google sheets. </li>
-    </ul>
-    <img display: inline-block src="IMG_1.JPG">
-    <img src="/images/IMG_2.JPG">
-    <img src="/images/IMG_3.JPG">
-    <img src="/images/IMG_4.JPG">
-
-    <!-- include our own javascript -->
-    <script src="main.js"></script>
-
+    <div class="content">
+        <!--Nav Bar-->
+        <div id="nav-placeholder"></div>
+        <script> $(function(){$("#nav-placeholder").load("nav.html");});</script>
+        <h5>Sensors</h5>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12" style="text-align:justify;">
+                    <h3>What's in a Sensor?</h3>
+                    <ul>
+                        <li>Dylos DC1100: Laser particle counter that provides large and small particle counts.</li>
+                        <li>DHT22: Digital temperature and humidity sensor </li>
+                        <li>Raspberry Pi: Runs Python script and receives digital data from Dylos and DHT22 sensor. This data is stored internally in a CSV file and is transmitted to a google sheets. </li>
+                    </ul>
+                    <br>
+                    <div style="text-align:left;">
+                        <img class="imgpadding" src="/images/IMG_1.JPG">
+                        <img class="imgpadding" src="/images/IMG_2.JPG">
+                        <img class="imgpadding" src="/images/IMG_3.JPG">
+                        <img class="imgpadding" src="/images/IMG_4.JPG">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <footer class="footer">Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a></footer>
 </body>
-<footer>
-    Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a>
-</footer>
 </html>
