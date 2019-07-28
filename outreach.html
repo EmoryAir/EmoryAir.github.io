@@ -1,39 +1,37 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300" rel="stylesheet">
-
     <title>Outreach | Air Emory</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-    <!-- include leaflet css and javascript -->
-    <link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
-    <!--JQuery library-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- include our own css -->
-    <link rel="stylesheet" href="style.css" />
-
-    <!-- include w3.js javascript -->
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-
-    <!-- we include the javascript at the bottom, see below -->
+    <link rel="icon" href="images/cloud.png">
+    <link rel="stylesheet" href="style.css">
 </head>
-
-<div w3-include-html="nav.html"></div>
-<script> w3.includeHTML(); </script>
-
 <body>
-    <h1>Outreach</h1>
-    <h2> <a href = "https://atlantasciencefestival.org/" target="_blank">Atlanta Science Festival</a> | March 23, 2019</h2>
-    <p> We'll be at a booth at the ATL Science Festival with a sensor displaying live data to demonstrate where our data comes from. </p>
-    <img src="/images/ATL science festival flyer.jpg" width="1200" height="1000">
-
-    <!-- include our own javascript -->
-    <script src="main.js"></script>
-
+    <div class="content">
+            <!--Nav Bar-->
+            <div id="nav-placeholder"></div>
+            <script> $(function(){$("#nav-placeholder").load("nav.html");});</script>
+            <h5>Outreach</h5>
+            <div class="container">
+                <br>
+                <div class="row">
+                    <div class="col-sm-12" style="margin-left:6%;">
+                        <div style="font-size:25px;"> <a href="https://atlantasciencefestival.org/" target="_blank">Atlanta Science Festival</a> | March 23, 2019</div>
+                        <p> We'll be at a booth at the ATL Science Festival with a sensor displaying live data to demonstrate where our data comes from. </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" style="text-align:center;">
+                        <img src="images/ATL science festival flyer.jpg" width="1000px" height="800px"> 
+                    </div>
+                </div>
+            </div>
+    </div> 
+    <footer class="footer">Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a></footer>    
 </body>
-<footer>
-    Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a>
-</footer>
 </html>

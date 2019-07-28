@@ -1,17 +1,83 @@
-//get today's date in Month Day, Year format
+	//Get today's date in Month Day, Year format
 	function showDate() {
 		var date = new Date();
 		var day = date.getDate();
+		var month = date.getMonth() + 1;
 		var year = date.getFullYear();
-		var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-		var month = months[date.getMonth()];
+		if (month < 10) month = "0" + month;
+		if (day < 10) day = "0" + day;
+		document.getElementById("date").innerHTML = year + "-" + month + "-" + day;
+	}
 
-		document.getElementById("date").innerHTML = month + " " + day + ", " + year;
+	//Get max date for form input
+	function maxDate() {
+		var date = new Date();
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+		if (month < 10) month = "0" + month;
+		if (day < 10) day = "0" + day;
+		return year + "-" + month + "-" + day;
+	}
+
+	//Set max date and value for form input
+	function setDateInput() {
+		document.getElementById("start").value = maxDate();
+        document.getElementById("start").max = maxDate();
+	}
+
+	/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+	function openNav() {
+		document.getElementById("mySidebar").style.width = "250px";
+		document.getElementsByTagName("body")[0].style.marginLeft = "250px";
+		setTimeout(function() {
+			object.chart.rawChart.reflow();
+			object.chart.hourlyChart.reflow();
+		}, 500);
+	}
+  
+  /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+	function closeNav() {
+		document.getElementById("mySidebar").style.width = "0";
+		document.getElementsByTagName("body")[0].style.marginLeft = "0";
+		setTimeout(function() {
+			object.chart.rawChart.reflow();
+			object.chart.hourlyChart.reflow();
+		}, 500);
+	
+	}
+
+	//Function to generate the Ajax url 
+	//Use spreadsheet if year and month are in current month/year, otherwise get csv file
+	function generateUrl(newDate) {
+		var year = newDate.substring(0,4);
+		var month = newDate.substring(5,7);
+		var day = newDate.substring(8,10);
+		if (month.charAt(0) == '0') month = month.charAt(1);
+		//if (day.charAt(0) == '0') day = day.charAt(1);
+		day = parseInt(day);
+		var url = "";
+		var date = new Date();
+		
+		if (year == date.getFullYear() && month == date.getMonth() + 1) {
+			var sheet = date.getDate() - day + 1;
+			url = "https://spreadsheets.google.com/feeds/list/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/" + sheet +  "/public/values?alt=json";
+		} else {
+			url = "past-data/" + newDate.substring(0,7) + "/" + newDate + ".csv";
+		}
+		return url;
+	}
+
+	//Function to change date
+	function dateChange(obj, newDate) {
+		document.getElementById("date").innerHTML = newDate;
+		averages(generateUrl(newDate), newDate);
+		initChart(obj, generateUrl(newDate), newDate);
 	}
 
 	//display PM10, PM2.5, temperature, relative humidity averages for the current day 
-	function averages() {
-		
+	function averages(url, thisDate) {
+		console.log("URL: " + url);
 		//fix for google sheets algorithm: get only current day on spreadsheet1
 		var date = new Date();
 		var day = (date.getDate()).toString();
@@ -21,11 +87,6 @@
 		if (day.length == 1) day = "0" + day;
 		if (month.length == 1) month = "0" + month;
 		var dateString = year + "-" + month + "-" + day;
-		
-		var spreadsheetID = "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI";
-		//var spreadsheetID = "1JI6X71ukHWQN9AlNA__5JRt85Z2xnx_X1s_Vn5xfG7g";
-		var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/1/public/values?alt=json";
-		console.log(url);
 
 		//variables for current daily averages
 		var pmfinesum = 0;
@@ -37,95 +98,132 @@
 		var rhsum = 0;
 		var rhtot = 0;
 
-		$.getJSON(url, function(data) {
+		//If date is in google spreadsheet, use this method to get data
+		if (url.substring(0,20) == 'https://spreadsheets') {
 
-			var entry = data.feed.entry;
-			var count = 0; //check if there exists data for current day 
+			$.getJSON(url, function(data) {
 
-			$(entry).each(function() {
-				//fix to google sheets algorithm
-				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
-				if (timestamp != dateString) return;
-				
-				count++;
-				var pmfine = this.gsx$pmfine.$t;
-				//var pm10 = this.gsx$pm10.$t;
-				var rhStr = this.gsx$relativehumidity.$t;
-				var temperatureStr = this.gsx$temperaturec.$t;
-	
-				//var pm10num = parseFloat(pm10);
-				var pmfinenum = parseFloat(pmfine);
-				var rh = parseFloat(rhStr);
-				var temperature = parseFloat(temperatureStr);
+				var entry = data.feed.entry;
+				var count = 0; //check if there exists data for current day 
 
-				//to get avg
-				/*
-				if (pm10 != '0' && pm10 != '') {
-					pm10sum += pm10num;
-					pm10tot++;
-				}*/
-				
-				if (pmfine != '0' && pmfine != '') {
-					pmfinesum += pmfinenum;
-					pmfinetot++;
+				$(entry).each(function() {
+					//fix to google sheets algorithm
+					var timestamp = (this.gsx$timestamp.$t).substring(0,10);
+					if (thisDate == dateString) {
+						if (timestamp != dateString) return;
+					}
+					
+					count++;
+					var pmfine = this.gsx$pmfine.$t;
+					//var pm10 = this.gsx$pm10.$t;
+					var rhStr = this.gsx$relativehumidity.$t;
+					var temperatureStr = this.gsx$temperaturec.$t;
+		
+					//var pm10num = parseFloat(pm10);
+					var pmfinenum = parseFloat(pmfine);
+					var rh = parseFloat(rhStr);
+					var temperature = parseFloat(temperatureStr);
+
+					//to get avg
+					/*
+					if (pm10 != '0' && pm10 != '') {
+						pm10sum += pm10num;
+						pm10tot++;
+					}*/
+					
+					if (pmfine != '0' && pmfine != '') {
+						pmfinesum += pmfinenum;
+						pmfinetot++;
+					}
+					
+					if (rhStr != '0' && rhStr != '') {
+						rhsum += rh;
+						rhtot++;
+					}
+
+					if (temperatureStr != '0' && temperatureStr != '') {
+						tempsum += temperature;
+						temptot++;
+					}
+
+					//var pm10avg;
+					var pmfineavg;
+					var tempavg;
+					var rhavg;
+	/*
+					if (pm10tot != 0) {
+						pm10avg = (pm10sum/pm10tot).toFixed(2) + " \u03BCg/m\u00B3";
+					} else {
+						pm10avg = "No Data";
+					}*/
+
+					if (pmfinetot != 0) {
+						pmfineavg = (pmfinesum/pmfinetot).toFixed(2) + " \u03BCg/m\u00B3";
+					} else {
+						pmfineavg = "No Data";
+
+					}
+					
+					if (temptot != 0) {
+						tempavg = (tempsum/temptot).toFixed(2) + " &deg;C";
+					} else {
+						tempavg = "No Data";
+					}
+
+					if (rhtot != 0) {
+						rhavg = (rhsum/rhtot).toFixed(2) + "%";
+					} else {
+						rhavg = "No Data";
+					}
+					
+					document.getElementById("pm25").innerHTML = pmfineavg;
+					document.getElementById("temperature").innerHTML = tempavg;
+					document.getElementById("relhumid").innerHTML = rhavg;
+					
+				});
+					//output no data if there exists no data for current day
+					if (count == 0) {
+					document.getElementById("pm25").innerHTML = "No Data";
+					document.getElementById("temperature").innerHTML = "No Data";
+					document.getElementById("relhumid").innerHTML = "No Data";
+					}
+			});
+			//else, get and read the csv file
+		} else {
+			getCsv(url, function(data) {
+				var allTextLines = data.split(/\r\n|\n/);
+				var headers = allTextLines[0].split(',');
+				var lines = [];
+				for (let i = 1; i < allTextLines.length; i++) {
+					var txt = allTextLines[i].split(',');
+					if (txt.length == headers.length) {
+						lines.push(txt);
+					}
 				}
-				
-				if (rhStr != '0' && rhStr != '') {
-					rhsum += rh;
-					rhtot++;
+				for (let j = 0; j < lines.length; j++) {
+					if (lines[j][6]!= 0 && lines[j][6] != '') {
+						pmfinesum += Number(lines[j][6]);
+						pmfinetot++;
+					}
+					if (lines[j][1] != 0 && lines[j][1] != '') {
+						tempsum += Number(lines[j][1]);
+						temptot++;
+					}
+					if (lines[j][2] != 0 && lines[j][2] != '') {
+						rhsum += Number(lines[j][2]);
+						rhtot++;
+					}
 				}
-
-				if (temperatureStr != '0' && temperatureStr != '') {
-					tempsum += temperature;
-					temptot++;
-				}
-
-				//var pm10avg;
-				var pmfineavg;
-				var tempavg;
-				var rhavg;
-/*
-				if (pm10tot != 0) {
-					pm10avg = (pm10sum/pm10tot).toFixed(2) + " \u03BCg/m\u00B3";
-				} else {
-					pm10avg = "No Data";
-				}*/
-
-				if (pmfinetot != 0) {
-					pmfineavg = (pmfinesum/pmfinetot).toFixed(2) + " \u03BCg/m\u00B3";
-				} else {
-					pmfineavg = "No Data";
-
-				}
-				
-				if (temptot != 0) {
-					tempavg = (tempsum/temptot).toFixed(2) + " &deg;C";
-				} else {
-					tempavg = "No Data";
-				}
-
-				if (rhtot != 0) {
-					rhavg = (rhsum/rhtot).toFixed(2) + "%";
-				} else {
-					rhavg = "No Data";
-				}
-				
+				pmfineavg = (pmfinesum / pmfinetot).toFixed(2) + " \u03BCg/m\u00B3";
+				tempavg = (tempsum / temptot).toFixed(2) + " &deg;C";
+				rhavg = (rhsum / rhtot).toFixed(2) + "%";
+		
 				document.getElementById("pm25").innerHTML = pmfineavg;
 				document.getElementById("temperature").innerHTML = tempavg;
 				document.getElementById("relhumid").innerHTML = rhavg;
-				
 			});
-				//output no data if there exists no data for current day
-				if (count == 0) {
-				document.getElementById("pm25").innerHTML = "No Data";
-				document.getElementById("temperature").innerHTML = "No Data";
-				document.getElementById("relhumid").innerHTML = "No Data";
-				}
-		});
-
-
+		}
 	}
-
 
 	var object = {
 		name: "Date",
@@ -170,11 +268,11 @@
 	}
 
 	//Get raw data
-	function getRawData(obj, callback) {
+	function getRawData(obj, url, callback) {
 		console.log("Get raw data");
 		$.ajax({
 			method: "GET",
-			url: "https://spreadsheets.google.com/feeds/list/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/1/public/values?alt=json",
+			url: url,
 			dataType: "json",
 			success: callback,
 			error: function() {
@@ -432,40 +530,221 @@
 
 
 	//Initialize chart
-	function initChart(obj) {
+	function initChart(obj, url, thisDate) {
 		console.log("Initialize chart");
-		//waitSpinner(obj.elementIds["raw"], "Calculating chart for " + obj.name);
-		getRawData(obj, function(data) {
-			var datafine = [];
-			var relhum = [];
-			var temperature = [];
-			
-			var date = new Date();
-			var day = (date.getDate()).toString();
-			var month = (1 + date.getMonth()).toString();
-			var year = date.getFullYear();
+		if (url.substring(0,20) == 'https://spreadsheets') {
+			getRawData(obj, url, function(data) {
+				var datafine = [];
+				var relhum = [];
+				var temperature = [];
+				
+				var date = new Date();
+				var day = (date.getDate()).toString();
+				var month = (1 + date.getMonth()).toString();
+				var year = date.getFullYear();
 
-			if (day.length == 1) day = "0" + day;
-			if (month.length == 1) month = "0" + month;
-			var dateString = year + "-" + month + "-" + day;
+				if (day.length == 1) day = "0" + day;
+				if (month.length == 1) month = "0" + month;
+				var dateString = year + "-" + month + "-" + day;
+
+					var entry = data.feed.entry;
+
+					$(entry).each(function() {
+						var timestamp = (this.gsx$timestamp.$t).substring(0,10);
+						if (thisDate == dateString) {
+							if (timestamp != dateString) return;
+						}
+						var pmfine = parseFloat(this.gsx$pmfine.$t);
+						//var pm10 = this.gsx$pm10.$t;
+						var time = this.gsx$timestamp.$t;
+						var temp = parseFloat(this.gsx$temperaturec.$t);
+						var rh = parseFloat(this.gsx$relativehumidity.$t);
+
+						pmfine = pmfine.toFixed(2);
+						temp = temp.toFixed(2);
+						rh = rh.toFixed(2);
+
+						//turn time string into a number
+						var hour;
+						var min;
+
+						if (time.charAt(11) == '0') {
+							hour = parseInt(time.charAt(12));
+						} else {
+							hour = parseInt(time.charAt(11) + time.charAt(12));
+						}
+						if (time.charAt(14) == '0') {
+							min = parseInt(time.charAt(15));
+						} else {
+							min = parseInt(time.charAt(14) + time.charAt(15));
+						}
+						var timeNum = (((hour*60) + min) / 60.0).toFixed(2); 
+
+						if (pmfine != '0' && pmfine != '') datafine.push([parseFloat(timeNum), parseFloat(pmfine)]);
+						if (temp != '0' && temp != '') temperature.push([parseFloat(timeNum), parseFloat(temp)]);
+						if (rh != '0' && rh != '') relhum.push([parseFloat(timeNum), parseFloat(rh)]);
+					});
+				obj.rawdata.rh = relhum;
+				obj.rawdata.temp = temperature;
+				obj.rawdata.pm25 = datafine;
+				obj.chart.rawChart = createRawChart(obj);
+			})
+
+			getRawData(obj, url, function(data) {
+				var date = new Date();
+				var day = (date.getDate()).toString();
+				var year = date.getFullYear();
+				var month = (1 + date.getMonth()).toString();
+				
+				if (month.length == 1) month = "0" + month;
+				if (day.length == 1) day = "0" + day;
+				var dateString = year + "-" + month + "-" + day;
+
+				// pm, rh, temp counts
+				//var pm10arr = [];
+				var pmfinearr = [];
+				var relhumid = [];
+				var temperature = [];
+
+				//total datapoints counts
+				//var pm10tot = [];
+				var pmfinetot = [];
+				var temptot = [];
+				var rhtot = [];
+
+				//initialize arrays with 0
+				for (let i = 0; i < 24; i++) {
+					//pm10arr[i] = 0;
+					pmfinearr[i] = 0;
+					//pm10tot[i] = 0;
+					pmfinetot[i] = 0;
+					temperature[i] = 0;
+					temptot[i] = 0;
+					relhumid[i] = 0;
+					rhtot[i] = 0;
+				}
 
 				var entry = data.feed.entry;
 
 				$(entry).each(function() {
 					var timestamp = (this.gsx$timestamp.$t).substring(0,10);
-					console.log(timestamp);
-					if (timestamp != dateString) return;
-					var pmfine = parseFloat(this.gsx$pmfine.$t);
+					if (thisDate == dateString) {
+						if (timestamp != dateString) return;
+					}
 					//var pm10 = this.gsx$pm10.$t;
+					var pmfine = this.gsx$pmfine.$t;
+					var temp = this.gsx$temperaturec.$t;
+					var rh = this.gsx$relativehumidity.$t;
 					var time = this.gsx$timestamp.$t;
-					var temp = parseFloat(this.gsx$temperaturec.$t);
-					var rh = parseFloat(this.gsx$relativehumidity.$t);
+					
+					//var pm10num;
+					var pmfinenum;
+					var tempnum;
+					var rhnum;
+					/*
+					if (pm10 == "") {
+						pm10num = 0;
+					} else {
+						pm10num = parseFloat(pm10);
+					}*/
+					
+					if (pmfine == "") {
+						pmfinenum = 0;
+					} else {
+						pmfinenum = parseFloat(pmfine);
+					}
+					
+					if (temp == "") {
+						tempnum = 0;
+					} else {
+						tempnum = parseFloat(temp);
+					}
+					
+					if (rh == "") {
+						rhnum = 0;
+					} else {
+						rhnum = parseFloat(rh);
+					}
+					
+					//get hour from timestamp
+					var hour;
+					if (time.charAt(11) == '0') {
+						hour = parseInt(time.charAt(12));
+					} else {
+						hour = parseInt(time.charAt(11) + time.charAt(12));
+					}
+		
+					//pm10arr[hour] += pm10num;
+					pmfinearr[hour] += pmfinenum;
+					temperature[hour] += tempnum;
+					relhumid[hour] += rhnum;
 
-					pmfine = pmfine.toFixed(2);
-					temp = temp.toFixed(2);
-					rh = rh.toFixed(2);
+					//if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
+					if (pmfine != '0' && pmfine != "") pmfinetot[hour]++;
+					if (temp != '0' && temp != "") temptot[hour]++;
+					if (rh != '0' && rh != "") rhtot[hour]++;
+				});
 
-					//turn time string into a number
+
+				var pmfineavg = [];
+				var tempavg = [];
+				var rhavg = [];
+
+				for (let i = 0; i < 24; i++) {
+					//variables for averages for each hour, 0-24
+					//var pm10avg;
+					var temppmfine;
+					var temptemp;
+					var temprh;
+					
+					//if total array is empty, there is no data 
+					//else, get the average for the hour 
+					if (pmfinetot[i] != 0) {
+						temppmfine = (pmfinearr[i] / pmfinetot[i]);
+						temppmfine = temppmfine.toFixed(2);
+						pmfineavg.push([parseFloat(i), parseFloat(temppmfine)]);
+					} 
+					if (temptot[i] != 0) {
+						temptemp = (temperature[i] / temptot[i]);
+						temptemp = temptemp.toFixed(2);
+						tempavg.push([parseFloat(i), parseFloat(temptemp)]);
+					} 
+					if (rhtot[i] != 0) {
+						temprh = (relhumid[i] / rhtot[i]);
+						temprh = temprh.toFixed(2);
+						rhavg.push([parseFloat(i), parseFloat(temprh)]);
+					} 
+				}
+				obj.hourlydata.rh = rhavg;
+				obj.hourlydata.temp = tempavg;
+				obj.hourlydata.pm25 = pmfineavg;
+				obj.chart.hourlyChart = createHourlyChart(obj);
+
+			})
+		} else {
+			//handle for csv here
+			getCsv(url, function(data) {
+				var allTextLines = data.split(/\r\n|\n/);
+				var headers = allTextLines[0].split(',');
+				var lines = [];
+				for (let i = 1; i < allTextLines.length; i++) {
+					var txt = allTextLines[i].split(',');
+					if (txt.length == headers.length) {
+						lines.push(txt);
+					}
+				}
+
+				var datafine = [];
+				var relhum = [];
+				var temperature = [];
+
+				for (let j = 0; j < lines.length; j++) {
+					var time = lines[j][0];
+					var pmfine = parseFloat(lines[j][6]).toFixed(2);
+					var temp = parseFloat(lines[j][1]).toFixed(2);
+					var rh = parseFloat(lines[j][2]).toFixed(2);
+
+					//turn timestring into an hour
 					var hour;
 					var min;
 
@@ -480,149 +759,43 @@
 						min = parseInt(time.charAt(14) + time.charAt(15));
 					}
 					var timeNum = (((hour*60) + min) / 60.0).toFixed(2); 
-
 					if (pmfine != '0' && pmfine != '') datafine.push([parseFloat(timeNum), parseFloat(pmfine)]);
 					if (temp != '0' && temp != '') temperature.push([parseFloat(timeNum), parseFloat(temp)]);
 					if (rh != '0' && rh != '') relhum.push([parseFloat(timeNum), parseFloat(rh)]);
-				});
-			obj.rawdata.rh = relhum;
-			obj.rawdata.temp = temperature;
-			obj.rawdata.pm25 = datafine;
-			obj.chart.rawChart = createRawChart(obj);
-		})
-
-		getRawData(obj, function(data) {
-			var date = new Date();
-			var day = (date.getDate()).toString();
-			var year = date.getFullYear();
-			var month = (1 + date.getMonth()).toString();
-			
-			if (month.length == 1) month = "0" + month;
-			if (day.length == 1) day = "0" + day;
-			var dateString = year + "-" + month + "-" + day;
-
-			// pm, rh, temp counts
-			//var pm10arr = [];
-			var pmfinearr = [];
-			var relhumid = [];
-			var temperature = [];
-
-			//total datapoints counts
-			//var pm10tot = [];
-			var pmfinetot = [];
-			var temptot = [];
-			var rhtot = [];
-
-			//initialize arrays with 0
-			for (let i = 0; i < 24; i++) {
-				//pm10arr[i] = 0;
-				pmfinearr[i] = 0;
-				//pm10tot[i] = 0;
-				pmfinetot[i] = 0;
-				temperature[i] = 0;
-				temptot[i] = 0;
-				relhumid[i] = 0;
-				rhtot[i] = 0;
-			}
-
-			var entry = data.feed.entry;
-
-			$(entry).each(function() {
-				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
-				if (timestamp != dateString) return;
-				//var pm10 = this.gsx$pm10.$t;
-				var pmfine = this.gsx$pmfine.$t;
-				var temp = this.gsx$temperaturec.$t;
-				var rh = this.gsx$relativehumidity.$t;
-				var time = this.gsx$timestamp.$t;
-				
-				//var pm10num;
-				var pmfinenum;
-				var tempnum;
-				var rhnum;
-				/*
-				if (pm10 == "") {
-					pm10num = 0;
-				} else {
-					pm10num = parseFloat(pm10);
-				}*/
-				
-				if (pmfine == "") {
-					pmfinenum = 0;
-				} else {
-					pmfinenum = parseFloat(pmfine);
 				}
-				
-				if (temp == "") {
-					tempnum = 0;
-				} else {
-					tempnum = parseFloat(temp);
-				}
-				
-				if (rh == "") {
-					rhnum = 0;
-				} else {
-					rhnum = parseFloat(rh);
-				}
-				
-				//get hour from timestamp
-				var hour;
-				if (time.charAt(11) == '0') {
-					hour = parseInt(time.charAt(12));
-				} else {
-					hour = parseInt(time.charAt(11) + time.charAt(12));
-				}
-	
-				//pm10arr[hour] += pm10num;
-				pmfinearr[hour] += pmfinenum;
-				temperature[hour] += tempnum;
-				relhumid[hour] += rhnum;
-
-				//if (pm10 != '0' && pm10 != "") pm10tot[hour]++;
-				if (pmfine != '0' && pmfine != "") pmfinetot[hour]++;
-				if (temp != '0' && temp != "") temptot[hour]++;
-				if (rh != '0' && rh != "") rhtot[hour]++;
-			});
-
-
-			var pmfineavg = [];
-			var tempavg = [];
-			var rhavg = [];
-
-			for (let i = 0; i < 24; i++) {
-				//variables for averages for each hour, 0-24
-				//var pm10avg;
-				var temppmfine;
-				var temptemp;
-				var temprh;
-				
-				//if total array is empty, there is no data 
-				//else, get the average for the hour 
-				if (pmfinetot[i] != 0) {
-					temppmfine = (pmfinearr[i] / pmfinetot[i]);
-					temppmfine = temppmfine.toFixed(2);
-					pmfineavg.push([parseFloat(i), parseFloat(temppmfine)]);
-				} 
-				if (temptot[i] != 0) {
-					temptemp = (temperature[i] / temptot[i]);
-					temptemp = temptemp.toFixed(2);
-					tempavg.push([parseFloat(i), parseFloat(temptemp)]);
-				} 
-				if (rhtot[i] != 0) {
-					temprh = (relhumid[i] / rhtot[i]);
-					temprh = temprh.toFixed(2);
-					rhavg.push([parseFloat(i), parseFloat(temprh)]);
-				} 
-			}
-			console.log(pmfineavg);
-
-			obj.hourlydata.rh = rhavg;
-			obj.hourlydata.temp = tempavg;
-			obj.hourlydata.pm25 = pmfineavg;
-			obj.chart.hourlyChart = createHourlyChart(obj);
-
-		})
+				obj.rawdata.rh = relhum;
+				obj.rawdata.temp = temperature;
+				obj.rawdata.pm25 = datafine;
+				obj.chart.rawChart = createRawChart(obj);					
+			})
+		}
 	}
+
+	//Get csv data
+	function getCsv(url, callback) {
+		$.ajax({
+			type: 'GET',
+			url: url,
+			dataType: 'text',
+			success: callback,
+			error: function() {
+				console.log("ERROR: Cannot get csv file.");
+				document.getElementById("pm25").innerHTML = "No Data";
+				document.getElementById("temperature").innerHTML = "No Data";
+				document.getElementById("relhumid").innerHTML = "No Data";
+				object.rawdata.rh = null;
+				object.rawdata.temp = null;
+				object.rawdata.pm25 = null;
+				object.chart.rawChart = createRawChart(object);	
+				object.hourlydata.rh = null;
+				object.hourlydata.temp = null;
+				object.hourlydata.pm25 = null;
+				object.chart.hourlyChart = createHourlyChart(object);	
+			}
+		});
+	}
+
+	
 
 
 	
