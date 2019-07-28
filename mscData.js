@@ -201,15 +201,15 @@
 					}
 				}
 				for (let j = 0; j < lines.length; j++) {
-					if (lines[j][6]!= 0 && lines[j][6] != '') {
+					if (lines[j][6]!= '0' && lines[j][6] != '') {
 						pmfinesum += Number(lines[j][6]);
 						pmfinetot++;
 					}
-					if (lines[j][1] != 0 && lines[j][1] != '') {
+					if (lines[j][1] != '0' && lines[j][1] != '') {
 						tempsum += Number(lines[j][1]);
 						temptot++;
 					}
-					if (lines[j][2] != 0 && lines[j][2] != '') {
+					if (lines[j][2] != '0' && lines[j][2] != '') {
 						rhsum += Number(lines[j][2]);
 						rhtot++;
 					}
@@ -767,6 +767,84 @@
 				obj.rawdata.temp = temperature;
 				obj.rawdata.pm25 = datafine;
 				obj.chart.rawChart = createRawChart(obj);					
+			})
+
+			getCsv(url, function(data) {
+				var allTextLines = data.split(/\r\n|\n/);
+				var headers = allTextLines[0].split(',');
+				var lines = [];
+				for (let i = 1; i < allTextLines.length; i++) {
+					var txt = allTextLines[i].split(',');
+					if (txt.length == headers.length) {
+						lines.push(txt);
+					}
+				}
+				// pm, rh, temp counts
+				//var pm10arr = [];
+				var pmfinearr = [];
+				var relhumid = [];
+				var temperature = [];
+
+				//total datapoints counts
+				//var pm10tot = [];
+				var pmfinetot = [];
+				var temptot = [];
+				var rhtot = [];
+
+				//initialize arrays with 0
+				for (let i = 0; i < 24; i++) {
+					pmfinearr[i] = 0;
+					pmfinetot[i] = 0;
+					temperature[i] = 0;
+					temptot[i] = 0;
+					relhumid[i] = 0;
+					rhtot[i] = 0;
+				}
+				
+				for (let j = 0; j < lines.length; j++) {
+					var hour = parseInt((lines[j][0]).substring(11,13));
+					if (lines[j][6] != '0' && lines[j][6] != '') {
+						pmfinearr[hour] += (parseFloat(lines[j][6]));
+						pmfinetot[hour]++;
+					}
+					if (lines[j][1] != '0' && lines[j][1] != '') {
+						temperature[hour] += (parseFloat(lines[j][1]));
+						temptot[hour]++;
+					}
+					if (lines[j][2] != '0' && lines[j][2] != '') {
+						relhumid[hour] += (parseFloat(lines[j][2]));
+						rhtot[hour]++;
+					}
+				}
+
+				//arrays for the averages
+				var pmfineavg = [];
+				var tempavg = [];
+				var relhumidavg = [];
+
+				//iterate through sum arrays and get avgs for each hour
+				for (let k = 0; k < 24; k++) {
+					var pm;
+					var t;
+					var rh;
+
+					if (pmfinetot[k] != 0) {
+						pm = (pmfinearr[k] / pmfinetot[k]).toFixed(2);
+						pmfineavg.push([parseInt(k), parseFloat(pm)]);
+					}
+					if (temptot[k] != 0) {
+						t = (temperature[k] / temptot[k]).toFixed(2);
+						tempavg.push([parseInt(k), parseFloat(t)]);
+					}
+					if (rhtot[k] != 0) {
+						rh = (relhumid[k] / rhtot[k]).toFixed(2);
+						relhumidavg.push([parseInt(k), parseFloat(rh)]);
+					}
+				}
+				obj.hourlydata.rh = relhumidavg;
+				obj.hourlydata.temp = tempavg;
+				obj.hourlydata.pm25 = pmfineavg;
+				obj.chart.hourlyChart = createHourlyChart(obj);
 			})
 		}
 	}
