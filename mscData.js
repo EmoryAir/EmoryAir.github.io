@@ -17,7 +17,6 @@
 		var year = date.getFullYear();
 		if (month < 10) month = "0" + month;
 		if (day < 10) day = "0" + day;
-		console.log(year + "-" + month + "-" + day);
 		return year + "-" + month + "-" + day;
 	}
 
@@ -48,7 +47,6 @@
 	
 	}
 
-
 	//Function to generate the Ajax url 
 	//Use spreadsheet if year and month are in current month/year, otherwise get csv file
 	function generateUrl(newDate) {
@@ -58,27 +56,20 @@
 		if (month.charAt(0) == '0') month = month.charAt(1);
 		//if (day.charAt(0) == '0') day = day.charAt(1);
 		day = parseInt(day);
-		console.log("Day: " + day);
 		var url = "";
 		var date = new Date();
 		
 		if (year == date.getFullYear() && month == date.getMonth() + 1) {
-			console.log("Year and month match!");
 			var sheet = date.getDate() - day + 1;
-			console.log("Sheet: " + sheet);
 			url = "https://spreadsheets.google.com/feeds/list/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/" + sheet +  "/public/values?alt=json";
-			console.log("URL: " + url);
 		} else {
-			console.log("Not a match!");
 			url = "past-data/" + newDate.substring(0,7) + "/" + newDate + ".csv";
-			console.log("URL: " + url);
 		}
 		return url;
 	}
 
 	//Function to change date
 	function dateChange(obj, newDate) {
-		console.log("The new date is : " + newDate);
 		document.getElementById("date").innerHTML = newDate;
 		averages(generateUrl(newDate), newDate);
 		initChart(obj, generateUrl(newDate), newDate);
@@ -86,7 +77,7 @@
 
 	//display PM10, PM2.5, temperature, relative humidity averages for the current day 
 	function averages(url, thisDate) {
-		
+		console.log("URL: " + url);
 		//fix for google sheets algorithm: get only current day on spreadsheet1
 		var date = new Date();
 		var day = (date.getDate()).toString();
@@ -96,9 +87,6 @@
 		if (day.length == 1) day = "0" + day;
 		if (month.length == 1) month = "0" + month;
 		var dateString = year + "-" + month + "-" + day;
-	
-		//var url = "https://spreadsheets.google.com/feeds/list/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/1/public/values?alt=json";
-		console.log(url);
 
 		//variables for current daily averages
 		var pmfinesum = 0;
@@ -110,97 +98,135 @@
 		var rhsum = 0;
 		var rhtot = 0;
 
-		$.getJSON(url, function(data) {
+		//If date is in google spreadsheet, use this method to get data
+		if (url.substring(0,20) == 'https://spreadsheets') {
 
-			var entry = data.feed.entry;
-			var count = 0; //check if there exists data for current day 
+			$.getJSON(url, function(data) {
 
-			$(entry).each(function() {
-				//fix to google sheets algorithm
-				var timestamp = (this.gsx$timestamp.$t).substring(0,10);
-				if (thisDate == dateString) {
-					if (timestamp != dateString) return;
+				var entry = data.feed.entry;
+				var count = 0; //check if there exists data for current day 
+
+				$(entry).each(function() {
+					//fix to google sheets algorithm
+					var timestamp = (this.gsx$timestamp.$t).substring(0,10);
+					if (thisDate == dateString) {
+						if (timestamp != dateString) return;
+					}
+					
+					count++;
+					var pmfine = this.gsx$pmfine.$t;
+					//var pm10 = this.gsx$pm10.$t;
+					var rhStr = this.gsx$relativehumidity.$t;
+					var temperatureStr = this.gsx$temperaturec.$t;
+		
+					//var pm10num = parseFloat(pm10);
+					var pmfinenum = parseFloat(pmfine);
+					var rh = parseFloat(rhStr);
+					var temperature = parseFloat(temperatureStr);
+
+					//to get avg
+					/*
+					if (pm10 != '0' && pm10 != '') {
+						pm10sum += pm10num;
+						pm10tot++;
+					}*/
+					
+					if (pmfine != '0' && pmfine != '') {
+						pmfinesum += pmfinenum;
+						pmfinetot++;
+					}
+					
+					if (rhStr != '0' && rhStr != '') {
+						rhsum += rh;
+						rhtot++;
+					}
+
+					if (temperatureStr != '0' && temperatureStr != '') {
+						tempsum += temperature;
+						temptot++;
+					}
+
+					//var pm10avg;
+					var pmfineavg;
+					var tempavg;
+					var rhavg;
+	/*
+					if (pm10tot != 0) {
+						pm10avg = (pm10sum/pm10tot).toFixed(2) + " \u03BCg/m\u00B3";
+					} else {
+						pm10avg = "No Data";
+					}*/
+
+					if (pmfinetot != 0) {
+						pmfineavg = (pmfinesum/pmfinetot).toFixed(2) + " \u03BCg/m\u00B3";
+					} else {
+						pmfineavg = "No Data";
+
+					}
+					
+					if (temptot != 0) {
+						tempavg = (tempsum/temptot).toFixed(2) + " &deg;C";
+					} else {
+						tempavg = "No Data";
+					}
+
+					if (rhtot != 0) {
+						rhavg = (rhsum/rhtot).toFixed(2) + "%";
+					} else {
+						rhavg = "No Data";
+					}
+					
+					document.getElementById("pm25").innerHTML = pmfineavg;
+					document.getElementById("temperature").innerHTML = tempavg;
+					document.getElementById("relhumid").innerHTML = rhavg;
+					
+				});
+					//output no data if there exists no data for current day
+					if (count == 0) {
+					document.getElementById("pm25").innerHTML = "No Data";
+					document.getElementById("temperature").innerHTML = "No Data";
+					document.getElementById("relhumid").innerHTML = "No Data";
+					}
+			});
+			//else, get and read the csv file
+		} else {
+			getCsv(url, function(data) {
+				var allTextLines = data.split(/\r\n|\n/);
+				var headers = allTextLines[0].split(',');
+				var lines = [];
+				for (let i = 1; i < allTextLines.length; i++) {
+					var txt = allTextLines[i].split(',');
+					if (txt.length == headers.length) {
+						lines.push(txt);
+					}
 				}
-				
-				count++;
-				var pmfine = this.gsx$pmfine.$t;
-				//var pm10 = this.gsx$pm10.$t;
-				var rhStr = this.gsx$relativehumidity.$t;
-				var temperatureStr = this.gsx$temperaturec.$t;
-	
-				//var pm10num = parseFloat(pm10);
-				var pmfinenum = parseFloat(pmfine);
-				var rh = parseFloat(rhStr);
-				var temperature = parseFloat(temperatureStr);
-
-				//to get avg
-				/*
-				if (pm10 != '0' && pm10 != '') {
-					pm10sum += pm10num;
-					pm10tot++;
-				}*/
-				
-				if (pmfine != '0' && pmfine != '') {
-					pmfinesum += pmfinenum;
-					pmfinetot++;
+				console.log(headers[1]);
+				console.log(headers[6]);
+				console.log(headers[2]);
+				for (let j = 0; j < lines.length; j++) {
+					if (lines[j][6]!= 0 && lines[j][6] != '') {
+						pmfinesum += Number(lines[j][6]);
+						pmfinetot++;
+					}
+					if (lines[j][1] != 0 && lines[j][1] != '') {
+						tempsum += Number(lines[j][1]);
+						temptot++;
+					}
+					if (lines[j][2] != 0 && lines[j][2] != '') {
+						rhsum += Number(lines[j][2]);
+						rhtot++;
+					}
 				}
-				
-				if (rhStr != '0' && rhStr != '') {
-					rhsum += rh;
-					rhtot++;
-				}
-
-				if (temperatureStr != '0' && temperatureStr != '') {
-					tempsum += temperature;
-					temptot++;
-				}
-
-				//var pm10avg;
-				var pmfineavg;
-				var tempavg;
-				var rhavg;
-/*
-				if (pm10tot != 0) {
-					pm10avg = (pm10sum/pm10tot).toFixed(2) + " \u03BCg/m\u00B3";
-				} else {
-					pm10avg = "No Data";
-				}*/
-
-				if (pmfinetot != 0) {
-					pmfineavg = (pmfinesum/pmfinetot).toFixed(2) + " \u03BCg/m\u00B3";
-				} else {
-					pmfineavg = "No Data";
-
-				}
-				
-				if (temptot != 0) {
-					tempavg = (tempsum/temptot).toFixed(2) + " &deg;C";
-				} else {
-					tempavg = "No Data";
-				}
-
-				if (rhtot != 0) {
-					rhavg = (rhsum/rhtot).toFixed(2) + "%";
-				} else {
-					rhavg = "No Data";
-				}
-				
+				pmfineavg = (pmfinesum / pmfinetot).toFixed(2) + " \u03BCg/m\u00B3";
+				tempavg = (tempsum / temptot).toFixed(2) + " &deg;C";
+				rhavg = (rhsum / rhtot).toFixed(2) + "%";
+		
 				document.getElementById("pm25").innerHTML = pmfineavg;
 				document.getElementById("temperature").innerHTML = tempavg;
 				document.getElementById("relhumid").innerHTML = rhavg;
-				
 			});
-				//output no data if there exists no data for current day
-				if (count == 0) {
-				document.getElementById("pm25").innerHTML = "No Data";
-				document.getElementById("temperature").innerHTML = "No Data";
-				document.getElementById("relhumid").innerHTML = "No Data";
-				}
-		});
-
-
+		}
 	}
-
 
 	var object = {
 		name: "Date",
@@ -701,7 +727,7 @@
 	}
 
 	//Get csv data
-	function getCsv(obj, url, callback) {
+	function getCsv(url, callback) {
 		$.ajax({
 			type: 'GET',
 			url: url,
@@ -709,9 +735,13 @@
 			success: callback,
 			error: function() {
 				console.log("ERROR: Cannot get csv file.");
+				document.getElementById("pm25").innerHTML = "No Data";
+				document.getElementById("temperature").innerHTML = "No Data";
+				document.getElementById("relhumid").innerHTML = "No Data";
 			}
 		});
 	}
+
 	
 
 

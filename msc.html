@@ -134,7 +134,7 @@
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div id="pickDate" style="text-align: center;">
                 <label for="start">Date:</label>
-                <input type="date" id="start" name="date-start" value="maxDate()" min="2019-06-01" max="maxDate()">
+                <input type="date" id="start" name="date-start" value="" min="2019-06-01" max="">
             </div>
             <div id="submitForm" style="text-align: center;">
                 <button type="submit" id="submitBtn" name="submit" onclick="dateChange(object, document.getElementById('start').value)">Submit</button>
@@ -153,16 +153,20 @@
                         <div class="numbers" id="temperature" style="font-size: 25px;"></div>
                         <div class="numbers" id="relhumid" style="font-size: 25px;"></div>
                     </div>
-                
-                <div id="rawChartContainer" style="position: relative; top: 50px"></div>
-                <div id="hourlyChartContainer" style="position: relative; top: 50px"></div>
-            
+                <div style="margin-left: 4%; margin-right: 4%;">
+                    <div id="rawChartContainer" style="position: relative; top: 50px"></div>
+                    <div id="hourlyChartContainer" style="position: relative; top: 50px"></div>
+                </div>
                 <script>
                     var defaultUrl = "https://spreadsheets.google.com/feeds/list/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/1/public/values?alt=json"; 
                     setDateInput();
                     showDate();
                     averages(defaultUrl, maxDate());
                     initChart(object, defaultUrl, maxDate());
+
+                    /*getCsv('past-data/2019-06/2019-06-01.csv', function(data) {
+                        console.log(data);
+                    });*/
                 </script>
             </div>
         </div>
