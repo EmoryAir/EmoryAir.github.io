@@ -14,12 +14,13 @@
 
     <style>
         .logoContainer {
-            padding-top: 20px;
-            padding-left: 25px;
-            padding-right: 30px;
+            display: inline-block;
+            padding-left: 20px;
         }
         .text {
+            display: inline-block;
             text-align: right;
+            margin-left: 2%;
         }
         .infoContainer {
             text-align: center;
@@ -40,30 +41,28 @@
             font-weight: bold;
             color: #747474;
         }
+        @media only screen and (max-width: 1070px) {
+            .fa-cloud { display: none; }
+            .fas {display: none; }
+}
     </style>
 </head>
 <div class="content">
     <!--Nav Bar-->
     <div id="nav-placeholder"></div>
     <script>$(function(){$("#nav-placeholder").load("nav.html");});</script>
+    <div class="inner">
     <!--Main info-->
-    <div style="background-color: #85D9F7; padding-bottom:50px; padding-top: 50px; height: 75vh;">
-    <div class="landingContainer row">
-        <div class="leftContainer col-sm-7">
-        <div class="textContainer">
+    <div class="landingContainer row" style="background-color: #85D9F7; padding-bottom:50px; padding-top: 50px; height: 75vh;">
+        <div class="leftContainer col-sm-12">
             <div class="text">
-            <h2>Community based.<br>Student led.<br>Air quality sensor network.</h2>
-            <h1>AIR EMORY</h1>
+                <h2>Community based.<br>Student led.<br>Air quality sensor network.</h2>
+                <h1>AIR EMORY</h1>
+            </div>
+            <div class="logoContainer">
+                <i class="fas fa-cloud"></i>
             </div>
         </div>
-        </div>
-        <div class="rightContainer">
-        <div class="logoContainer col-sm-5">
-            <i class="fas fa-cloud"></i>
-            <!--<img src="images/cloud.png" alt="logo">-->
-        </div>
-        </div>
-    </div>
     </div>
     <!--Bottom page info: Monitor Pollution, Raise Awareness, Engage the Community-->
     <div class="bottomInfo row" style="background-color: white; padding:30px; text-align:center;">
@@ -93,6 +92,7 @@
             </div>
         </div>
         </div>
+    </div>
     </div>
     </div>
     <footer class="footer">Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a></footer>
