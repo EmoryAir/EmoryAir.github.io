@@ -1,22 +1,19 @@
 	//Get today's date in Month Day, Year format
 	function showDate() {
-		var date = new Date();
-		var day = date.getDate();
-		var month = date.getMonth() + 1;
-		var year = date.getFullYear();
-		if (month < 10) month = "0" + month;
-		if (day < 10) day = "0" + day;
+		//est offset is -5
+		var date = moment().utcOffset('-0500').format();
+		var day = date.substring(8,10);
+		var month = date.substring(5,7);
+		var year = date.substring(0,4);
 		document.getElementById("date").innerHTML = year + "-" + month + "-" + day;
 	}
 
 	//Get max date for form input
 	function maxDate() {
-		var date = new Date();
-		var day = date.getDate();
-		var month = date.getMonth() + 1;
-		var year = date.getFullYear();
-		if (month < 10) month = "0" + month;
-		if (day < 10) day = "0" + day;
+		var date = moment().utcOffset('-0500').format();
+		var day = date.substring(8,10);
+		var month = date.substring(5,7);
+		var year = date.substring(0,4);
 		return year + "-" + month + "-" + day;
 	}
 
