@@ -52,7 +52,7 @@ Tabletop.init({
       '<br/>' + data.time +
       '<br/><b>Tempurature:</b> ' + data.temp +
       '<br/><b>Humidity:</b> ' + data.humid +
-      '<br/><b>PM 2.5:</b> ' + data.pm25mg +
+      '<br/><b>PM 2.5' + ' \u03BCg/m\u00B3'+ ':</b>' + data.avg +
       '<br/><b>AQI:</b> ' + data.aqi;
       //possibly change to L.circleMarker and set color
       var m = L.circleMarker( [data.lat, data.lng], {
