@@ -14,14 +14,16 @@ var map = L.map( 'map', {
 	zoom: 9
   });
 
-  L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
    subdomains: ['a','b','c']
   }).addTo( map );
 
-  var myURL = jQuery( 'script[src$="main.js"]' ).attr( 'src' ).replace( 'main.js', '' );
+
+
+var myURL = jQuery( 'script[src$="main.js"]' ).attr( 'src' ).replace( 'main.js', '' );
 //color for the markers 
-  function getColor(d) {
+function getColor(d) {
     return d > 301 ? '#F1A545' :
            d > 251  ? '#8A45F1' :
            d > 201  ? '#FD0909' :
@@ -30,7 +32,7 @@ var map = L.map( 'map', {
            d > 51   ? '#F9F22C' :
            d > 0    ? '#48D027' :
                       '#FFEDA0';
-  }
+}
 // add var "code" for the google sheets 
   var code = '1xqrk4AK9gWJ4nbS5MMQMtLaeNTbylfdEboVlgU2ut7o'
   
