@@ -28,7 +28,6 @@ function getColor(d) {
            d > 251  ? '#8A45F1' :
            d > 201  ? '#FD0909' :
            d > 151   ? '#E860F1' :
-           d > 101   ? '#FD9B09' :
            d > 51   ? '#F9F22C' :
            d > 0    ? '#48D027' :
                       '#FFEDA0';
@@ -107,25 +106,23 @@ Tabletop.init({
 /////////end of marker cluster group 1//////////////////
 
 //////////////legend stuff /////////////////////////////////////////////////
-var legend = L.control({position: 'bottomright'});
-    legend.onAdd = function (map) {
 
-    var div = L.DomUtil.create('div', 'info legend');
-    labels = ['<strong>Categories</strong>'],
-    categories = ['Good','Moderate','USG','Unhealthy','Very Unhealthy', 'Hazardous'];
-    
+var legend = L.control({ position: "bottomright" });
 
-    for (var i = 0; i < categories.length; i++) {
-      var c = [1, 52, 102, 152, 202, 252];
-            div.innerHTML += 
-            labels.push(
-                '<i class="circle" style="background:' + getColor(c[i]) + '"></i> ' +
-            (categories[i] ? categories[i] : '+'));
+legend.onAdd = function(map) {
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += "<h4>Categories</h4>";
+  div.innerHTML += '<i style="background: #8A45F1"></i><span>Hazardous</span><br>';
+  div.innerHTML += '<i style="background: #FD0909"></i><span>Very Unhealthy</span><br>';
+  div.innerHTML += '<i style="background: #E860F1"></i><span>Unhealthy</span><br>';
+  div.innerHTML += '<i style="background: #F9F22C"></i><span>Moderate</span><br>';
+  div.innerHTML += '<i style="background: #E6E696"></i><span>Good</span><br>';
+  div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span>Grænse</span><br>';
+  
+  
 
-        }
-        div.innerHTML = labels.join('<br>');
-    return div;
-    };
-    legend.addTo(map);
+  return div;
+};
 
+legend.addTo(map);
 
