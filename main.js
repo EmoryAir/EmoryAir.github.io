@@ -112,11 +112,11 @@ var legend = L.control({ position: "bottomright" });
 legend.onAdd = function(map) {
   var div = L.DomUtil.create("div", "legend");
   div.innerHTML += "<h4>Categories</h4>";
-  div.innerHTML += '<i style="background: #4d0000"></i><span>Hazardous</span><br>';
+  div.innerHTML += '<i style="background: #4D0000"></i><span>Hazardous</span><br>';
   div.innerHTML += '<i style="background: #FD0909"></i><span>Very Unhealthy</span><br>';
   div.innerHTML += '<i style="background: #E860F1"></i><span>Unhealthy</span><br>';
   div.innerHTML += '<i style="background: #F9F22C"></i><span>Moderate</span><br>';
-  div.innerHTML += '<i style="background: #E6E696"></i><span>Good</span><br>';
+  div.innerHTML += '<i style="background: #33FF33"></i><span>Good</span><br>';
   div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span></span><br>';
   
   
