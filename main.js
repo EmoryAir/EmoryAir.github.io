@@ -117,7 +117,7 @@ legend.onAdd = function(map) {
   div.innerHTML += '<i style="background: #E860F1"></i><span>Unhealthy</span><br>';
   div.innerHTML += '<i style="background: #F9F22C"></i><span>Moderate</span><br>';
   div.innerHTML += '<i style="background: #E6E696"></i><span>Good</span><br>';
-  div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span>Grænse</span><br>';
+  div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span></span><br>';
   
   
 
