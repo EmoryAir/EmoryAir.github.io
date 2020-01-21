@@ -108,7 +108,7 @@ Tabletop.init({
 //////////////legend stuff /////////////////////////////////////////////////
 
 var legend = L.control({ position: "bottomright" });
-
+//heeeelo
 legend.onAdd = function(map) {
   var div = L.DomUtil.create("div", "legend");
   div.innerHTML += "<h4>Categories</h4>";
