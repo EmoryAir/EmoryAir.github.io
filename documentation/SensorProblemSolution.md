@@ -48,11 +48,11 @@ WantedBy=default.target
 ```sudo systemctl stop EmoryAQSensor```
 ```END```
 
-## To check the EmoryAQSensor service status use: 
-```systemctl status EmoryAQSensor.service```
-```systemctl |grep EmoryAQSensor```
-```journalctl |grep EmoryAQ```
 
+## Check to see if the data is being written 
+
+* in CSV, use ```vi data.csv```
+* on google, go to ```vi CurrentcodeOct30.py``` and check which google doc its being written to 
 
 
 ## Python environment - make Python3 default
@@ -76,6 +76,13 @@ WantedBy=default.target
 ## Install google python APIs
 ```sudo pip install google-api-python-client oauth2client```
 ```sudo pip3 install --upgrade google-api-python-client oauth2client```
+
+## To check the EmoryAQSensor service status without the shortcuts use: 
+```systemctl status EmoryAQSensor.service```
+
+```systemctl |grep EmoryAQSensor```
+
+```journalctl |grep EmoryAQ```
 
 ## Aliases (shortcuts) added to check the status of the sensor code
  All Aliases are available on ```.bash_aliases```
