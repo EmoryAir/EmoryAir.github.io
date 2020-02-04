@@ -88,6 +88,13 @@ WantedBy=default.target
 * ```status``` = 'systemctl status EmoryAQSensor.service', gives you the status of the code running on EmoryAQ
 * ```jnl``` =  'journalctl |grep EmoryAQ', journal logs 
 
+## Change WIFI Configurations 
+1) Go type in ```sudo nano /etc/wpa_supplicant/wpa_supplicant.conf``` into the terminal 
+2) add a new network in the format of ```network={ssid=[name of network] psk=[password]}```
+3) Exit nano by typing ```ctrl+x``` and then ```y``` to save
+4) bring the network up on it by running ```sudo ifdown wlan0``` and then ```sudo ifup wlan0```
+5) then reboot with ```sudo reboot```
+
 ## Problem 2: Data Not Recording To Google Docs
 * The CSV was recording the sensor data in the computer but the data was not sending to our online Google Spreadsheet.
 
