@@ -77,15 +77,16 @@ WantedBy=default.target
 ```sudo pip install google-api-python-client oauth2client```
 ```sudo pip3 install --upgrade google-api-python-client oauth2client```
 
-## Adding Aliases
-```aliases in .bash_aliases```
-```alias so=source```
-```alias ltr='ls -ltr'```
-```alias +=pushd```
-```alias h=history```
-```alias off='sudo shutdown -h now'```
-```status='systemctl status EmoryAQSensor.service'```
-```jnl = 'journalctl |grep EmoryAQ'```
+## Aliases (shortcuts) added to check the status of the sensor code
+ All Aliases are available on ```.bash_aliases```
+
+* ```so [filename]``` = source of the file
+* ```ltr``` = 'ls -ltr', it list the permissions and more information about files in that directory 
+* ```+``` = 'pushd', used to bookmark directories so that you can easily navigate to them 
+* ```h``` = 'history', shows you the history of the commands that you have entered into the terminal 
+* ```off``` = 'sudo shutdown -h now', shuts down the raspberry pi
+* ```status``` = 'systemctl status EmoryAQSensor.service', gives you the status of the code running on EmoryAQ
+* ```jnl``` =  'journalctl |grep EmoryAQ', journal logs 
 
 ## Problem 2: Data Not Recording To Google Docs
 * The CSV was recording the sensor data in the computer but the data was not sending to our online Google Spreadsheet.
