@@ -97,9 +97,9 @@ WantedBy=default.target
 
 ## Change WIFI Configurations 
 1) type in the terminal ```sudo raspi-config```
-2) then go to Network and add the ssid and password 
+2) then go to ```Network Options``` then ```Wi-Fi``` and then add the ssid and password 
 3) then reboot with ```sudo reboot```
-If you're working with the Emory Guest Wifi, connect with nothing inputed in the password. Instead, go to the internet on the Raspberry Pi and enter your information to use the Emory Guest Wifi network 
+Note: If you're working with the Emory Guest Wifi, connect with nothing inputed in the password. Instead, go to the internet on the Raspberry Pi and enter your information to use the Emory Guest Wifi network 
 
 ## Problem 2: Data Not Recording To Google Docs
 * The CSV was recording the sensor data in the computer but the data was not sending to our online Google Spreadsheet.
