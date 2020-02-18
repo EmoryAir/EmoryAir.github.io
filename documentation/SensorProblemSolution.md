@@ -96,11 +96,10 @@ WantedBy=default.target
 * ```jnl``` =  'journalctl |grep EmoryAQ', journal logs 
 
 ## Change WIFI Configurations 
-1) Go type in ```sudo nano /etc/wpa_supplicant/wpa_supplicant.conf``` into the terminal 
-2) add a new network in the format of ```network={ssid=[name of network] psk=[password]}```
-3) Exit nano by typing ```ctrl+x``` and then ```y``` to save
-4) bring the network up on it by running ```sudo ifdown wlan0``` and then ```sudo ifup wlan0```
-5) then reboot with ```sudo reboot```
+1) type in the terminal ```sudo raspi-config```
+2) then go to Network and add the ssid and password 
+3) then reboot with ```sudo reboot```
+If you're working with the Emory Guest Wifi, connect with nothing inputed in the password. Instead, go to the internet on the Raspberry Pi and enter your information to use the Emory Guest Wifi network 
 
 ## Problem 2: Data Not Recording To Google Docs
 * The CSV was recording the sensor data in the computer but the data was not sending to our online Google Spreadsheet.
