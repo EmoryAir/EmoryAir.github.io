@@ -101,6 +101,12 @@ WantedBy=default.target
 3) then reboot with ```sudo reboot```
 Note: If you're working with the Emory Guest Wifi, connect with nothing inputed in the password. Instead, go to the internet on the Raspberry Pi and enter your information to use the Emory Guest Wifi network 
 
+## Disconnect WIFI  
+1) type in the terminal ```sudo nano /etc/wpa_supplicant/wpa_supplicant.conf```
+2) then go to ```network={ssid="testing" psk="testingPassword"}```  and delete the ssid and psk combo that you want to delete
+3) then reboot with ```sudo reboot```
+
+
 ## Problem 2: Data Not Recording To Google Docs
 * The CSV was recording the sensor data in the computer but the data was not sending to our online Google Spreadsheet.
 
