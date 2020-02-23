@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
+        /*
         html {
             box-sizing: border-box;
         }
@@ -48,15 +49,39 @@
             clear: both;
             display: table;
         }
-        .title {
-            color: grey;
-        }
         h6 {
             font-size: 20px;
         }
         .card-img-top {
             height: 25vw;
             object-fit: cover;
+        }
+        */
+        .row {
+            border-radius:6px;
+            background-color:#ECECEC;
+            box-shadow: 0 0 4px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .08);
+            padding:20px;
+            margin-bottom: 50px;
+        }
+        img {
+            height:auto;
+            width:80%;
+            padding:10px;
+        }
+        .title {
+            color: grey;
+        }
+        .name {
+            font-weight: 800;
+            font-family: 'Arial', sans-serif;
+            font-size: 5vh;
+            color: black;
+            padding-bottom: 8px;
+        }
+        .text {
+            font-family:'Arial', sans-serif;
+            font-size: 2.5vh;
         }
   </style>
 </head>
@@ -66,6 +91,74 @@
         <div id="nav-placeholder"></div>
         <script> $(function(){$("#nav-placeholder").load("nav.html");});</script>
         <h5>Members</h5>
+        <div class="container-fluid text-justified background parallax" style="padding:10vh;">
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="/images/eri saikawa.jpg">
+                </div>
+                <div class="col-sm-8">
+                    <div class="name">Eri Saikawa</div>
+                    <div class="text">Eri is an Associate Professor in the Department of Environmental Sciences, Emory College and jointly appointed in the Department of Environmental Health at the Rollins School of Public Health at Emory University. Her main research questions are related to the source and the magnitude of emissions linked to air pollution, ozone depletion, and global warming, as well as the impacts of these emissions on humans and on the society.</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="/images/raymond cheng.jpg">
+                </div>
+                <div class="col-sm-8">
+                    <div class="name">Raymond Cheng</div>
+                    <div class="text">Raymond is a sophomore double majoring in Environmental Science and Human Health from Nanjing, China. He’s interested in environmental health field and has been doing air quality monitoring and health risks assessment project since high school. He is planning to connect the high school project with the Emory AQ and facilitate further studies of environmental health impact.</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="/images/anna munslow.jpg">
+                </div>
+                <div class="col-sm-8">
+                    <div class="name">Anna Munslow</div>
+                    <div class="text">Anna is a senior majoring in computer science. She is interested in air quality monitoring and displaying local air quality data for community members.</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="/images/eleanor partington.jpg">
+                </div>
+                <div class="col-sm-8">
+                    <div class="name">Eleanor Partington</div>
+                    <div class="text">Eleanor is a sophomore majoring in Environmental Science and joined the group in Spring 2019. She is from Atlanta, Georgia and is interested in environmental policy and conservation efforts. She is looking to either double major in Political Science or minor in Sustainability.</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="/images/momo rutkin.jpeg">
+                </div>
+                <div class="col-sm-8">
+                    <div class="name">Momo Rutkin</div>
+                    <div class="text">Momo is a senior majoring in Computer Science and Environmental Science from San Francisco, CA. She is interested in conducting research on air pollution predictive modeling for countries in Asia and in IoT technology for air quality monitoring.</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="/images/calvin_bruno.jpg">
+                </div>
+                <div class="col-sm-8">
+                    <div class="name">Calvin Bruno</div>
+                    <div class="text">Calvin is a sophomore majoring in Computer Science and Environmental Science from Fair Haven, New Jersey. He started work with the group in January of 2020. He is interested in emerging atmospheric technologies, specifically those built for the amelioration of our current atmospheric situation.</div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="name">Alumni</div>
+                <div class="text">
+                    <ul class="list-unstyled">
+                        <li>Emily Rexer '20</li>
+                        <li>Ken Wakabayashi '18</li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        <!--
         <div class="inner">
             <div class="row">
                 <div class="column">
@@ -151,6 +244,7 @@
                 </div>
             </div>
         </div>
+    -->
         </div>
         <footer class="footer">Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a></footer>
     </body>
