@@ -11,20 +11,42 @@ Have some working knowledge of HTML, JavaScript, JSON, HTTP GET requests, and AJ
 	* [Eclipse](https://www.eclipse.org/downloads/)
 * Server (example below)
 	* [Python3](https://www.python.org/downloads/)
-* [Git](https://git-scm.com/downloads) - Only needed if you are committing your code to the repository
 
-## Step One: Make the Google Spreadsheet public
+## Step One: Create the the webpage
+* Create a new directory
+* Create a new HTML file in the directory
+* Copy and past the starter code into the HTML file
+
+### Starter Code
+```html
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Example Webpage</h1>
+    <script>
+    //Your code goes here.
+
+    
+    </script>
+
+  </body>
+</html>
+```
+
+## Step Two: Make the Google Spreadsheet public
 If the spreadsheet is not public, the data is not available on the web, and a request cannot be made to get the data. Click [here](https://support.wix.com/en/article/setting-your-google-spreadsheet-as-public) for instructions on how to make a spreadsheet public.
 
-## Step Two: Identify the Google Spreadsheet ID
+## Step Three: Identify the Google Spreadsheet ID
 The ID is the value between the "/d/" and "/edit" in the url of the spreadsheet </br>
 MSC Example: 
 * https://docs.google.com/spreadsheets/d/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/edit#gid=2090448674
 * Spreadsheet ID is "1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI"
 
-## Step Three: Create the AJAX request
+## Step Four: Create the AJAX request
 Note: Must have jquery included in webpage header to utilize AJAX
-* Can include the jquery's CDN in the header
+* Can include the jquery's CDN in the header (this is done in the starter code)
 * Can download jquery in a directory in the project and include the link in the header
 
 ### Ajax Request Format Example
@@ -74,7 +96,7 @@ function getData(callback) {
 }
 ```
 
-## Step Four: Making the Request and Displaying the Data
+## Step Five: Making the Request and Displaying the Data
 ### Create the Function
 ```javascript
 function displayData() {}
@@ -378,27 +400,12 @@ function getData(callback) {
       displayData();
 ```
 
-## Step Five: Rendering the Webpage
-* ```cd``` into the directory containing the webpage
+## Step Six: Rendering the Webpage
+* Open your terminal and '''cd''' into the directory containing the webpage
 * Start your server
 	* For python3, type the command ```python3 -m http.server```
 	* For python2, type the command ```python -m SimpleHTTPServer```
-* Go to your browser and type ```localhost:8080```
+* Go to your browser and type ```localhost:8000```
+* To terminate the server, type the command '''Ctrl+C'''
 
-## Template Webpage
-```html
-<html>
-  <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <h1>Example Webpage</h1>
-    <script>
-    //Your code goes here.
 
-    
-    </script>
-
-  </body>
-</html>
-```
