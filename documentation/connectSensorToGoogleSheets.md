@@ -4,6 +4,7 @@
 * Go to [Google Cloud](cloud.google.com) and use the email: **emoryaq@gmail.com** and enter the password 
 * Once you're signed in, go to google drive
 * At the google drive, go to Air Emory > Air Emory Website > [Sensor Sheets](https://drive.google.com/drive/u/2/folders/1AorpXWDZ1x3_l8bFXLCRiZf3ocJSbJ4X) and create a new google sheets page
+* change the sharing preferences to ```can edit ```
 
 ## Step 2: Link the sheet to the sensor
 * Log into the Raspberry Pi and open up the current code 
