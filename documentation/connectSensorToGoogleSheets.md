@@ -1,7 +1,7 @@
 # Connection The Sensor To a Google Sheets 
 
 ## Step 1: Create the Google Sheet 
-* Go to [Google Cloud](cloud.google.com) and use the email: **emoryaq@gmail.com** and enter the password 
+* Go to Google and use the email: **emoryaq@gmail.com** and enter the password 
 * Once you're signed in, go to google drive
 * At the google drive, go to Air Emory > Air Emory Website > [Sensor Sheets](https://drive.google.com/drive/u/2/folders/1AorpXWDZ1x3_l8bFXLCRiZf3ocJSbJ4X) and create a new google sheets page
 * change the sharing preferences to ```can edit ```
