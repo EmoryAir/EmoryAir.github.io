@@ -49,7 +49,7 @@ def dhtdata():
 * The function is specifiying to import the measurement data every minute from a certain serial port:Line 1-6 
 * Then it is splitting appart that data and storing it into the variable y: Line 7
 * Then it is parsing(breaking down) the measurements even more and storing PM2.5 data in the PM25 variable, and stores the PM 10 measurement in the PM10 variable: Line: 8
-```
+``` python
 def dylosdata():
 1.    serialport=serial.Serial('//dev/ttyUSB0',
 2.                             baudrate=9600,
@@ -73,7 +73,7 @@ The measurements described above are sent to the Raspberry Pi once per minute. T
 In order to add the new measurements to the premade CSV file in the computer, we need:
 * To open up the "data.csv" file in the Pi and create a new row in the sheet to add our new measurement data: Line 1
 * Write the data down on the new row: Line 2-3
-```
+``` python
 def cssv():
     try:
 1.        with open('data.csv', 'a', newline='') as csv_file:
