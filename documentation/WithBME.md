@@ -17,6 +17,7 @@ sudo pip3 install adafruit-circuitpython-bme680
 ## The Sensor Code
 The lines with an ```[ADD]``` next to it are the lines you need to add
 The lines with ```[NOTE]``` are things to note about the code
+The lines with ```[CHANGE]``` are things to change about the code
 ``` python
 #!/usr/bin/env
 #Modules
