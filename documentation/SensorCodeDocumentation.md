@@ -31,7 +31,7 @@ There are 2 functions in the code that collects measurements from the sensors: o
 * The code first reads the humidity and tempurature data in that instance and records it into a humidity variable and temperature variable: Line 1-3
 * Then, if the sensor recorded a value for the humidity and the tempurature, it print it onto the computer screen: Line 6-7
 * In the end, the function returns the tempurature value and the humidity value for that instance: Line 10
-```
+``` python
 def dhtdata():
     try:
 1.        sensor=22
@@ -90,7 +90,7 @@ In order to send data to the Google Sheets, we need:
 * A google sheet name created with the account that has the Key Credentials (Emory Air Gmail account): Line 5        
 * Internet connection (the Raspberry Pi needs to be connected to the internet: we use EmoryGuest)
 * A function in the code that sends the measurements to a row in the sheets:  Line 6
-```
+``` python
 def gdoc():
         try:
         1.        scope = ['https://spreadsheets.google.com/feeds',
@@ -107,7 +107,7 @@ def gdoc():
 * First we compile all of the measurements into one variable: Line 1
 * Then we call the functions: Line 2-3
 * This line ensures that that we collect and record data from the sensors every minute 
-```
+``` python
 1. alldata=[timestamp,temperature, humidity, PM25, PM10]
 2.    cssv()
 3.    gdoc()
@@ -115,7 +115,7 @@ def gdoc():
 ```
 ## The Sensor Code
 Here is all of the above steps, line by line, compiled together to create the sensor code we use!
-```
+``` python
 #!/usr/bin/env
 #Modules
 import Adafruit_DHT
