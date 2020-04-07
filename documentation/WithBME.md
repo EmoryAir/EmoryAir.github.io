@@ -15,7 +15,8 @@ sudo pip3 install adafruit-circuitpython-bme680
 
 
 ## The Sensor Code
-The lines with an ```ADD``` next to it are the lines you need to add
+The lines with an ```[ADD]``` next to it are the lines you need to add
+The lines with ```[NOTE]``` are things to note about the code
 ``` python
 #!/usr/bin/env
 #Modules
@@ -26,10 +27,14 @@ import csv
 import gspread
 import time
 import json
-ADD import board
-ADD import busio
-ADD import adafruit_bme680
+[ADD] import board
+[ADD] import busio
+[ADD] import adafruit_bme680
 from oauth2client.service_account import ServiceAccountCredentials
+
+#initialize the I2C connection with the sensor
+[ADD] i2c = busio.I2C(board.SCL, board.SDA)
+
 
 #Global Variables:
 starttime=time.time()
@@ -39,11 +44,11 @@ PM25=-9999
 pm10=-9999
 
 #Define Variables
+#[NOTE] although its not dht anymore, we can just keep the function name as in to avoid complications 
 def dhtdata():
     try:
-        sensor=22
-        pin=4
-        humidity,temperature = Adafruit_DHT.read(sensor, pin)
+        [ADD] sensor = adafruit_bme680.Adafruit_BME680_I2C(i2c)
+        [CHANGE] humidity,temperature = sensor.humidity, sensor.temperature
     except:
         print('sensor or pin error, try checking GPIOpin#')
     if humidity !=None and temperature !=None:
