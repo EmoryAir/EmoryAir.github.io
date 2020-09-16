@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
     <!-- include leaflet css and javascript -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.css" integrity="sha384-gnyrAoIOt/4fOO7ZS4MVNUkQl0QlEdzA6z3r/GGT4VO6x+EX/iHjeTsq1jGYVgaB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" integrity="sha384-wgw+aLYNQ7dlhK47ZPK7FRACiq7ROZwgFNg0m04avm4CaXS+Z9Y7nMu8yNjBKYC+" crossorigin="anonymous">
@@ -24,18 +25,42 @@
         <!--Nav Bar-->
         <div id="nav-placeholder"></div>
         <script> $(function(){$("#nav-placeholder").load("nav.html");});</script>
+        
+        <!--Air Emory Map-->
+        <div class="column1" style="padding-left: 5%; padding-right: 5%; float:left; width: 50%">
         <h5>Air Pollution Map</h5>
         <br>
         <div class="row">
-            <div class="col-sm-12" style="padding-left: 5%; padding-right: 5%;">
-                <p>Emory Air Quality is a student-led air quality sensor network. The first of its kind at Emory that displays real-time data around campus. This promotes awareness, general knowledge, and engagement for students and faculty alike about our interaction with the environment.</p>
+            <div class="col-sm-12" style="padding-left: 5%; padding-right: 5%">
+                <p>Air Emory is a student-led air quality sensor network. The first of its kind at Emory that displays real-time data around campus. This promotes awareness, general knowledge, and engagement for students and faculty alike about our interaction with the environment.</p>
                 <p>We currently have one sensor running outside at the Emory Math and Science Center, and are working on setting up more sensors around campus.</p>
-                <br>
+                <br><br>
                 <div id="map" style="border: 1px solid #AAA;"></div>
             </div>
+         </div>
+         </div>
+        
+         <!--PurpleAir Map-->
+        <div class="column2" style="padding-left: 5%; padding-right: 5%; float:right; width: 50%">
+        <h5>PurpleAir Data Map</h5>
+        <br>
+        <div class="row">
+            <div class="col-sm-12" style="padding-left: 5%; padding-right: 5%">
+                <p>PurpleAir is a community air monitoring system of PM air pollution sensors. The PurpleAir system is composed of many sensors that are installed, controlled and maintained by members of the community.</p>
+                <p>Readings are then uploaded to the cloud every 80 seconds (or so) where they are stored for download and displayed on the PurpleAir map. Take a real-time look at the network of monitors so far!</p>
+                <br>
+                
+        <div id="map" style="border: 1px solid #AAA;">
+        <p><iframe src="https://www.purpleair.com/map?&amp;zoom=7&amp;lat=35.580379519744085&amp;lng=-79.59728153770357&amp;clustersize=45&amp;orderby=L&amp;latr=3.4487256689702477&amp;lngr=7.91015625" width="570" height="500">&nbsp;</p>
+        <p></iframe></p>
         </div>
+        </div>
+        </div>
+        </div>
+
     </div>
-    <br><br>
+
+
     <link rel="stylesheet" href="style.css">
     <!-- include our own javascript -->
     <script type='text/javascript' src='markers.js'></script>
@@ -43,3 +68,4 @@
     <footer class="footer">Contact us at <a href="mailto:emoryaq@gmail.com">emoryaq@gmail.com</a></footer>
 </body>
 </html>
+
