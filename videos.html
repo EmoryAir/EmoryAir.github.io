@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Videos | Air Emory</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link rel="icon" href="images/cloud.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<style> 
+
+        .row {
+            border-radius:6px;
+            background-color:#ECECEC;
+            box-shadow: 0 0 4px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .08);
+            padding:20px;
+            margin-bottom: 50px;
+        }
+
+        .name {
+            font-weight: 600;
+            font-family: 'Arial', sans-serif;
+            font-size: 3vh;
+            color: black;
+            padding-bottom: 8px;
+        }
+        .text {
+            font-family:'Arial', sans-serif;
+            font-size: 2vh;
+        }
+</style>
+
+
+<body>
+    <div class="content">
+        <!--Nav Bar-->
+        <div id="nav-placeholder"></div>
+        <script> $(function(){$("#nav-placeholder").load("nav.html");});</script>
+        <h5>Videos</h5>
+        <div class="container-fluid text-justified background parallax" style="padding:10vh;">
+            
+
+         <div class="row">
+                <div class="col-sm-4">
+                    <div class="name">What Are Federal Air Sensors?</div>
+                    <br>
+                    <div class = "text">Watch the educational video to see Eleanor Partington, an Emory University student researcher, teach about federal air sensors! </div>
+                    <br>
+                    <div class = "text">To view air sensor systems, visit our <a href= "map.html" target="_blank"> Map page</a>. </div>
+                </div>
+
+
+                <div class="col-sm-8">
+                    <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/VTYVpxqhIwE" frameborder="0" ></iframe>
+                     </div>
+                </div>
+        </div>
+
+
+
+        </div>
+        </div>
+         <footer class="footer">Contact us at <a href="mailto:air.emory@emory.edu">air.emory@emory.edu</a></footer>
+</body>
+</html>
