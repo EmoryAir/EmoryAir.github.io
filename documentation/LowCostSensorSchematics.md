@@ -1,7 +1,7 @@
 # Low Cost Sensor Documentation
 
 ## Background
-Below is documentation of the components used and their arrangment for the sensors we used during the 2021 Atlanta Science Festival. A small computer called an [Arduino](https://store.arduino.cc/usa/mkr2uno-adapter) was used to procecc data collected by the laser particle sensor. This data was then displayed on a small LED display. The measurements taken and displayed were as follows:
+Below is documentation of the components used and their arrangment for the sensors we used during the 2021 Atlanta Science Festival. A small computer called an [Arduino](https://store.arduino.cc/usa/mkr2uno-adapter) was used to process data collected by the laser particle sensor. This data was then displayed on a small LED display. The measurements taken and displayed were as follows:
 
 ### Measurements
 * EPA Air Quality Standard (On a scale from Good-Harmful)
