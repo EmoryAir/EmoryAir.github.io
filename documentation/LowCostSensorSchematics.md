@@ -32,7 +32,7 @@ Following is a step-by-step guide to setting up your low-cost sensor. Follow alo
 
 -A yellow wire follows in Arduino 10, ending in 17a
 
--a red wire follows this plugging into Arduino 9 and breadboard 18a. 
+-A red wire follows this plugging into Arduino 9 and breadboard 18a. 
 
 -Next is another red wire plugging into Arduino 8, this wire connects to breadboard slot 23a. 
 
@@ -54,7 +54,7 @@ Following is a step-by-step guide to setting up your low-cost sensor. Follow alo
 
 -Connect a yellow wire to 35+ and 35c. 
 
--Next, connect a bluw wire to 36g and 26b. 
+-Next, connect a blue wire to 36g and 26b. 
 
 -Another blue wire connects 27c and 27+. Two more wire connections! 
 
