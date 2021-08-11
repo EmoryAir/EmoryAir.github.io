@@ -61,15 +61,17 @@ Following is a step-by-step guide to setting up your low-cost sensor. Follow alo
 
 -This next component only consists of one wire: a yellow wire in Arduino 4 connecting to the second left most node on the laser particle sensor. Next we will connect the laser particle sensor to the breadboard and finally we will do a bit of breadboard-breadboard connecting and you will be well on your way to testing the air quality wherever you want.
 
-<img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%201.jpg" width="300" height ="250">
+<img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%201.jpg" width="350" height ="250">
 
 -There are two wires to connect the laser particle sensor: 
 
 -A red wire that plugs in directly to the right of the above yellow wire ending in breadboard 59+ 
 
-<img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%202.0.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%202.1.jpg" width="300" height ="250">
+<img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%202.0.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%202.1.jpg" width="350" height ="250">
 
 -A black wire connects to the laser particle sensor two nodes to the right of the red wire ending in breadboard 61-. As said above, we will now move to the breadboard-breadboard connections!
+
+<img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%203.0.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%203.1.jpg" width="300" height ="250">
 
 -In this section there are 7 connections needed to be made. Let's start with a red wire, plug this wire into breadboard 37- and 37c. 
 
