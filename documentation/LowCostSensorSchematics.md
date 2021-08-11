@@ -22,7 +22,7 @@ Following is a step-by-step guide to setting up your low-cost sensor. Follow alo
 
 
 ### Step-by-Step
--Start by connecting the LCD display. Plug the LCD display into D32 and line up the rest of the metal barbs with the neighboring slots on the breadboard. The Arduino, sensor, and battery will not plug snugly into the breadboard as the LCD display does, we used rubber bands to keep these components in place. Next we will connect the Arduino
+-Start by connecting the LCD display. Plug the LCD display into D28 and line up the rest of the metal barbs with the neighboring slots on the breadboard. The Arduino, sensor, and battery will not plug snugly into the breadboard as the LCD display does, we used rubber bands to keep these components in place. Next we will connect the Arduino
 
 -The Arduino connects to two distinct components, the laser particle sensor and the breadboard itself...we will start by connecting to the breadboard. Moving from right to left along the Arduino, connect a blue wire to Arduino GND and plug the other end into slot 10 minus (for the purpose of the rest of the document I will use "-" and "+" to in place of positive and negative terminals on the breadboard). 
 
