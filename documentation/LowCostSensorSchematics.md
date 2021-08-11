@@ -16,7 +16,7 @@ Moderate
 Set-up for the sensor is as follows: 
 Make sure you have all necessary components, laser particle sensor, Arduino (link can be found above), breadboard, LCD display, wire packet. The following image can be used as a guide for sensor assembly (but a step-by-step guide can be found below if you do not want to try the asembly on your own). The wire column indicates the necessary wire color, the second column indicates what you are connecting and where on the breadboard one must initially insert the wire. The third column indicates what you are connecting to and where the other end of the wire should be inserted. 
 
-![Low Cost Schema](https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Low_Cost_Schema.png)
+<img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Low_Cost_Schema.png" width="250" height ="200">
 
 Following is a step-by-step guide to setting up your low-cost sensor. Follow along with the instucrutions to come, and you will have a sensor set-up exactly like those we use in the lab! One thing to note is that these steps do not have to be done in order. Your sensor will still operate regardless of the order you connected your wires and hardware!
 
@@ -42,7 +42,7 @@ Following is a step-by-step guide to setting up your low-cost sensor. Follow alo
 
 -This next component only consists of one wire: a yellow wire in Arduino 4 connecting to the second left most node on the laser particle sensor (a picture of the orientation of laser particle wires is found just below). Next we will connect the laser particle sensor to the breadboard and finally we will do a bit of breadboard-breadboard connecting and you will be well on your way to testing the air quality wherever you want.
 
-![Laser Sensor Close Up](https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1246.jpg)
+<img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1246.jpg" width="300" height ="250">
 
 -There are two wires to connect the laser particle sensor: 
 
@@ -66,10 +66,9 @@ Following is a step-by-step guide to setting up your low-cost sensor. Follow alo
 
 -The last last last part is to connect the battery. A small device consisting of two wires will be used to do this. Clip one end to the two terminals on the 9v battery, then plug the other end (looks like an auxillary input) into the black socket on the Arduino. Your LCD display should light up and show the surrounding particulate matter conecentration!!! Below are some images of a complete make-up of one of our low-cost sensors so you can see what it should look like when complete!
 
-![Laser Sensor Close Up](https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1103.jpg)
-![Laser Sensor Close Up](https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1104.jpg)
-![Laser Sensor Close Up](https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1105.jpg)
-
+<img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1103.jpg" width="300" height ="200">
+<img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1104.jpg" width="250" height ="350">
+<img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1105.jpg" width="250" height ="350">
 
 
 
