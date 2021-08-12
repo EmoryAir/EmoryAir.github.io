@@ -1,7 +1,9 @@
 # Low Cost Sensor Documentation
 
 ## Background
-Below is documentation of the components used and their arrangment for the sensors we used during the 2021 Atlanta Science Festival. A small computer called an [Arduino](https://store.arduino.cc/usa/mkr2uno-adapter) was used to process data collected by the laser particle sensor. This data was then displayed on a small LED display. The measurements taken and displayed were as follows:
+In March of 2021 a few of the AirEmory team led an event alongside the Atlanta Science Festival. The event was a small "air quality scavenger hunt" and it required participants to use a handheld air quality sensor and take readings at different, secret, locations around old fourth ward park. The event was designed to give those without much experience in air quality testing and general knowledge in air quality a look into our world. To further this outreach we decided it would be fun to give people the chance to make their own at home air quality sensors, exactly like the ones we used at the event.
+
+Below is documentation of the components used and their arrangment for the sensors we used during the 2021 Atlanta Science Festival. A small computer called an [Arduino](https://store.arduino.cc/usa/mkr2uno-adapter) was used to process data collected by the laser particle sensor. This data was then displayed on a small LED display. The measurements taken and shown were as follows:
 
 ### Measurements
 * EPA Air Quality Standard (On a scale from Good-Harmful)
@@ -12,6 +14,9 @@ Moderate
 ```
 17
 ```
+What does this mean? Well if you go onto your phone's weather app and look around for a bit you will most definitely see an Air Quality reading. This reading is a compilation of all airborne pollutants, PM2.5 being one of those. So, to boil it down, what you are esentially doing with this sensor is taking just the reading for PM2.5, and the display will show you what that concentration of PM2.5 equivaltes to on the Air Quality Srandard Scale. This scale, as shown above, ranges from good to harmful. A level of "good" means that there are no health risks for people caused by the air quality. The next level is "moderate" so the only health risks present are those for people already at risk of respiratory issues. Following this is "unhealthy for sensitive groups." This is to warn, namely, the elderly and children of the risks of exsessive outdoor exposure. The next three are just in increasing levels of severity and all imply health effects for the general population. Those levels are, in order, as follows: "unhealthy, very unhealthy, and hazardous."
+
+
 ### Set-up
 Set-up for the sensor is as follows: 
 Make sure you have all necessary components, laser particle sensor, Arduino (link can be found above), breadboard, LCD display, wire packet. The following image can be used as a guide for sensor assembly (but a step-by-step guide can be found below if you do not want to try the asembly on your own). The wire column indicates the necessary wire color, the second column indicates what you are connecting and where on the breadboard one must initially insert the wire. The third column indicates what you are connecting to and where the other end of the wire should be inserted. 
