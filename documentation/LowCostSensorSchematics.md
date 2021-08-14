@@ -31,11 +31,11 @@ Some things to note: You do not have to use these links. These are just a few tr
 
 ### Set-up
 Set-up for the sensor is as follows: 
-Make sure you have all necessary components, laser particle sensor, Arduino (link can be found above), breadboard, LCD display, wire packet. The following image can be used as a guide for sensor assembly (but a step-by-step guide can be found below if you do not want to try the asembly on your own). The wire column indicates the necessary wire color, the second column indicates what you are connecting and where on the breadboard one must initially insert the wire. The third column indicates what you are connecting to and where the other end of the wire should be inserted. 
+Make sure you have all necessary components (links for purchase can be found above), laser particle sensor, Arduino, breadboard, LCD display, wire packet, battery. The following image can be used as a guide for sensor assembly (but a step-by-step guide can be found below if you do not want to try the asembly on your own). The wire column indicates the necessary wire color, the second column indicates what you are connecting and where on the breadboard one must initially insert the wire. The third column indicates what you are connecting to and where the other end of the wire should be inserted. 
 
 <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Low_Cost_Schema.png" width="250" height ="200">
 
-Following is a step-by-step guide to setting up your low-cost sensor. Follow along with the instucrutions to come, and you will have a sensor set-up exactly like those we use in the lab! One thing to note is that these steps do not have to be done in order. Your sensor will still operate regardless of the order you connected your wires and hardware!
+Following is a step-by-step guide to setting up your low-cost sensor. Follow along with the instucrutions to come, and you will have a sensor set-up exactly like those we use in the lab! One thing to note is that these steps do not have to be done in order. Your sensor will still operate regardless of the order you connected your wires and hardware! Additionally, most all pictures below show single wire connections. This is done to make following along easier, DO NOT disconnect the wires after connecting them. Your finished product should look like the sensor found in the photos at the end of the document!
 
 
 ### Step-by-Step
