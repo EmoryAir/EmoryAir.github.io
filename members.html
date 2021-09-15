@@ -11,77 +11,30 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /*
-        html {
-            box-sizing: border-box;
-        }
-        .inner {
-            margin: 4%;
-        }
-
-        *, *:before, *:after {
-            box-sizing: inherit;
-        }
-        .column {
-            float: left;
-            width: 25%;
-            margin-bottom: 16px;
-            padding: 0 8px;
-        }
-
-        @media screen and (max-width: 650px) {
-            .column {
-                width: 100%;
-                display: block;
-            }
-        }
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            height: 650px;
-            overflow: scroll;
-        }
-        .info {
-            padding-left: 8px;
-            padding-right: 8px;
-        }
-        .info::after, .row::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-        h6 {
-            font-size: 20px;
-        }
-        .card-img-top {
-            height: 25vw;
-            object-fit: cover;
-        }
-        */
+    
         .row {
-            border-radius:6px;
             background-color:#ECECEC;
             box-shadow: 0 0 4px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .08);
             padding:20px;
             margin-bottom: 50px;
         }
         img {
-            height:auto;
+            height:80%;
             width:80%;
-            padding:10px;
         }
         .title {
             color: grey;
         }
         .name {
-            font-weight: 800;
+            font-weight: 600;
             font-family: 'Arial', sans-serif;
-            font-size: 5vh;
+            font-size: 4vh;
             color: black;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
         }
         .text {
             font-family:'Arial', sans-serif;
-            font-size: 2.5vh;
+            font-size: 2vh;
         }
   </style>
 </head>
@@ -92,6 +45,8 @@
         <script> $(function(){$("#nav-placeholder").load("nav.html");});</script>
         <h5>Members</h5>
         <div class="container-fluid text-justified background parallax" style="padding:10vh;">
+
+
             <div class="row">
                 <div class="col-sm-4">
                     <img src="/images/eri saikawa.jpg">
@@ -101,15 +56,50 @@
                     <div class="text">Eri is an Associate Professor in the Department of Environmental Sciences, Emory College and jointly appointed in the Department of Environmental Health at the Rollins School of Public Health at Emory University. Her main research questions are related to the source and the magnitude of emissions linked to air pollution, ozone depletion, and global warming, as well as the impacts of these emissions on humans and on the society.</div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="/images/calvin_bruno.jpg">
+                </div>
+                <div class="col-sm-8">
+                    <div class="name">Calvin Bruno</div>
+                    <div class="text">Calvin is a fourth-year majoring in Computer Science and Environmental Science from Fair Haven, New Jersey. He started work with the group in January of 2020. He is interested in emerging atmospheric technologies, specifically those built for the amelioration of our current atmospheric situation.</div>
+                </div>
+            </div>
+           
             <div class="row">
                 <div class="col-sm-4">
                     <img src="/images/raymond cheng.jpg">
                 </div>
                 <div class="col-sm-8">
                     <div class="name">Raymond Cheng</div>
-                    <div class="text">Raymond is a third-year student double majoring in Environmental Science and Quantitative Science with a concentration in Medical Anthropology. He’s currently enrolled in a BS/MPH program with Rollins School of Public Health in Environmental Health. He comes from Nanjing, China and joined the group in fall 2018. His research interest mainly involves environmental epidemiology, the exposure assessment and health outcome evaluation through qualitative and quantitative research methods, with a particular emphasis on that of air pollution. He’s currently involved in the cough clinic study, COVID-AQ study and also part of Air Emory group.  </div>
+                    <div class="text">Raymond is a fourth-year undergraduate student double majoring in Environmental Science and Quantitative Science with a concentration in Medical Anthropology. He’s currently enrolled in a BS/MPH program with Rollins School of Public Health in Environmental Health. He comes from Nanjing, China and joined the group in fall 2018. His research interest mainly involves environmental epidemiology, the exposure assessment and health outcome evaluation through qualitative and quantitative research methods, with a particular emphasis on that of air pollution. He’s currently involved in the cough clinic study, COVID-AQ study and also part of Air Emory group.</div>
                 </div>
             </div>
+            
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="/images/raven.jpg">
+                </div>
+                <div class="col-sm-8">
+                    <div class="name">Raven Crosby </div>
+                    <div class="text">Raven Crosby is a fourth-year student from Stone Mountain, GA studying environmental science and dance and movement studies. She is also a part of the BS/MPH program with Rollins School of Public Health studying environmental health. Crosby is currently engaged in research for her senior thesis which focuses on air quality testing using low-cost sensors and the impact air quality has on school-aged students. Her interests are in air quality, environmental justice, policy, and climate change. </div>
+                </div>
+            </div>
+            
+
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="/images/Rebecca_Luo.jpg">
+                </div>
+                <div class="col-sm-8">
+                    <div class="name">Rebecca Luo</div>
+                    <div class="text">Rebecca is a fourth-year undergraduate student majoring in Computer Science and Economics from Baton Rouge, LA. She is interested in monitoring air pollution through data analysis and visualization. She is also passionate about educating young students concerning environmental issues.</div>
+                </div>
+            </div>
+         
+            
             <div class="row">
                 <div class="col-sm-4">
                     <img src="/images/anna munslow.jpg">
@@ -119,35 +109,40 @@
                     <div class="text">Anna majored in Computer Science. She is interested in air quality monitoring and displaying local air quality data for community members.</div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <img src="/images/eleanor partington.jpg">
-                </div>
-                <div class="col-sm-8">
-                    <div class="name">Eleanor Partington</div>
-                    <div class="text">Eleanor is a third-year majoring in Environmental Science and Political Science. She is from Stone Mountain, Georgia and joined the lab in the spring of 2019. She is interested in climate change, environmental justice, and environmental policy. She is currently working on the Air Emory project monitoring air quality on the Emory campus and hopefully, in the future, the Atlanta area. She is starting her own research project looking at the origins of the unequal air pollution distribution in Atlanta.</div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-4">
-                    <img src="/images/calvin_bruno.jpg">
-                </div>
-                <div class="col-sm-8">
-                    <div class="name">Calvin Bruno</div>
-                    <div class="text">Calvin is a third-year student majoring in Computer Science and Environmental Science from Fair Haven, New Jersey. He started work with the group in January of 2020. He is interested in emerging atmospheric technologies, specifically those built for the amelioration of our current atmospheric situation.</div>
-                </div>
-            </div>
            
             <div class="row">
                 <div class="col-sm-4">
-                    <img src="/images/Rebecca_Luo.JPG">
+                    <img src="/images/eleanorpartington.jpg">
                 </div>
                 <div class="col-sm-8">
-                    <div class="name">Rebecca Luo</div>
-                    <div class="text">Rebecca is a third-year student majoring in Computer Science and Economics from Baton Rouge, LA. She is interested in monitoring air pollution through data analysis and visualization. She is also passionate about educating young students concerning environmental issues. </div>
+                    <div class="name">Eleanor Partington</div>
+                    <div class="text">Eleanor is a fourth-year majoring in Environmental Science and Political Science. She is from Stone Mountain, Georgia and joined the lab in the spring of 2019. She is interested in climate change, environmental justice, and environmental policy. She is currently working on the Air Emory project monitoring air quality on the Emory campus and K-12 school campuses around Georgia. She is starting her own research project looking at the origins of the unequal air pollution distribution in Atlanta. </div>
                 </div>
             </div>
+            
+            
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="/images/Siyan Pu.JPG">
+                </div>
+                <div class="col-sm-8">
+                    <div class="name">Siyan Pu</div>
+                    <div class="text">Siyan Pu is a fourth-year undergraduate student majoring in Computer Science and Quantitative Science. She is interested in analyzing and modeling the trends of air quality data. She is currently working on validating the air quality data measured by low-cost air sensors. She hopes to implement analytical methods to produce meaningful data in the environmental science field. </div>
+                </div>
+            </div>
+            
+      
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="/images/Grace Regnier.jpg">
+                </div>
+                <div class="col-sm-8">
+                    <div class="name">Grace Regnier</div>
+                    <div class="text">Grace is a second-year undergraduate student majoring in Physics. Her interests include environmental justice and science education. She hopes to promote an interdisciplinary approach to science that is informed by and accessible to voices within a community. She currently works with the AirEmory team to monitor air quality at local schools.</div>
+                </div>
+            </div>
+            
             
             <div class="row">
                 <div class="name">Alumni</div>
@@ -161,93 +156,7 @@
             </div>
             
         </div>
-        <!--
-        <div class="inner">
-            <div class="row">
-                <div class="column">
-                    <div class="card">
-                    <img class="card-img-top" src="/images/eri saikawa.jpg" alt="Eri" style="width:100%">
-                    <div class="info">
-                        <h6>Eri Saikawa</h6>
-                        <p class="title">Project Supervisor</p>
-                        <p>Eri is an Associate Professor in the Department of Environmental Sciences, Emory College and jointly appointed in the Department of Environmental Health at the Rollins School of Public Health at Emory University. Her main research questions are related to the source and the magnitude of emissions linked to air pollution, ozone depletion, and global warming, as well as the impacts of these emissions on humans and on the society.</p>
-                    </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                    <img class="card-img-top" src="/images/raymond cheng.jpg" alt="Raymond" style="width:100%">
-                    <div class="info">
-                        <h6>Raymond Cheng</h6>
-                        <p class="title">Member</p>
-                        <p>Raymond is a sophomore double majoring in Environmental Science and Human Health from Nanjing, China. He’s interested in environmental health field and has been doing air quality monitoring and health risks assessment project since high school. He is planning to connect the high school project with the Emory AQ and facilitate further studies of environmental health impact.</p>
-                    </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                    <img class="card-img-top" src="/images/anna munslow.jpg" alt="Anna" style="width:100%">
-                    <div class="info">
-                        <h6>Anna Munslow</h6>
-                        <p class="title">Member</p>
-                        <p>Anna is a senior majoring in computer science. She is interested in air quality monitoring and displaying local air quality data for community members.</p>
-                    </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                    <img class="card-img-top" src="/images/eleanor partington.jpg" alt="Eleanor" style="width:100%">
-                    <div class="info">
-                        <h6>Eleanor Partington</h6>
-                        <p class="title">Member</p>
-                        <p>Eleanor is a freshman majoring in Environmental Science and joined the group in Spring 2019. She is from Atlanta, Georgia and is interested in environmental policy and conservation efforts. She is looking to either double major in Political Science or minor in Sustainability.</p>
-                    </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                    <img class="card-img-top" src="/images/emily rexer.jpg" alt="Emily" style="width:100%">
-                    <div class="info">
-                        <h6>Emily Rexer</h6>
-                        <p class="title">Member</p>
-                        <p>Emily is a fourth year majoring in Math and Computer Science. She is working on the website and data storage for Air Emory.</p>
-                        <p><br></p>
-                    </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                    <img class="card-img-top" src="/images/momo rutkin.jpeg" alt="Momo" style="width:100%">
-                    <div class="info">
-                        <h6>Momo Rutkin</h6>
-                        <p class="title">Member</p>
-                        <p>Momo is a senior majoring in Computer Science and Environmental Science from San Francisco, CA. She is interested in conducting research on air pollution predictive modeling for countries in Asia and in IoT technology for air quality monitoring.</p>
-                        <p><br></p>
-                    </div>
-                    </div>
-                </div>
-                <div class="column">
-                        <div class="card">
-                        <img class="card-img-top" src="/images/noimage.png" alt="Justin" style="width:100%">
-                        <div class="info">
-                            <h6>Justin Ross</h6>
-                            <p class="title">Member</p>
-                        </div>
-                        </div>
-                    </div>
-                <div class="column">
-                    <div class="card">
-                    <img class="card-img-top" src="/images/ken wakabayashi.jpg" alt="Ken" style="width:100%">
-                    <div class="info">
-                        <h6>Ken Wakabayashi</h6>
-                        <p class="title">Alumnus</p>
-                        <p>Ken majored in Chemistry and Environmental Sciences and started work within the group during Summer 2017. He is from San Diego, California and is interested in conducting policy driving research in climate science. He worked on modeling emissions from the combustion of biofuels in cooking stoves for Nepal.</p>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    -->
+
         </div>
          <footer class="footer">Contact us at <a href="mailto:air.emory@emory.edu">air.emory@emory.edu</a></footer>
     </body>
