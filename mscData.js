@@ -58,7 +58,7 @@
 		
 		if (year == date.getFullYear() && month == date.getMonth() + 1) {
 			var sheet = date.getDate() - day + 1;
-			url = "https://spreadsheets.google.com/feeds/list/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/" + sheet +  "/public/values?alt=json";
+			url = "https://sheets.googleapis.com/v4/spreadsheets/1IpmZM0CTu4Ju2vR9nNPbUOFKtJNHCO69ydEH9vAtxWI/values/" + sheet +  "?alt=json&key=AIzaSyAAcHpKKntYmOIOzNKu2D-GWp-HVnZNgxs";
 		} else {
 			url = "past-data/" + newDate.substring(0,7) + "/" + newDate + ".csv";
 		}
