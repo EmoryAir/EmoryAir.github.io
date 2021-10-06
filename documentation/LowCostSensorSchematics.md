@@ -1,12 +1,18 @@
 # Low Cost Sensor Documentation
 
-### Background
-In March of 2021 a few of the AirEmory team led an event alongside the Atlanta Science Festival. The event was a small "air quality scavenger hunt" and it required participants to use a handheld air quality sensor and take readings at different, secret, locations around old fourth ward park. The event was designed to give those without much experience in air quality testing and general knowledge in air quality a look into our world. To further this outreach we decided it would be fun to give people the chance to make their own at home air quality sensors, exactly like the ones we used at the event.
+### Why Do We Care About Air Quality?
+Exposure to pollution can affect everyone's health. When you breathe in air, pollution aloft in the air can enter your lungs and blood stream. This can cause averse health effect or worsen pre-exisintg medical conditions such as asthma. This is why we measure air quality, to know the day-to-day risk of being outside. There are several ways we measure air quality, all of which use technology. Government air quality monitors are decidedly the most accurate and trusted ways to measure air quality. All reported measures of air quality (on say your phone's weather app) come from government monitors. One downfall of government monitors is that they are few and far between. Despite this, other air quality sensors, like the one you will build using this document, are useful for staying safe and informing ourselves on the local level. We can use less accurate, but more accessible sensors to inform our daily decisions. 
 
-Below is documentation of the components used and their arrangment for the sensors we used during the 2021 Atlanta Science Festival. A small computer, called an Arduino, was used to process data collected by the laser particle sensor. This data was then displayed on a small LCD display. The measurements taken and shown were as follows:
+
+### Background
+In March 2021, a few of the Air Emory team led an event alongside the Atlanta Science Festival. The event was a small "air quality scavenger hunt" and it required participants to use a handheld air quality sensor and take readings at different, secret, locations around old fourth ward park. The event was designed to give those without much experience in air quality testing and general knowledge in air quality a look into our world. To further this outreach, we decided it would be fun to give people the chance to make their own at home air quality sensors, exactly like the ones we used at the event.
+
+Below is documentation of the components used and their arrangment for the sensors we used during the 2021 Atlanta Science Festival. A small computer, called an Arduino, was used to process data collected by the laser particle sensor. This data was then displayed on a small LCD display. 
+
+The measurements taken and shown were as follows:
 
 ### Measurements
-* EPA Air Quality Standard (On a scale from Good-Harmful)
+* EPA Air Quality Index (On a scale from Good-Harmful)
 ```
 Moderate
 ``` 
@@ -14,10 +20,44 @@ Moderate
 ```
 17
 ```
-What does this mean? Well if you go onto your phone's weather app and look around for a bit you will most definitely see an Air Quality reading. This reading is a compilation of all airborne pollutants, PM2.5 being one of those. So, to boil it down, what you are esentially doing with this sensor is taking just the reading for PM2.5, and the display will show you what that concentration of PM2.5 equivaltes to on the Air Quality Srandard Scale. This scale, as shown above, ranges from good to harmful. A level of "good" means that there are no health risks for people caused by the air quality. The next level is "moderate" so the only health risks present are those for people already at risk of respiratory issues. Following this is "unhealthy for sensitive groups." This is to warn, namely, the elderly and children of the risks of exsessive outdoor exposure. The next three are just in increasing levels of severity and all imply health effects for the general population. Those levels are, in order, as follows: "unhealthy, very unhealthy, and hazardous."
+What does this mean? Well if you go onto your phone's weather app and look around for a bit you will most definitely see an Air Quality reading. So, to boil it down, what you are esentially doing with this sensor is taking just the reading for PM2.5, and the display will show you what that concentration of PM2.5 equivaltes to on the Air Quality Index. This scale, as shown above, ranges from good to harmful. A level of "good" means that there are no health risks for people caused by the air quality. The next level is "moderate" so the only health risks present are those for people already at risk of respiratory issues. Following this is "unhealthy for sensitive groups." This is to warn, namely, the elderly and children of the risks of exsessive outdoor exposure. The next three are just in increasing levels of severity and all imply health effects for the general population. Those levels are, in order, as follows: "unhealthy, very unhealthy, and hazardous." For further reading: https://www.airnow.gov/aqi/aqi-basics/ 
 
+PM2.5 is measured in micrograms per cubic meter (1,000,000 micrograms = 1 grams). To put this to scale, a few common items that weigh a gram include: a raisin, or a paper clip. So to get one microgram you would have to cut a raisin into 1,000,000 pieces. That is the measure of PM2.5 in the air. 
+
+Here is a list of of EPA AQI levels and their equivalent PM2.5 concentration levels:
+
+* Example: AQI Category
+```
+Index Values, PM2.5 Concentration
+```
+* Good 
+```
+0-50, 0.0-12.0
+```
+* Moderate
+```
+51-100, 12.1-35.4
+```
+* Unhealthy for Sensitive Groups
+```
+101-150, 35.5-55.4
+```
+* Unhealthy
+```
+151-200, 55.5-150.4
+```
+* Very Unhealthy
+```
+201-300, 150.5-250.4
+```
+* Hazardous
+```
+>301, >250.5
+```
 
 ### Materials
+
+To build the low-cost sensor used at the Atlanta Science Festival the following materials will be needed:
 
 * [Arduino](https://store.arduino.cc/usa/mkr2uno-adapter)
 * [Wire kit](https://www.amazon.com/IZOKEE-Solderless-Breadboard-Arduino-Project/dp/B08151TQHG/ref=sr_1_6?dchild=1&keywords=Arduino+Wire&qid=1628894843&sr=8-6)
@@ -26,12 +66,14 @@ What does this mean? Well if you go onto your phone's weather app and look aroun
 * [LCD Display](https://www.adafruit.com/product/1447)
 * A single D battery
 * Rubber Bands
+* USB cable
+* Laptop or monitor
 
 Some things to note: You do not have to use these links. These are just a few trusted links found by the lab. If you are looking for a different LCD display make sure you find one with a soldered header. We will not provide explaination for how to solder your electronics (if this is something you want to do, however, by all means power to you).
 
 ### Set-up
 Set-up for the sensor is as follows: 
-Make sure you have all necessary components (links for purchase can be found above), laser particle sensor, Arduino, breadboard, LCD display, wire packet, battery. The following image can be used as a guide for sensor assembly (but a step-by-step guide can be found below if you do not want to try the asembly on your own). The wire column indicates the necessary wire color, the second column indicates what you are connecting and where on the breadboard one must initially insert the wire. The third column indicates what you are connecting to and where the other end of the wire should be inserted. 
+Make sure you have all necessary components (links for purchase can be found above), laser particle sensor, Arduino, breadboard, LCD display, wire packet, battery. The following image can be used as a guide for sensor assembly (but a step-by-step guide can be found below if you do not want to try the asembly on your own). The wire column indicates the wire color we used (although colors are arbitrary so do not fret over this), the second column indicates what you are connecting and where on the breadboard one must initially insert the wire. The third column indicates what you are connecting to and where the other end of the wire should be inserted. 
 
 <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Low_Cost_Schema.png" width="250" height ="200">
 
@@ -39,7 +81,9 @@ Following is a step-by-step guide to setting up your low-cost sensor. Follow alo
 
 
 ### Step-by-Step
--Start by connecting the LCD display. Plug the LCD display into D28 and line up the rest of the metal barbs with the neighboring slots on the breadboard. The Arduino, sensor, and battery will not plug snugly into the breadboard as the LCD display does, we used rubber bands to keep these components in place. Next we will connect the Arduino
+-We will start by coding the LCD display to show the metrics we would like to see. To do this, connect your Arduino to a laptop or monitor via USB. Create a new workspace within the Arduino. Copy and paste the code from: https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/documentation/PM_sensor_LCD.ino onto your workspace. Congrats! You just coded in Arduino's native language!
+
+-Next, start by connecting the LCD display. Plug the LCD display into D28 and line up the rest of the metal barbs with the neighboring slots on the breadboard. The Arduino, sensor, and battery will not plug snugly into the breadboard as the LCD display does, we used rubber bands to keep these components in place. Next we will connect the Arduino
 
 <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%201.jpg" width="300" height ="250">
 
@@ -118,11 +162,12 @@ Following is a step-by-step guide to setting up your low-cost sensor. Follow alo
 
 <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%2014.jpg" width="300" height ="250">
 
--The last last last part is to connect the battery. A small device consisting of two wires will be used to do this. Clip one end to the two terminals on the 9v battery, then plug the other end (looks like an auxillary input) into the black socket on the Arduino. Your LCD display should light up and show the surrounding particulate matter conecentration!!! Below are some images of a complete make-up of one of our low-cost sensors so you can see what it should look like when complete!
+-The last last last part to connect is the battery. A small device consisting of two wires will be used to do this. Clip one end to the two terminals on the 9v battery, then plug the other end (looks like an auxillary input) into the black socket on the Arduino. Your LCD display should light up and show the surrounding particulate matter conecentration!!! Below are some images of a complete make-up of one of our low-cost sensors so you can see what it should look like when complete!
 
 <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1103.jpg" width="300" height ="200">
 <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1104.jpg" width="250" height ="350">
 <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1105.jpg" width="250" height ="350">
 
-
+### Sources
+https://www.epa.gov/sites/default/files/2016-04/documents/2012_aqi_factsheet.pdf
 
