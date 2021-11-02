@@ -1,7 +1,7 @@
 # Low Cost Sensor Documentation
 
 ### Why Do We Care About Air Quality?
-Exposure to pollution can affect everyone's health. When you breathe in air, pollution aloft in the air can enter your lungs and blood stream. This can cause averse health effect or worsen pre-exisintg medical conditions such as asthma. This is why we measure air quality, to know the day-to-day risk of being outside. There are several ways we measure air quality, all of which use technology. Government air quality monitors are decidedly the most accurate and trusted ways to measure air quality. All reported measures of air quality (on say your phone's weather app) come from government monitors. One downfall of government monitors is that they are few and far between. Despite this, other air quality sensors, like the one you will build using this document, are useful for staying safe and informing ourselves on the local level. We can use less accurate, but more accessible sensors to inform our daily decisions. 
+Exposure to pollution can affect everyone's health. When you breathe in air, pollution aloft in the air can enter your lungs and blood stream. This can cause averse health effect or worsen pre-exisintg medical conditions such as asthma. This is why we measure air quality, to know the day-to-day risk of being outside. There are several ways we measure air quality, all of which use technology. Government air quality monitors are decidedly the most accurate and trusted ways to measure air quality. All reported measures of air quality (on say your phone's weather app, or your prefered weather website) come from government monitors, and sensors. One downfall of government monitors is that they are few and far between. Additionally, other air quality sensors, like the one you will build using this document, are useful for staying safe and informing ourselves on the local level. We can use less accurate, but more accessible sensors to inform our daily decisions. For more information visit our info page: https://www.airemory.com/info.html
 
 
 ### Background
@@ -16,19 +16,17 @@ The measurements taken and shown were as follows:
 ```
 Moderate
 ``` 
-* PM 2.5 Concentration
+* PM<sub>2.5</sub> Concentration
 ```
 17
 ```
-What does this mean? Well if you go onto your phone's weather app and look around for a bit you will most definitely see an Air Quality reading. So, to boil it down, what you are esentially doing with this sensor is taking just the reading for PM2.5, and the display will show you what that concentration of PM2.5 equivaltes to on the Air Quality Index. This scale, as shown above, ranges from good to harmful. A level of "good" means that there are no health risks for people caused by the air quality. The next level is "moderate" so the only health risks present are those for people already at risk of respiratory issues. Following this is "unhealthy for sensitive groups." This is to warn, namely, the elderly and children of the risks of exsessive outdoor exposure. The next three are just in increasing levels of severity and all imply health effects for the general population. Those levels are, in order, as follows: "unhealthy, very unhealthy, and hazardous." For further reading: https://www.airnow.gov/aqi/aqi-basics/ 
+What does this mean? Well if you go onto your phone's weather app and look around for a bit you will most definitely see an Air Quality reading. So, to boil it down, what you are esentially doing with this sensor is taking just the reading for PM<sub>2.5</sub>, and the display will show you what that concentration of PM<sub>2.5</sub> equivaltes to on the Air Quality Index. This scale, as shown above, ranges from good to harmful. A level of "good" means that there are no health risks for people caused by the air quality. The next level is "moderate" so the only health risks present are those for people already at risk of respiratory issues. Following this is "unhealthy for sensitive groups." This is to warn, namely, the elderly and children of the risks of exsessive outdoor exposure. The next three are just in increasing levels of severity and all imply health effects for the general population. Those levels are, in order, as follows: "unhealthy, very unhealthy, and hazardous." For further reading: https://www.airnow.gov/aqi/aqi-basics/ 
 
-PM2.5 is measured in micrograms per cubic meter (1,000,000 micrograms = 1 grams). To put this to scale, a few common items that weigh a gram include: a raisin, or a paper clip. So to get one microgram you would have to cut a raisin into 1,000,000 pieces. That is the measure of PM2.5 in the air. 
-
-Here is a list of of EPA AQI levels and their equivalent PM2.5 concentration levels:
+Here is a list of of EPA AQI levels and their equivalent PM<sub>2.5</sub> concentration levels:
 
 * Example: AQI Category
 ```
-Index Values, PM2.5 Concentration
+Index Values, PM<sub>2.5</sub> Concentration
 ```
 * Good 
 ```
