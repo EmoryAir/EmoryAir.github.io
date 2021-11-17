@@ -26,7 +26,7 @@ Here is a list of of EPA AQI levels and their equivalent PM<sub>2.5</sub> concen
 
 * Example: AQI Category
 ```
-Index Values, PM<sub>2.5</sub> Concentration
+Index Values, PM Concentration
 ```
 * Good 
 ```
