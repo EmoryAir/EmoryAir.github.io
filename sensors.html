@@ -51,7 +51,7 @@
 <br>
 <br>
 <br>
-        <h1 id="low-cost-sensor-documentation" style="color:black;">Our Low Cost Sensor Set-Up Guide</h1>
+    <h1 id="low-cost-sensor-documentation" style="color:black;">Our Low Cost Sensor Set-Up Guide</h1>
         <h3 id="why-do-we-care-about-air-quality-">Why Do We Care About Air Quality?</h3>
             <p>Exposure to pollution can affect everyone&#39;s health. When you breathe in air, pollution aloft in the air can enter your lungs and blood stream. This can cause averse health effect or worsen pre-exisintg medical conditions such as asthma. This is why we measure air quality, to know the day-to-day risk of being outside. There are several ways we measure air quality, all of which use technology. Government air quality monitors are decidedly the most accurate and trusted ways to measure air quality. All reported measures of air quality (on say your phone&#39;s weather app, or your preferred weather website) come from government monitors, and sensors. One downfall of government monitors is that they are few and far between. Additionally, other air quality sensors, like the one you will build using this document, are useful for staying safe and informing ourselves on the local level. We can use less accurate, but more accessible sensors to inform our daily decisions. For more information visit our info page: <a href="https://www.airemory.com/info.html">https://www.airemory.com/info.html</a></p>
         <h3 id="background">Background</h3>
@@ -99,53 +99,53 @@
     <h3 id="set-up">Set-up</h3>
         <p>Set-up for the sensor is as follows: 
         Make sure you have all necessary components (links for purchase can be found above), laser particle sensor, Arduino, breadboard, LCD display, wire packet, battery. The following image can be used as a guide for sensor assembly (but a step-by-step guide can be found below if you do not want to try the asembly on your own). The wire column indicates the wire color we used (although colors are arbitrary so do not fret over this), the second column indicates what you are connecting and where on the breadboard one must initially insert the wire. The third column indicates what you are connecting to and where the other end of the wire should be inserted. </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/master/images/Low_Cost_Schema.png" width="250" height ="200"></p>
+        <p><img src="/images/Low_Cost_Schema.png" width="250" height ="200"></p>
         <p>Following is a step-by-step guide to setting up your low-cost sensor. Follow along with the instructions to come, and you will have a sensor set-up exactly like those we use in the lab! One thing to note is that these steps do not have to be done in order. Your sensor will still operate regardless of the order you connected your wires and hardware! Additionally, most all pictures below show single wire connections. This is done to make following along easier, DO NOT disconnect the wires after connecting them. Your finished product should look like the sensor found in the photos at the end of the document!</p>
     <h3 id="step-by-step">Step-by-Step</h3>
         <p>We will start by coding the LCD display to show the metrics we would like to see. To do this, connect your Arduino to a laptop or monitor via USB. Create a new workspace within the Arduino. Copy and paste the code from: <a href="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/documentation/PM_sensor_LCD.ino">https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/documentation/PM_sensor_LCD.ino</a> onto your workspace. Congrats! You just coded in Arduino&#39;s native language!</p>
         <p>Next, start by connecting the LCD display. Plug the LCD display into D28 and line up the rest of the metal barbs with the neighboring slots on the breadboard. The Arduino, sensor, and battery will not plug snugly into the breadboard as the LCD display does, we used rubber bands to keep these components in place. Next we will connect the Arduino</p>
         <p><img src="/images/Step%201.jpg" width="300" height ="250"></p>
         <p>The Arduino connects to two distinct components, the laser particle sensor and the breadboard itself...we will start by connecting to the breadboard. Moving from right to left along the Arduino, connect a blue wire to Arduino GND and plug the other end into slot 10 minus (for the purpose of the rest of the document I will use &quot;-&quot; and &quot;+&quot; to in place of positive and negative terminals on the breadboard). </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/step%202.jpg" width="300" height ="250"></p>
+        <p><img src="/images/step%202.jpg" width="300" height ="250"></p>
         <p>Next connect a white wire into Arduino slot 12 and connect the other end to 15a. </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%203.1.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%203.2.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%203.1.jpg" width="300" height ="250"> <img src="/images/Step%203.2.jpg" width="300" height ="250"></p>
         <p>Next, connect another white wire to Arduino 11 with the other end connecting to 16a. </p>
         <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%204.1.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%204.2.jpg" width="300" height ="250"></p>
         <p>A yellow wire follows in Arduino 10, ending in 17a</p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%205.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%205.2.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%205.jpg" width="300" height ="250"> <img src="/images/Step%205.2.jpg" width="300" height ="250"></p>
         <p>A red wire follows this plugging into Arduino 9 and breadboard 18a. </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%206.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%206.2.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%206.jpg" width="300" height ="250"> <img src="/images/Step%206.2.jpg" width="300" height ="250"></p>
         <p>-Next is another red wire plugging into Arduino 8, this wire connects to breadboard slot 23a. </p>
         <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%206.3.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%206.4.jpg" width="300" height ="250"></p>
         <p>-The last wire on this side of the Arduino to connect the Arduino to the breadboard is an orange wire in Arduino 7 that ends in breadboard 25a. </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%207.1.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%207.2.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%207.1.jpg" width="300" height ="250"> <img src="/images/Step%207.2.jpg" width="300" height ="250"></p>
         <p>The last wire connects on the opposite side of the Arduino in the 5v slot and ends in the 39+ spot of the breadboard. Next we will connect the Arduino to the laser particle sensor.</p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%208.1.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%208.2.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%208.1.jpg" width="300" height ="250"> <img src="/images/Step%208.2.jpg" width="300" height ="250"></p>
         <p>This next component only consists of one wire: a yellow wire in Arduino 4 connecting to the second left most node on the laser particle sensor. Next we will connect the laser particle sensor to the breadboard and finally we will do a bit of breadboard-breadboard connecting and you will be well on your way to testing the air quality wherever you want.</p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%201.jpg" width="350" height ="250"></p>
+        <p><img src="/images/Sensor%20Connection%201.jpg" width="350" height ="250"></p>
         <p>There are two wires to connect the laser particle sensor: </p>
         <p>A red wire that plugs in directly to the right of the above yellow wire ending in breadboard 59+ </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%202.0.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%202.1.jpg" width="350" height ="250"></p>
+        <p><img src="/images/Sensor%20Connection%202.0.jpg" width="300" height ="250"> <img src="/images/Sensor%20Connection%202.1.jpg" width="350" height ="250"></p>
         <p>A black wire connects to the laser particle sensor two nodes to the right of the red wire ending in breadboard 61-. As said above, we will now move to the breadboard-breadboard connections!</p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%203.0.jpg" width="300" height ="250"> <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Sensor%20Connection%203.1.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Sensor%20Connection%203.0.jpg" width="300" height ="250"> <img src="/images/Sensor%20Connection%203.1.jpg" width="300" height ="250"></p>
         <p>In this section there are 7 connections needed to be made. Let&#39;s start with a red wire, plug this wire into breadboard 37- and 37c. </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%209.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%209.jpg" width="300" height ="250"></p>
         <p>Connect a yellow wire to 35+ and 35c. </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%209.1.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%209.1.jpg" width="300" height ="250"></p>
         <p>Next, connect a blue wire to 36g and 26b. </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%2010.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%2010.jpg" width="300" height ="250"></p>
         <p>Another blue wire connects 27c and 27+. Two more wire connections! </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%2011.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%2011.jpg" width="300" height ="250"></p>
         <p>Take a final blue wire and link 14b with 13+. </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%2012.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%2012.jpg" width="300" height ="250"></p>
         <p>Finally, use a black wire to connect 13a with 12-. </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%2013.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%2013.jpg" width="300" height ="250"></p>
         <p>The last connection needed in this section is the small black dial labeled with a white &quot;10k&quot; marking. It has two prongs on one side and one on the other. Connect the two prong side to 35d and 37d with the single prong fitting nicely into 36f. </p>
-        <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/Step%2014.jpg" width="300" height ="250"></p>
+        <p><img src="/images/Step%2014.jpg" width="300" height ="250"></p>
         <p>The last last last part to connect is the battery. A small device consisting of two wires will be used to do this. Clip one end to the two terminals on the 9v battery, then plug the other end (looks like an auxiliary input) into the black socket on the Arduino. Your LCD display should light up and show the surrounding particulate matter concentration!!! Below are some images of a complete make-up of one of our low-cost sensors so you can see what it should look like when complete!</p>
-    <p><img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1103.jpg" width="300" height ="200">
-    <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1104.jpg" width="250" height ="350">
-    <img src="https://github.com/EmoryAir/EmoryAir.github.io/blob/Low_cost_schema/images/IMG-1105.jpg" width="250" height ="350"></p>
+    <p><img src="/images/IMG-1103.jpg" width="300" height ="200">
+    <img src="/images/IMG-1104.jpg" width="250" height ="350">
+    <img src="/images/IMG-1105.jpg" width="250" height ="350"></p>
     <h3 id="sources">Sources</h3>
     <p><a href="https://www.epa.gov/sites/default/files/2016-04/documents/2012_aqi_factsheet.pdf">https://www.epa.gov/sites/default/files/2016-04/documents/2012_aqi_factsheet.pdf</a></p>
 <br><br>
