@@ -35,7 +35,16 @@
             <script> $(function(){$("#nav-placeholder").load("nav.html");});</script>
             <h5>Outreach</h5>
 
+            <!--Tab Bar-->
+                <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#current">Current Events</a></li>
+                <li><a data-toggle="tab" href="#past">Past Events</a></li>
+                </ul> 
 
+            <!--Tab Bar-->               
+
+  <div class="tab-content">
+            <div id="current" class="tab-pane fade in active"> 
                     <div class="col-sm-6" style="padding-left: 7%; padding-right: 3%; padding-top: 5%; float:left">
                     <div class="row">
                     <div style="font-size:25px;"><strong>Get to Know Your Learning Atmosphere </strong></div><br>
@@ -83,34 +92,43 @@
                   <!-- school flyer -->
 
         <!-- School Map -->
-        
             <div class="col-sm-12" style="padding-left: 7%; padding-top: 5%; float:left">
             <div style="font-size:25px;"><strong>Map of Participating Georgia Schools</strong></div><br>
-            <div class="col-sm-6" style="padding-right: 5%; float:left;">
-            <p > Please see below for a map of schools in Georgia we are working with to place quality-controlled low-cost air sensors from Airly. </p>
+            <div class="col-sm-5" style="padding-right: 7%; float:left;">
+            <p> Please see below for a map of schools in Georgia we are working with to place quality-controlled low-cost air sensors from Airly. </p>
             <p>Hover over shapes in the legend indicating schools and regulatory monitors to view specific school names and site ids.  </p>
             </div>
 
             <div class="col-sm-6" style="float:right; padding-right: 7%; ">
-            <img src="images/maplegend.png" style = "max-width: 100%; max-height: 40%; border: 1px solid #555;">
+            <img src="mapl.png" style = "max-width: 100%; max-height: 40%; border: 1px solid #555;">
             </div>
             </div>
 
-            <iframe src="s-map.html" style="border: none; width: 86%; height: 20%; align: left; overflow: hidden; margin-left: 7%;"></iframe>
-
+            <iframe src="s-map.html" style="border: none; width: 86%; height: 20%; align: left;margin-left: 7%; margin-bottom: 1%"></iframe>
+            <a href= "s-map.html" target="_blank" style="font-size:15px; float:left; margin-left: 7%;"> <strong>View Full Map Here</strong></a> <br><br><br>
 
         
         <!-- School Map -->
-
+    </div>
 
          <!-- Past events -->
-        <div class="col-sm-12" style="padding-left: 7%;text-align: left; padding-top: 5%;">
-        <div style="font-size:25px;"><strong>Past Events</strong></div>
-        </div>
+        <div id="past" class="tab-pane fade"> 
+        <div class="col-sm-12" style="padding-left: 7%;text-align: left; padding-top: 5%; "></div>
 
          <div class="row">
                     <div class="col-sm-6" style="padding-left: 3%; padding-right: 7%; padding-top: 5%; float:right">
 
+            <!-- Hack the Earth -->
+                    <div style="font-size:20px;"> <a href="hackathon.html" target="_blank">Hack the Earth!</a> | March 18th - 20th, 2022</div>
+
+                    <p> Hack the Earth: People Focused, Earth Centered" is Emory’s environmental hackathon, where participants from across Atlanta compete to create solutions to real issues in less than 36 hours. </p> <br> <br>
+                        
+                    
+
+            <!-- Hack the Earth -->
+
+
+             <!-- AQ Challenge  -->
 
                     <div style="font-size:20px;"> <a href="https://scienceatl.org/air-quality/" target="_blank">Georgia Air Quality Challenge</a> | Winners Announced: April 22, 2021</div>
 
@@ -131,15 +149,19 @@
                 <div id="air" class="tab-pane fade"> <br><br>
                 <a href="images/Air Quality Challenge Flyer.png" download="AQ-FLyer">
                  <img src="images/Air Quality Challenge Flyer.png" alt="W3Schools" width="100%" height="100%">
-                </a> <br>
+                </a> <br> <br>
                 <p>Click on flyer to view/download.</p><br>
                 </div>
                  <!-- #air -->
 
                 <div id="hide" class="tab-pane fade"> </div> <br>
             </div>
-        </div>
              <!-- AQ Challenge Flyer -->
+
+             <!-- AQ Challenge  -->
+
+        </div>
+
 
          <div class="col-sm-6" style="padding-left: 7%; float:left; padding-top: 3%;">
 
@@ -147,10 +169,10 @@
                             
         </div>
     </div>
-    <!-- Past events -->
-
-
-
+</div>
+ <!-- Past events -->
+</div>
+        
 
 
      <footer class="footer">Contact us at <a href="mailto:air.emory@emory.edu">air.emory@emory.edu</a></footer>    
